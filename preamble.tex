@@ -1,0 +1,145 @@
+\usepackage{amsmath,amssymb,amsfonts, mathtools}
+\usepackage{tikz}
+\usepackage [utf8] {inputenc}
+\usepackage{cmap}
+\usepackage [T2A] {fontenc} 
+\usepackage[english, russian]{babel}
+\usepackage{geometry}
+\geometry{left=20mm,right=20mm,top=25mm,bottom=20mm} % задание полей текста
+\usepackage[colorlinks=true,linkcolor=red]{hyperref}
+%===============================================================================
+
+% Работа с переносами
+\binoppenalty=10000
+\relpenalty=10000
+\sloppy
+%===============================================================================
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+
+%===============================================================================
+
+% Красивые страницы 
+
+%===============================================================================
+
+\usepackage{fancyhdr}
+\newcommand{\changefont}{%
+	\fontsize{9}{11}\selectfont
+}
+\fancyhf{}
+\pagestyle{fancy}
+% этим мы убеждаемся, что заголовки глав и 
+% разделов используют нижний регистр.
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}  % убираем текущие установки для колонтитулов
+\fancyhead[RE, RO]{\changefont\thepage}
+\fancyhead[LO,LE]{\changefont\rightmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % оставляем место для линейки
+\fancypagestyle{plain}
+
+
+
+\usepackage{quiver} 
+\usetikzlibrary{babel}
+%===============================================================================
+
+% Настройка нумерации
+
+%===============================================================================
+
+
+
+\addto\captionsrussian{% Replace "english" with the language you use
+	\renewcommand{\contentsname}%
+	{Содержание}%
+}
+
+%===============================================================================
+
+% Theorem styles
+
+%===============================================================================
+\usepackage{amsthm}
+\theoremstyle{definition}
+\usepackage{ mathrsfs }
+ \usepackage{stackrel} 
+% ----------- Math short-cats
+\newcommand{\bb}{\mathbb}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Cx}{\ensuremath{\mathbb{C}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\def\L{\mathbb{L}}
+\def\CB{\mathcal{B}}
+\def\CC{\mathcal{C}}
+\def\CE{\mathcal{E}}
+\def\CR{\mathcal{R}}
+\def\CA{\mathcal{A}}
+% \def\CF{\mathcal{F}}
+\def\CG{\mathcal{G}}
+\def\CS{\mathcal{S}}
+\def\CD{\mathcal{D}}
+\def\CH{\mathcal{H}}
+\def\CP{\mathcal{P}}
+\def\CM{\mathcal{M}}
+\def\CL{\mathcal{L}}
+\def\CK{\mathcal{K}}
+\def\FB{\mathfrak{B}}
+\def\deff{\stackrel{def}\Leftrightarrow}
+\def\rrr{\longrightarrow}
+\def\rr{\rightarrow}
+\def\eps{\varepsilon}
+\def\bs{\backslash}
+% You can write your commands below
+\usepackage{gensymb}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\newcommand{\F}{\ensuremath{\mathcal{F} }}
+\newcommand{\Anu}{\ensuremath{\mathcal{A}_{\nu}}}
+\DeclareMathOperator{\FDU}{FDU}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\Rea}{Re}
+\DeclareMathOperator{\Ima}{Im}
+\usepackage{ulem}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\conv}{conv}
+% ----------- Math and theorems -----------
+\usepackage[many]{tcolorbox}
+\usepackage{mdframed}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+\newtheorem*{remark}     {Замечание}
+\newtheorem*{next0}      {Следствие}
+\newtheorem*{next1}      {Следствие 1}
+\newtheorem*{next2}      {Следствие 2}
+
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{definition}[theorem]{Определение}
+\newtheorem{claim}[theorem]{Утверждение}
+\newtheorem{example}[theorem]{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+
+
+\newcommand{\lab}[1]{(\ref{#1})}
+
+
+\usepackage{hyperref}
+
+% Обводка кружочком множеств
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,shapes.misc}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
