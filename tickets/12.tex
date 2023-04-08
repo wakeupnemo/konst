@@ -1,0 +1,136 @@
+\newpage
+\section{Метрические пространства и метрическая топология. Теорема Бэра о категории.}
+\begin{definition}
+	$(X, \rho)$ называется метрическим пространством, если функция $\rho \colon X \times X \to [0, \infty)$ такая, что 
+	\begin{itemize}
+		\item $\forall x,y \in X\colon \ \rho(x,y) = 0 \Leftrightarrow x = y$
+		\item $\forall x,y \in X \colon \ \rho(x,y) = \rho(y,x)$
+		\item $\forall x,y,z \in X \colon \ \rho(x,z) \leq \rho(x,y) + \rho(y,z)$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	В метрическом пространстве $(X,\rho)$ открытым шаром в точке $x$ радиуса $R$ называется
+	$$
+	O_R(x) = \{y \in X \mid \rho(x,y) < R\}
+	$$
+\end{definition}
+\begin{definition}
+	Замкнутый шаром будем обозначать $B_R(x) = [O_R(x)]$.
+\end{definition}
+\begin{definition}
+	Пусть $(X, \rho)$ --- метрическое пространство, топология в $X$, порожденная базой 
+	$$
+	\beta_\rho = \{O_R(x) \mid R > 0, \ x \in X\}
+	$$
+	Называется метрической топологией (мы будем обозначать ее $\tau_\rho$).
+\end{definition}
+\begin{claim}
+	$\beta_\rho$ действительно является базой некоторой топологии.
+\end{claim}
+\begin{proof}
+	Проверим критерий базы (\ref{th:base_criterian}). Для любого $x \in X$, $x \in O_R(x)$, поэтому первое условие выполнено. Пусть $x \in O_{R_1}(x_1) \cap O_{R_2}(x_2)$. Покажем что существует такое $R > 0$, что 	
+	$$
+	O_R(x) \subset O_{R_1}(x_1) \cap O_{R_2}(x_2)
+	$$
+	Возьмем $R = \min\{R_1 - \rho(x_1, x), R_2 - \rho(x_2, x)\}$, тогда 
+	$$
+	\forall y \in O_R(x) \Rightarrow \rho(x_1, y) < R_1
+	$$
+	Значит, можем записать 
+	$$
+	\rho(x_1, y) \leq \rho(x_1, x) +  \rho(x, y) < \rho(x_1,x) + R \leq R_1
+	$$
+	Аналогично 
+	$$
+\rho(x_2, y) \leq \rho(x_2, x) +  \rho(x, y) < \rho(x_2,x) + R \leq  R_2
+	$$
+	Таким образом 
+	$$
+	O_R(x) \subset O_{R_1}(x_1) \cap O_{R_2}(x_2)
+	$$
+	И значит, $\beta_\rho$ --- база.
+\end{proof}
+
+\begin{definition}
+	Последовательность $\{x_n\} \subset X$, называется фундаментальной в метрическом пространстве $(X,\rho)$, если
+	$$
+	\forall \eps > 0 \ \exists N \in \N \colon \  \forall n, m \geq N \Rightarrow \rho(x_n,x_m) < \eps 
+	$$
+\end{definition}
+\begin{definition}
+	Метрическое пространство называется полным, если любая фундаментальная последовательность является сходящейся. 
+\end{definition}
+
+\begin{definition}
+	Подмножество метрического пространства $S \subset X$, называется всюду плотным в $(X, \rho)$, если 
+	$$
+	\forall x \in X, \ \forall U(x) \in \tau_\rho, \ \exists s \in S \Rightarrow s \in U(x)
+	$$
+\end{definition}
+
+\begin{definition}
+	Пусть $(Z, \rho)$ --- метрическое пространство. Множество $S \subset Z$ называется нигде не плотным, если 
+	$$
+	\Int [S] = \varnothing
+	$$
+\end{definition}
+\begin{remark}
+	Очевидно, что это определение равносильно:
+	$$
+	\forall r > 0, \ \forall z \in Z \Rightarrow B_r(z) \nsubseteq [S]
+	$$
+	Я использую замкнутый шар, потому что если нельзя впихнуть открытый, то взяв радиус поменьше, не впихнется и замкнутый (это следствие аксиом отделимости для метрических пространств)
+\end{remark}
+
+\begin{definition}
+	\hfill 
+	\begin{itemize}
+		\item Метрическое пространство $(Z, \rho)$ --- называется первой категории по Бэру, если 
+		$$
+		Z = \bigcup_{n=1}^\infty S_n
+		$$
+		Где $S_n$ --- нигде не плотные множества
+		\item Если $(Z, \rho)$ не является первой категории по Бэру, то оно называется второй категории по Бэру.
+	\end{itemize} 
+\end{definition}
+
+\begin{theorem}[Бэр]\label{th:bear}
+	Пусть $(Z, \rho)$ --- полное метрическое пространство (в частности $(Z, \|\|)$ --- банахово), тогда $(Z, \rho)$ --- второй категории.
+\end{theorem}
+\begin{proof}
+	Пусть $Z$ представлено в виде счетного объединения некоторых множеств.
+	$$
+	Z = \bigcup_{n=1}^\infty S_n , \ S_n \subset Z
+	$$
+	Предположим, что все $S_n$ --- нигде не плотные. То есть $\Int [S_n] = \varnothing$. 
+	Построим фундаментальную последовательность, сходящуюся к точке не лежащей в $Z$, что будет являться противоречием. Возьмем $z_0 \in Z$, тогда
+	$$
+	B_1(z_0) \nsubseteq [S_1] \Rightarrow B_1(z_0)\setminus [S_1] \text{ --- открыто и имеет не пустую внутренность	}
+	$$
+	Тогда $\exists r_1 \leq \frac{1}{2}$, $\exists z_1 \in Z$:
+	$$
+	B_{r_1}(z_1) \subset B_1(z_0)\setminus [S_1]
+	$$
+	Тогда посмотрим на $B_{r_1}(z_1)$ в силу того, что $S_2$ --- нигде не плотно:
+	$$
+	B_{r_1}(z_1) \setminus [S_2] \neq \varnothing
+	$$
+	Значит $\exists r_2 \leq \displaystyle \frac{1}{2^2}$, $\exists z_2 \in Z$:
+	$$
+	B_{r_2}(z_2) \subset B_{r_2}(z_1) \setminus [S_2]
+	$$
+	Кроме того, по построению:
+	$$
+	B_{r_2}(z_2) \subset B_{r_1}(z_1) \subset B_{r_0}(z_0)
+	$$
+	Продолжая процесс получим последовательность $\{z_n\} \subset Z$, она фундаментальна:
+	$$
+	\forall \eps > 0: \exists N: \frac{1}{2^N} < \eps: \forall n, m \geq N \ z_n,z_m \in B_{r_N}(z_N) \Rightarrow \rho(z_n,z_m) < \eps
+	$$ 
+	Так как, $Z$ --- полно, то $\exists z^* \in Z: z_n \xrightarrow{\rho} z^*$. Но по построению для любого $S_N$ верно $\forall n \geq N + 1: \ z_n \notin [S_n]$. Таким образом
+	$$
+	z^* \notin \bigcup_{n=1}^\infty S_n = Z
+	$$
+	Полученное противоречие доказывает теорему.
+\end{proof}

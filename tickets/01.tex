@@ -1,0 +1,128 @@
+\section{Аксиома выбора. Лемма о неподвижном множестве. Частично упорядоченные множества. Теорема Хаусдорфа о максимальности и лемма Цорна}
+
+\textbf{Аксиома выбора.} Пусть $P$ --- непустое множество, тогда $\exists \varphi_P$ --- функция выбора для $P$:  $\varphi_P: 2^P\setminus \{\varnothing\} \rightarrow P$ такая что:
+$$
+~ \forall S \subset P, \ S \neq \varnothing ~\Rightarrow~ \varphi_P(S) \in S
+$$
+\begin{definition}
+	\label{def:pos}
+	Пусть $X$ --- непустое множество. Пусть в $X$ введено отношение порядка $\leq$ удовлетворяющее свойствам:	
+	\begin{itemize}
+		\item $\forall x \in X \Rightarrow x \leq x$
+		\item $\forall x, y \in X ~\begin{cases}
+			x \leq y \\
+			y \leq x 
+		\end{cases} \Rightarrow x = y $
+		\item $\forall x,y,z \in X  Ё\begin{cases}
+			x \leq y \\
+			y \leq z 
+		\end{cases} \Rightarrow x \leq z$
+	\end{itemize}	
+Тогда пару $(X, \leq)$ --- называют частично упорядоченным множеством (ЧУМ), а отношение порядка $\leq$ --- частичным порядком.
+\end{definition}
+\begin{definition}
+	Пусть $(X,\leq)$ --- ЧУМ. Тогда если $\forall x,y \in X \Rightarrow (x \leq y) \vee (y \leq x)$, то $(X, \leq)$ --- называется линейно упорядоченным множеством (ЛУМ)
+\end{definition}
+\begin{lemma}[о неподвижном множестве]
+	Пусть $F$ --- непустое семейство множеств, частично упорядоченных относительно вложения. $(F, \subset )$ -- ЧУМ. Пусть:
+	\begin{itemize}
+		\item $\forall C \subset F$, $C$ --- ЛУМ верно $\bigcup\limits_{L \in C} L \in F$. 
+		\item Задана функция $f: F \rightarrow F$ такая что $\forall A \in F \Rightarrow A \subset f(A)$ и $f(A) \setminus A$ --- не более чем одноточечно.
+	\end{itemize}
+Тогда $\exists A^*\in F:\ f(A^*) = A^*$
+\end{lemma}
+\begin{proof}
+	БЕЗ ДОКАЗАТЕЛЬСТВА
+\end{proof}
+
+\begin{theorem}[Хаусдорфа о максимальности]
+	\label{th:Hausdorf}
+	Пусть $(X, \leq)$ --- ЧУМ, тогда существует максимальный по включению ЛУМ $L \subset X$
+\end{theorem}
+
+	\begin{proof}
+	Рассмотрим $F = \{\text{все ЛУМы в }(X, \leq)\}$ --- не пусто, тк $\{x\} \in F$ тогда $(F, \subset)$ --- ЧУМ. Для любого $L \in F$ определим 
+	$$
+	L^c := \{x \in X \setminus L :\ L \cup \{x\} \in F\}
+	$$
+	То есть это множество тех $x$ которые можно добавить в $L$ при этом не нарушив его лумовости. 
+	Пусть $\varphi_X$ --- функция выбора для $X$. Рассмотрим 
+	$$
+	f: F \rightarrow F: \ f(L) = \begin{cases}
+		L , L^c = \varnothing \\
+		L \cup \varphi_X(L^c), L^c \neq \varnothing 
+	\end{cases}
+	$$
+	По построению $\forall L \in F: \ f(L) \in F$ и $f(L)\setminus L$ --- не более чем одноточечно. Покажем, что выполнены условии леммы онеподвижном множестве, для этого докажем, что $\bigcup\limits_{L \in C}L \in F$, для любого лума $C$. Пусть $C \subset F$ --- ЛУМ. Рассмотрим 
+	$$
+	L_c := \bigcup\limits_{L \in C}L \subset X
+	$$
+	Покажем, что $L_c \in F$, то есть, что $L_c$ --- ЛУМ. Имеем:
+	$$
+	\forall x,y \in L_c \Rightarrow 
+	\begin{cases}
+		x \in \bigcup\limits_{L \in C} L \\
+		y \in \bigcup\limits_{L \in C} L 
+	\end{cases} 
+	\Rightarrow 
+	\begin{cases}
+		\exists L_x \in C:\ x \in L_x \\
+		\exists L_y \in C:\ y \in L_y 
+	\end{cases}
+	$$
+	Но $L_x, L_y \in C$, а $C$ --- ЛУМ, тогда $L_x, L_y$ --- сравнимы. Без ограничения общности считаем, что $L_x \subset L_y$, тогда $x, y \in L_y$ и $x,y$ --- сравнимы. Отсюда $L_c$ --- ЛУМ, то есть $L_c \in F$.
+	
+	Таким образом выполнены условия леммы о неподвижном множестве, тогда
+	$$
+	\exists L_* \in F: \ f(L_*) = L_*
+	$$
+	Значит $L_*$ --- ЛУМ в $(X, \leq)$ и $L^c = \varnothing$, что эквивалентно максимальности $L_*$. 
+\end{proof}
+
+\begin{lemma}[Цорна]\label{lem:zorn}
+	Пусть $(X, \leq)$ --- ЧУМ такой что, $\forall$ ЛУМ $L \subset X, ~ \exists z \in X$ --- мажоранта $L$ (т.е. $\forall x \in L \Rightarrow x \leq z$). Тогда в $(X, \leq)$ существует максимальный элемент $z_* \in X$
+\end{lemma}
+
+\begin{claim}
+	Теорема Хаусдорфа и лемма Цорна эквивалентны.
+\end{claim}
+\begin{proof}
+Пусть теорема Хаусдорфа верна. Пусть $(X, \leq)$ --- ЧУМ удовлетворяет лемме Цорна. Тогда по теореме Хаусдорфа в $(X,\leq)$ существует максимальный ЛУМ  $L_* \subset X$. Для этого лума существует мажоранта $z_* \in X$ т.ч. 
+		$$
+		\forall x \in L_* \Rightarrow x \leq z_*
+		$$
+		Покажем что $z_*$ --- максимальный элемент $(X, \leq)$. Пусть $x \in X$ такой, что $z_* \leq x$. Предположим, что $ x \neq z_*$. Тогда рассмотрим 
+		$$
+		L := L_*\cup \{x\}
+		$$
+		Имеем:
+		$$
+		\begin{cases}
+			\forall y \in L_*\ y \leq z_* \leq x \Rightarrow y \leq x \\
+			\text{Все элементы } L_* \text{ сравнимы}	
+		\end{cases} 
+		\Rightarrow L = L_*\cup \{x\} \text{ --- ЛУM}
+		$$
+		Пришли к противоречию с максимальностью $L_*$. Таким образом $z_*$ --- максимальный элемент.
+		
+		 Пусть верна лемма Цорна. Рассмотрим $F = \{\text{все ЛУМы в } (X, \leq)\}$. $F$ --- не пусто, так как $\forall x \in X \ \{x\} \in F$. Тогда можно рассмотреть ЧУМ $(F, \subset)$. Покажем что данный чум удовлетворяет лемме Цорна, это рассуждение дословно повторяет рассуждение в доказательстве теоремы Хаусдорфа, но все равно привожу его. Пусть $C \subset F$ --- ЛУМ. Рассмотрим 
+		$$
+		L_c := \bigcup\limits_{L \in C}L \subset X
+		$$
+		Покажем, что $L_c \in F$, то есть, что $L_c$ --- ЛУМ. Имеем:
+		$$
+		\forall x,y \in L_c \Rightarrow 
+		\begin{cases}
+			x \in \bigcup\limits_{L \in C} L \\
+			y \in \bigcup\limits_{L \in C} L 
+		\end{cases} 
+		\Rightarrow 
+		\begin{cases}
+			\exists L_x \in C:\ x \in L_x \\
+			\exists L_y \in C:\ y \in L_y 
+		\end{cases}
+		$$
+		Но $L_x, L_y \in C$, а $C$ --- ЛУМ, тогда $L_x, L_y$ --- сравнимы. Без ограничения общности считаем, что $L_x \subset L_y$, тогда $x, y \in L_y$ и $x,y$ --- сравнимы. Отсюда $L_c$ --- ЛУМ, то есть $L_c \in F$, с другой стороны, $\forall L \in C \ \Rightarrow L \subset L_c$ по построению. 
+		
+		Значит для любого ЛУМА $L$ существует мажоранта $L_c$. Таким образом $(F, \subset)$ --- удовлетворяет лемме Цорна. По лемме Цорна в $(F, \subset)$ существует максимальный элемент $L_* \in F$, так как он лежит в $F$, то $L_*$ --- ЛУМ. Предположив, что он не является максимальным в $X$ моментально получаем противоречие с его максимальностью в $F$. 
+\end{proof}

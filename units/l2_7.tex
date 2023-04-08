@@ -1,0 +1,262 @@
+\newpage
+\section{Свойства сопряженного оператора, теорема о разрешимости операторных уравнений.}
+\begin{claim}
+	Если $X,Y$ --- банаховы и $A \in \CL(X,Y)$ и $\Ima A^*$ --- замкнут в $X^*$, тогда $\Ima A$ --- замкнут в $Y$
+\end{claim}
+Заметим, что в условиях этого утверждения в силу \ref{th:frspirit} получим, что $\Ima A^* = (\Ker A)^\perp$ и $\Ima A = {}^\perp(\Ker A^*)$
+\begin{proof}
+	Рассмотрим
+	$$
+	Z = [\Ima A]_{\|\|} \subset Y
+	$$
+	$Z$ --- замкнутое подпространство банахова пространства, значит $Z$ --- само банахово. Определим
+	$$
+	T \colon X \to Z, \quad T(x)  = A(x) \forall x\in X 
+	$$
+	Ясно, что $T \in \CL(X,Z)$, кроме того 
+	$$
+	 \Ima T = \Ima A \Rightarrow [\Ima T]_{Z}  = Z 
+	$$
+	То есть $\Ima T$--- всюду плотен в $Z$. Рассмотрим сопряженный
+	$$
+	T^* \colon Z^* \to X^*
+	$$
+	Так как $\Ima T$ --- всюду плотен, то в силу теоремы Фредгольма (\ref{th:fr}) и следствия леммы \ref{lem:densyty} $\Ker T^* = (\Ima T)^\perp = \{0\}$. Значит $T^*$ --- инъективен, значит существует обратный оператор
+	$$
+	\exists (T^*)^{-1}\colon \Ima T^* \to Z^*
+	$$
+	Текущая картина
+	$$
+	T^* \colon Z^* \to X^* \quad A^* \colon Y^* \to X^* 
+	$$
+	Причем $\Ima A^*$ --- замкнут. Нужно понять, что из себя представляет $\Ima T^*$. 
+	
+	Рассмотрим произвольный $h \in Z^*$ по теореме Хана-Банаха 
+	$$
+	\exists g \in Y^*\colon g\big|_{Z}= h
+	$$
+	Тогда 
+	$$
+	\forall x \in X\colon h(T(x)) = (T^*h)(x)
+	$$
+	С другой стороны 
+	$$
+	h(T(x))  = h(\underbrace{A(x)}_{\in \Ima A})  = g(Ax)  = (A^*g)(x)
+	$$
+	Таким образом
+	$$
+	\forall x \in X T^*h(x) = A^*g(x) \Rightarrow T^*h = A^* g
+	$$
+	Таким образом $ \Ima T^* \subset \Im A^*$
+	Но можно рассуждать и в обратную сторону. Возьмем $g \in Y^*$, тогда $\forall x \in X$
+	$$
+	g(Ax) = (A^*g)(x)
+	$$
+	Рассматривая сужение $h = g\big|_Z$
+	$$
+	g(Ax) = g(Tx) = h(Tx) = (T^*h)(x)
+	$$
+	Значит $\forall x \in X \colon T^*g = A^*h \Rightarrow \Ima A^* \subset \Ima T^*$. Получили, что
+	$$
+	\Ima A^* = \Ima T^*
+	$$
+	Так как оператор $T$ --- сужение оператора $A$, то этот результат несколько тавтологичен. Однако теперь мы можем утверждать, что $\Ima T^*$---замкнут в банаховом $X^*$, значит по теореме Банаха об обратном операторе (\ref{th:inv_op}) 
+	$$
+	(T^*)^{-1} \in \CL(\Ima T^*, Z^*) \quad 0< \|(T^*)^{-1}\| < \infty
+	$$
+	А теперь ФОКУС. Что можно сказать про прямой оператор $T$, если он обладает непрерывным обратным сопряженным?
+	Оказывается, что если $(T^*)^* \in \CL(\Ima T^*, Z^*)$, то $T \colon X \to Z$ --- открытое отображение, то есть 
+	$$
+	\exists r>0 \colon T(O_1^X(0)) \supset O_r^Z(0)
+	$$
+	Предположив это, моментально получаем, что $\Ima T = Z$ и 
+	$$
+	[\Ima A]_{\|\|} = Z \supset \Ima A = \Ima T = Z 
+	$$
+	И получаем $\Ima A = [\Ima A]_{\|\|}$
+	
+	Докажем, что $T\colon X \to Z$ --- открытое отображение. Рассмотрим $[TO_1(0)]_Z$ --- замкнутое и выпуклое в $Z$ множество. Рассмотрим $z \in Z \setminus [TO_1(0)]_Z$. По следствию теоремы Хана-Банаха отделим $z$ от выпуклого замкнутого множества $[TO_1(0)]_Z$, получим 
+	$$
+	\exists f \in Z^*, \|f\| > 0 , \ \exists\gamma \in \R \colon\forall \|x\|\leq 1  \Rea f(T(x)) \leq \gamma < \Rea f(z)
+	$$
+	Взяв супремум по всем $x$ из единичного шара, получим
+	$$
+	\sup\limits_{\|x\| \leq 1} |\Rea f(T(x))| = 	\sup\limits_{\|x\| \leq 1} |\Rea (T^* f)(x)| = \|\Rea (T^* f)\| = \|T^* f\|\leq\gamma < \Rea f(z)
+	$$
+	Таким образом $T^* f \in X^*$. Кроме того 
+	$$
+	f = (T^*)^{-1}(T^*f) \Rightarrow \|f\| \leq \|(T^*)^{-1}\| \|T^*f\| 
+	$$
+	Значит
+	$$
+	\frac{\|f\|}{\|(T^*)^{-1}\|} \leq \|T^*f\|
+	$$
+	Теперь можем записать цепочку неравенств
+	$$
+	0 < \frac{\|f\|}{\|(T^*)^{-1}\|} \leq \gamma < \Rea f(z) \leq \|\Rea f\| \|z\| = \|f\| \|z\| \Rightarrow \|z\| > \frac{1}{\|(T^*)^{-1}\|} = k > 0
+	$$
+	Значит $z$ не может быть очень маленьким, точнее
+	$$
+	z \in Z \setminus B_{k}^Z(0) 
+	$$
+	Но $z \in Z \setminus [TO_1(0)]_Z$, значит мы получили
+	$$
+	O_k^Z(0) \subset B_{k}^Z(0)  \subset [TO_1(0)]_Z 
+	$$
+	Мы попали в ситуацию, аналогичную ситуации в доказательстве теоремы \ref{th:banachopenmap}. Так как $X$ --- полное, то, повторяя рассуждения из того доказательства 
+	$$
+	 [TO_1(0)]_Z  \subset T(B_2^X(0)) \subset T(O_X^3(0))
+	$$
+	Таким образом 
+	$$
+	O_{\frac{k}{3}}^Z(0) \subset TO_1^X(0) 
+	$$
+	То есть $T$--- открытое отображение! Доказательство окончено.
+\end{proof}
+\begin{claim}
+	\hfill
+	\begin{enumerate}
+		\item Пусть $X,Y$ --- ЛНП и $A \in \CL(X,Y)$ таков, что $\exists A^{-1 }$. Тогда $\exists (A^*)^{-1} \in L(X^*, Y^*)$ при этом $(A^*)^{-1} = (A^{-1})^*$
+		\item Пусть $X,Y$ --- ЛНП и $A^* \in \CL(Y^*, X^*)$ таков, что $\exists (A^*)^{-1}\colon X^* \to Y^*$, тогда $\exists A^{-1} \in \CL(\Ima A, X)$
+	\end{enumerate}	
+\end{claim}
+\begin{proof}
+	\hfil
+	\begin{enumerate}
+		\item Проверяется непосредственным вычислением операторов $(A^*)(A^{-1})^*$ и $(A^{-1})^*(A^*)$ по определению. 
+		\item По теореме Фредгольма (\ref{th:fr})
+		$$
+		\Ker A = {}^\perp(\Ima A^*) = {}^\perp (X^*) = \{0\}
+		$$
+		И
+		$$
+		[\Ima A]_{\|\|} = {}^\perp(\Ker A^*) = {}^\perp\{0\}= Y
+		$$
+		Значит образ всюду плотен в $Y$. Пусть $x \in X$ по следствию теоремы Хана-Банаха
+		$$
+		\|Ax\| = \sup\limits_{g \in Y*, \|g\| \leq 1}|g(Ax)| = \sup\limits_{g \in Y*, \|g\| \leq 1} |(A^*g)(x)|
+		$$
+		Так как $(A^*)^{-1} \in \CL(X^*, Y^*)$, то в силу критерия топологической непрерывности $A^* \colon Y^* \to X^*$ --- открытое отображение. Тогда 
+		$$
+		A^*B_1^{Y^*}(0) \supset A^*O_1^{Y^*}(0) \supset O_r^{X^*}(0) \supset  B_\frac{r}{2}^{X^*}(0)
+		$$
+		Значит
+		$$
+		\sup\limits_{g \in Y*, \|g\| \leq 1} |(A^*g)(x)| = \sup\limits_{f \in A^*B_1^{Y^*}(0)} |f(x)| \geq \sup\limits_{f \in X^*, \|f\| \leq \frac{r}{2}} |f(x)| < \frac{r}{2}\|x\|
+		$$
+		То есть
+		$$
+		\forall x \in X \Rightarrow \|Ax\| \geq \frac{r}{2}\|x\|
+		$$
+		Но тогда
+		$$
+		\|A^{-1}Ax\| = \|x\| \leq \frac{2}{r}\|Ax\| \Rightarrow \|A^{-1}\| \leq \frac{2}{r}
+		$$
+		Это означает, что $A^{-1} \in \CL(\Ima A, X)$
+	\end{enumerate}
+\end{proof}
+\begin{remark}
+	Если во втором пункте $X$ --- полное, то $\Ima A$ --- замкнут и $A^{-1} \in \CL(Y,X)$
+\end{remark}
+\begin{theorem}[Первая теорема Фредгольма]
+	\hfill
+	
+	Пусть $X$ --- банахово $A\in \CL(X)$ --- компактный оператор. Пусть $\lambda \in \Cx \setminus \{0\}$. Рассмотрим
+	$$
+	A_\lambda = A - \lambda I, \quad I \colon X \to X \text{ --- тождественный, } 
+	$$
+	Тогда
+	\begin{enumerate}
+		\item $\Ker A_\lambda$ --- конечномерен. 
+		\item $\Ima A_\lambda$ --- замкнут. 
+	\end{enumerate}
+
+\end{theorem}
+\begin{remark}
+	$A_\lambda x = y$ называется уравнением Фредгольма. 
+\end{remark}
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Покажем, что из любой последовательности $\{x_n\} \subset \Ker A_\lambda, \|x_n\| \leq R$ можно выделить сходящуюся подпоследовательность $x_{n_k}\to x \in \Ker A_\lambda$. Имеем
+		$$
+		\begin{cases}
+			Ax_n = \lambda x_n  \Leftrightarrow x_n = \frac{1}{\lambda}Ax_n\\
+			AB_R(0) \text{ --- вполне ограниченно}
+		\end{cases} 
+		$$
+		Тогда $ \exists n_1< n_2 < \dots$ $Ax_{n_k}$ --- фундаментальна, значит $x_{n_k}$ --- фундаментальна, что и требовалось.
+		\item В силу предыдущего пункта $\Ker A_\lambda = \Lin \{e_1, \dots ,e_N\}$. То есть
+		$$
+		\forall x \in \Ker A_\lambda \Rightarrow x = \sum_{k=1}^N \alpha_k(x)e_k
+		$$
+		Продолжая Хану-Банаху функционалы $\alpha_k$ до $f_k \in X^*$ можно рассмотреть пересечение их ядер
+		$$
+		M = \bigcap_{k=1}^N\Ker f_k
+		$$
+		Ясно, что
+		$$
+		M \cap \Ker A_\lambda = \{0\}
+		$$
+		Кроме того, любой $x \in X$ представляется как сумма из $M$ и $\Ker A_\lambda$
+		$$
+		x = \underbrace{\sum_{k=1}^N f_k(x) e_k}_{\in \Ker A_\lambda} + \underbrace{\left(x - \sum_{k=1}^N f_k(x) e_k\right)}_{\in M}
+		$$
+Значит
+		$$
+		\Ker A_\lambda \oplus M = X
+		$$
+		Заметим, что $A_\lambda \colon M \to X$ --- инъективен, так как $X = \Ker A_\lambda \oplus M$, то $A_\lambda(M) = \Ima A_\lambda$, поэтому мы можем сузиться на подпространство $M$ и анализировать образ $\Ima A_\lambda$ на нем. 
+		
+		
+		Пусть $\exists C > 0$:
+		$$
+		\forall x \in M\colon \|A_\lambda x\| \geq C\|x\| 
+		$$
+	Покажем в этом предположении замкнутость $\Ima A_\lambda$.
+		$$
+		\forall y \in [A_\lambda(M)]_X = [\Ima A_\lambda]_X \Rightarrow \begin{cases}
+			\exists y_n = A_\lambda(x_n) \to y \\
+			x_n \in M
+		\end{cases}
+		$$
+		Рассмотрим $\{x_n\}_{n=1}^\infty$
+		$$
+		\|x_n - x_m\| \leq \frac{1}{C}\|A_\lambda(x_n - x_m)\| = \|y_n - y_m\| \to 0 
+		$$
+		Значит $\{x_n\}_{n=1}^\infty$ --- фундаментальна в банаховом пространстве $X$, то есть
+		$$
+		\exists x \in X \colon x_n \to x 
+		$$
+		Но тогда в силу непрерывности $A_\lambda$, $y = A_\lambda(x) \Rightarrow y \in \Ima A_\lambda$, что и требовалось. 
+		
+		Теперь покажем, что действительно $\exists C>0$:
+		$$
+		\forall x \in M\colon \|A_\lambda x\| \geq C\|x\| 
+		$$
+		Предположим противное, то есть 
+		$$
+		\forall C > 0 \exists x_C \in M\colon \|A_\lambda x_C\| < C\|x_C\|
+		$$
+		Тогда, как минимум, $x_C \neq 0$. Рассмотрим $C_n = \displaystyle\frac{1}{n}$ и $z_n = \displaystyle\frac{x_{\frac{1}{n}}}{\|x_{\frac{1}{n}}\|} \in M, \ \|z_n\| = 1$. По предположению 
+		$$
+		\|A_\lambda z_n \| < \frac{1}{n} 
+		$$
+		Вспомним, что $A$ --- компактный оператор, так как все $z_n$ --- лежат на сфере, то образ последовательности $z_n$ --- вполне ограничен, тогда 
+		$$
+		\exists n_1 < n_2 < \dots \Rightarrow \{A z_{n_k} \}_{k=1}^\infty\text{ --- фундаметальна в $X$}
+		$$
+		Но тогда последовательность $z_{n_k}$ будет фундаментальна как сумма фундаментальной и бесконечно малой последовательностей:
+		$$
+		z_{n_k} = \frac{A z_{n_k} - A_\lambda z_{n_k}}{\lambda}
+		$$
+		$X$ --- банахово, значит $\exists x \in X, \ z_{n_k} \to x$. Поймем какими свойствами обладает $x$. Так как $\|z_{n_k}\| = 1$, то $\|x\| = 1$. Так как $M$ --- замкнуто, то $x \in M$. Кроме того 
+		$$
+		\begin{cases}
+			A_\lambda z_{n_k} \xrightarrow{k \to \infty} 0 \\
+			A_\lambda z_{n_k} \xrightarrow{k \to \infty} A_\lambda x
+		\end{cases} \Rightarrow A_\lambda x = 0 \Rightarrow x \in \Ker A_\lambda
+		$$
+		Получается $x \in M \cap \Ker A_\lambda$, но тогда $x = 0$, противоречие с $\|x\| = 1$. Таким образом теорема доказана. 
+	\end{enumerate}
+\end{proof}

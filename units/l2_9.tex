@@ -1,0 +1,183 @@
+\newpage
+\section{Теорема об отделимости}
+\begin{definition}
+	Пусть $(X,\tau)$ --- топологическое векторное пространство (относительно $\Cx$). $S_1$ и $S_2$ --- два множества из $X$, тогда говорят, что 
+	\begin{itemize}
+		\item $S_1$ и $S_2$ \textbf{отделимы}, если $\exists f \in X^* \setminus\{0\}$ и $\exists \gamma \in \R$, такие что 
+		$$
+		\forall x \in S_1, \ \forall y \in S_2 \colon \Rea f(x) \leq \gamma \leq \Rea f(y)
+		$$
+		\item $S_1$ и $S_2$ \textbf{строго отделимы}, если $\exists f \in X^* \setminus\{0\}$ и $\exists \gamma \in \R$, такие что 
+		$$
+		\forall x \in S_1, \ \forall y \in S_2 \colon \Rea f(x) < \gamma \leq \Rea f(y)
+		$$
+		\item $S_1$ и $S_2$ \textbf{сильно отделимы}, если $\exists f \in X^* \setminus\{0\}$ и $\exists \gamma_1, \gamma_2 \in \R$, такие что 
+		$$
+		\forall x \in S_1, \ \forall y \in S_2 \colon \Rea f(x) \leq \gamma_1 < \gamma_2 \leq  \Rea f(y)
+		$$
+	\end{itemize}
+\end{definition}
+\begin{theorem}[о строгой отделимости]
+	Пусть $(X,\tau)$ --- топологическое векторное пространство, $S_1, S_2$ --- выпуклые и непустые множества. $S_1$ --- $\tau$-открыто и $S_1 \cap S_2 = \varnothing$. Тогда $S_1$ и $S_2$ строго отделимы.
+\end{theorem}
+\begin{proof}
+	Рассмотрим $x_1 \in S_1$, $x_2 \in S_2$. Рассмотрим 
+	$$
+	U = S_1 - S_2 +\underbrace{x_2 - x_1}_y = S_1 - S_2 + y
+	$$
+	Так как $S_1$ ~---~ открыто, то $U$ ~---~ открыто. Кроме того $ 0 \in U$. Таким образом $U$ ~---~окрестность нуля. Далее, так как $S_1$, $S_2$~---~выпуклы, значит $U$~---~выпукло. Рассмотрим следующую функцию, называемую функцией Минковского
+	$$
+	\mu_U(x) = \inf\left\{t > 0 \colon \frac{x}{t} \in U\right\}
+	$$
+	Следующие свойства функции Минковского очевидны 
+	\begin{enumerate}
+		\item Положительная однородность.
+		\item $\forall x\in U \Rightarrow \mu_U(x) \leq 1$
+		\item $\forall x \notin U \Rightarrow \mu_U(x) \geq 1$
+	\end{enumerate}
+	Полуаддитивность не так очевидна. Пусть $u, v \in X$. Нам бы хотелось, чтобы 
+	$$
+	\mu_U(u + v) \leq \mu_U(u) + \mu_U(v)
+	$$
+	По определению инфинума $$\forall t > \mu_U(u), \ \exists t_1 \in(\mu_U(u), t) \Rightarrow \dfrac{u}{t_1} \in U.$$ Аналогично $$\forall \tau > \mu_U(v)  \ \exists \tau_1 \in (\mu_U(v), \tau) \Rightarrow \dfrac{v}{\tau_1} \in U.$$
+	На самом деле, в силу выпуклости в качестве $t_1$ и $\tau_1$ подойдут сами $t$ и $\tau$, действительно 
+	$$
+	\frac{u}{t} = \frac{t_1}{t}\left(\frac{u}{t_1}\right) + \left(1 - \frac{t_1}{t}\right)\cdot 0 \in U
+	$$
+	Аналогично
+	$$ 
+	\frac{v}{\tau} = \frac{\tau_1}{\tau}\left(\frac{v}{\tau_1}\right) + \left(1 - \frac{\tau_1}{\tau}\right)\cdot 0 \in U
+	$$
+	Легко видеть, что в силу выпуклости
+	$$
+	\frac{u + v}{t + \tau} = \frac{t}{t + \tau}\left(\frac{u}{t}\right) + \frac{\tau}{t+\tau}\left(\frac{v}{\tau}\right) \in U
+	$$
+	Так как функция Минковского это инфинум, то 
+	$$
+	\mu_U(u + v) \leq t + \tau
+	$$
+	Теперь перейдем к пределу при $t \to \mu_U(u) + 0$, $\tau\to\mu_U(v) + 0$, тогда 
+	$$
+	\mu_U(u + v) \leq \mu_U(u) + \mu_U(v)
+	$$
+	Так как $S_1 \cap S_2 = \varnothing$, то $ 0 \notin S_1 - S_2$. Воспоминая, что $U = S_1 - S_2 + y$, значит $y \notin U$. Значит $\mu_U(y) \geq 1$. Наконец, построим функционал который будем продолжать по Хану-Банаху. Рассмотрим 
+	$$
+	\varphi \colon \{\alpha y \mid \alpha \in \R \} \to \R \quad \varphi(\alpha y) = \alpha
+	$$
+	$\varphi$ --- вещественно линейный функционал, действующий из подпространства. Как он взаимодействует с функцией Минковского? Если $\alpha > 0$, то 
+	$$
+	\varphi(\alpha y) = \alpha \leq \alpha \mu_U(y) = \mu_U(\alpha y)
+	$$
+	Если $\alpha \leq 0$, то 
+	$$
+	\varphi(\alpha y) = \alpha \leq 0 \leq \mu_U(\alpha y)
+	$$
+	Таким образом на $\Lin \{y\}$ $\varphi \leq \mu_U$. Теперь выполнены все условия теоремы Хана-Банаха (\ref{th:h-b}), где $p = \mu_U$, значит 
+	$$
+	\exists \psi \colon X \to \R
+	$$
+	Вещественно линейный функционал такой, что 
+	$$
+	\psi \vert_{\Lin\{y\}} = \varphi, \quad \psi \leq \mu_U \text{ на $X$}
+	$$
+	Построим $f(x) = \psi(x) - i\psi(ix)\colon X \to \Cx$. $f$ --- комплексно линейный функционал. Так как мы работаем в ненормируемом случае, то непрерывность бесплатно нам не досталось. Покажем ее. Для этого поймем, что на $U$ данный функционал ограничен в силу свойств фукнкции Минковского:
+	$$
+	\forall x \in U \Rightarrow \mu_U(x) \leq 1 \Rightarrow \psi(x) \leq \mu_U(x) \leq 1 
+	$$
+	Симметризуем $U$. Положим $V = U \cap (-U)$, тогда 
+	$$
+	\forall x \in V \Rightarrow \psi(\pm x) \leq \mu_U(\pm x) \Rightarrow |\psi(x)| \leq 1
+	$$
+	В топологическом векторном пространстве ограниченность на некоторой окрестности нуля фактически является критерием непрерывности: 
+	$$
+	\forall \eps > 0 \  \exists W_\eps = \frac{\eps}{2} V \in \tau \Rightarrow \forall x \in W_\eps \Rightarrow |\psi(x)| \leq \frac{\eps}{2} < \eps 
+	$$
+	Таким образом $\psi \colon X \to \R$ --- непрерывен! 
+	
+	Теперь поймем, что данный функционал разделяет $S_1$ и $S_2$. $\forall u \in S_1, \ v \in S_2$:
+	$$
+	u - v + y \in U
+	$$
+	Так как $U$ --- открыто, то $\forall z \in U \Rightarrow \mu_U(z) < 1$. В силу непрерывности умножения на скаляр 
+	$$
+	1 \cdot u \in U \Rightarrow \ \exists \delta > 0\colon \forall \alpha \in \Cx: \ |\alpha - 1| < \delta \Rightarrow \alpha z \in U
+	$$
+	Тогда $$\left(1 + \dfrac{\delta}{2}\right) z \in  U \Rightarrow \mu_U(z) < \dfrac{1}{1 + \frac{\delta}{2}}< 1$$
+	Значит 
+	$$
+	\psi(u - v + y) \leq \mu_U(u - v + y) < 1
+	$$
+	Но $\psi$ --- линейный фукционал и $\psi(y) = \varphi(y) = 1$:
+	$$
+	\psi(u) - \psi(v) + 1 < 1 \Rightarrow \psi(u) < \psi(v)
+	$$
+	Что выполнено $\forall u \in S_1, \ v \in S_2$. Это почти победа. Осталось определить $\gamma$:
+	$$
+	\gamma = \inf_{u \in S_2} \psi(u)
+	$$
+	Тогда $\psi(u) \leq \gamma \leq \psi(v)$. Но $S_1$ --- открыто, значит мы сможем избавиться от нестрого неравенства. Теперь пользуемся непрерывностью сложения
+	 $$\forall u  = u + 0 \in S_1 \Rightarrow \exists W(0) \in \tau\colon \forall w \in W \Rightarrow u + w \in S_1$$
+	 Так как $W$ --- окрестность нуля, то $$\exists \delta > 0 \colon \forall \alpha \in \Cx: \ |\alpha| < \delta \Rightarrow \alpha y \in W$$
+	 Теперь $u + \frac{\delta}{2} y \in S_1$. Эта добавка, которую мы получили из открытости $S_1$ и дает строгую отделимость:
+	 $$
+	 \psi(u) + \psi\left(\frac{\delta}{2}y\right) = \frac{\delta}{2}\varphi(y) + \psi(u) = \psi(u) + \frac{\delta}{2} \leq \gamma
+	 $$
+	 Отметим, что $\delta$ зависит от $u$, поэтому сильной отделимости нет, но строгая появилась 
+	 $$
+	 \psi(u) < \gamma \leq \psi(v)
+	 $$
+	 Что и требовалось.
+\end{proof}
+\begin{definition}
+	Топологическое векторное пространство называется локально выпуклым если существует локальная база нуля состоящая из выпуклых окрестностей нуля.
+\end{definition}
+\begin{theorem}[О сильной отделимости]\label{th:strong_sep}
+	Пусть $(X,\tau)$ --- локально выпуклое топологическое векторное пространство. Тогда если $S_1 \subset X$ --- выпуклое, замкнутое не пустое множество. $S_2$ --- выпуклый не пустой компакт и $S_1 \cap S_2  = \varnothing$, то  $S_1$ и $S_2$ --- сильно отделимы. 
+\end{theorem}
+\begin{proof}
+	Рассмотрим $X \setminus S_1$. Это множество открыто и $S_2 \subset X \setminus S_1$. Значит 
+	$$
+	\forall x \in S_2 \ \exists V_x \in \beta_0\colon \ x + V_x \subset X \setminus S_1
+	$$
+	Где $\beta_0$ --- локальная база нуля из выпуклых окрестностей. Положим $W_x = V_x \cap (-V_x)$. Получили симметричную выпуклую окрестность нуля. Так как $W_x$ --- выпукло, то 
+	$$
+	x + \frac{W_x}{2} \subset x + V_x
+	$$
+	Проделывая данную процедуру для каждого $x \in S_2$ получаем открытое покрытие $S_2$
+	$$
+	P = \left\{x + \frac{W_x}{2} \mid S_2\right\} 
+	$$
+	Из него можно выбрать конечное подпокрытие
+	$$
+	\exists x_1, \dots, x_N \in S_2 \colon S_2 \subset \bigcup_{k = 1}^N \left( x_k + \frac{W_{x_k}}{2} \right)
+	$$
+	Тогда рассмотрим 
+	$$
+	U = \bigcap_{k = 1}^N \frac{W_{x_k}}{2} 
+	$$
+	$U$ --- выпуклая симметричная окрестность нуля. Причем 
+	$$
+	x \in S_2 + U \Rightarrow \exists k \in \overline{1,N}\colon x \in x_k + \frac{W_{x_k}}{2} + U \subset x_k + W_{x_k} \subset X \setminus S_1
+	$$ 
+	Вся эта возня была для того, чтобы написать 
+	$$
+	(S_2 + U)  \cap S_1 = \varnothing 
+	$$
+	Причем так как $U = -U$, то
+	$$
+	S_2 \cap (S_1 + U) = \varnothing
+	$$
+	Значит можно распушить $S_1$ с помощью окрестности $U$. $S_1 + U$ --- выпуклое открытое множество. Значит по теореме о строгой отделимости 
+	$$
+	\exists а \in X^*\setminus \{0\}; \ \psi = \Rea f 
+	$$
+	Такой что 
+	$$
+	\exists \gamma \in \R \colon \forall y \in S_2, \ \forall x \in S_2 + U\colon \psi(x) < \gamma \leq \psi(y)
+	$$
+	В качестве второй константы возьмем $\sup_{u \in U} \psi(u)$. Заметим, что так как $U$ --- симметрично, то он неотрицательный. Кроме того так как функционал не нулевой, то супремум ненулевой, получаем, что $\sup_{u \in U} \psi(u) > 0$. Тогда 
+	$$
+	\psi(x) \leq \gamma - \sup_{u \in U} \psi(u) = \gamma_1 < \gamma = \gamma_2 \leq \psi(y)
+	$$
+	Что и требовалось.
+\end{proof}

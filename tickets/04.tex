@@ -1,0 +1,97 @@
+\newpage
+\section{Топологическое и секвенциальное определение замкнутости и замыкания множества топологического пространства, связь между ними. Аксиома счетности}
+\begin{definition}
+	$(X,\tau)$ --- топологическое пространство, тогда если $S \subset X: \ X \setminus S \in \tau$, то $S$ называется топологически замкнутым в $(X,\tau)$.
+\end{definition}
+\begin{definition}
+	$(X, \tau)$ --- топологическое пространство, $S \subset X$. Тогда $x \in X$ называется топологической точкой прикосновения $S$, если 
+	$$
+	\forall U(x) \in \tau \Rightarrow U(x) \cap S \neq \varnothing
+	$$
+\end{definition}
+\begin{definition}
+	$(X,\tau)$ --- топологическое пространство, $S \subset X$. Тогда множество
+	$$
+	[S]_\tau \stackrel{def}= \{x \in X \mid x \text{ --- топологическая точка прикосновения } S \}
+	$$
+	Называется топологическим замыканием $S$
+\end{definition}
+\begin{definition}
+	$(X, \tau)$ --- топологическое пространство. $\{x_n\}_{n=1}^\infty \subset X$, $x \in X$. Говорят, что последовательность $\{x_n\}$ сходится по топологии к $x$. Пишут:
+	$$
+	x_n \xrightarrow[n \to \infty]{\tau} x \  \deff \forall U(x) \in \tau \ \exists N \in \N : \ \forall n \geq N \Rightarrow x_n \in U(x)
+	$$
+\end{definition}
+\begin{definition}
+	$(X,\tau)$	 --- топологическое пространство, $S \subset X$. Тогда $x \in X$ называется секвенциальной точкой прикосновения $S$ если
+	$$
+	\exists \{x_n\}_{n=1}^\infty \subset S : \ x_n \stackrel{\tau}{\longrightarrow} x 
+	$$
+\end{definition}
+\begin{claim}
+	Всякая секвенциальная точка прикосновения является топологической. Обратное неверно.
+\end{claim}
+\begin{proof}
+	$x \in X$ --- секвенциальная точка прикосновения $S$, тогда существует $\{x_n\}_{n=1}^\infty \subset S$:
+	$$
+	\forall U(x) \in \tau \ \exists N \in \N \ \forall n \geq N \Rightarrow x_n \in U(x)  \Rightarrow U(x) \cap  S \neq \varnothing 
+	$$
+	Тогда $x$ --- топологическая точка прикосновения. 
+	
+	Рассмотрим топологию Зарисского на оси $(\bb{R}, \tau_z)$, где:
+	$$
+	\tau_z = \{G \subset \R \mid G \neq \varnothing, \R \setminus G \text{ не более чем счетно}\} \cup \{\varnothing\}
+	$$
+	Пусть $x_n \stackrel{\tau_z}{\longrightarrow} x$ Тогда 
+	$$
+	U(x) = \R \setminus \{x_n \neq x\} \in \tau \Rightarrow \ \exists N: \ \forall n \geq N : \ x_n \in U(x) \Rightarrow  x_n = x 
+	$$
+	Тогда $\forall S \subset \R, S \neq \varnothing$ $x \in X$ --- секвенциальная точка прикосновения $S$ iff $x \in S$. То есть секвенциальными точками прикосновения множества $S$ могут быть только точки этого множества. С другой стороны пусть $S \subset \R$, $|S| = |\R|$. Тогда $\forall x \in \R \setminus S$ $\forall U(x) \ U(x) \cap S \neq \varnothing$, так как $|S| > |\N|$. Таким образом, $x$ --- топологическая точка прикосновения.
+\end{proof}
+\begin{definition}
+	$(X, \tau)$ --- топологическое пространство. $S \subset X$. Тогда $S$ --- называется секвенциально замкнутым, если 
+	$$S = \{x \in X \mid x \text{ --- секвенциальная точка прикосновения } S\}$$ 
+	При этом множество 
+	$$
+	[S]_{\text{секв}} = \{ \text{все секвенциальные точки прикосновения } S\}
+	$$
+	Называется секвенциальным замыканием $S$.
+\end{definition}
+\begin{remark}
+	Из утверждения выше следует что $[S]_\text{секв} \subset [S]_\tau$
+\end{remark}
+\begin{definition}
+	$(X,\tau)$ --- ТП. $x \in X$, тогда $B(x)$ --- некоторое подмножество окрестностей $x$ называется локальной базой $x$, если:
+	$$
+	\forall U(x) \in \tau \ \exists V \in B(x): \ V \subset U(x)
+	$$
+\end{definition}
+\noindent \hypertarget{fcs}{\textbf{Аксиома cчетности.}} Если $	\forall x \in X \ \exists B(x) = \{V_n\}_{n=1}^\infty$ --- cчетная локальная база $x$, то говорят, что $(X, \tau)$ удовлетворяет аксиоме счетности.
+\begin{remark}
+	При выполнении аксиомы счетности часто удобно считать, что элементы локальной базы упорядоченны по вложению. Заметим, что это всегда можно осуществить положив 
+	$$
+	W_n = \bigcap_{k=1}^n V_k
+	$$
+	Где $V_k$ --- элементы исходной локальной базы.
+\end{remark}
+\begin{theorem}
+	Пусть в $(X, \tau)$ --- топологическом пространстве выполнена аксиома счетности, $S \subset X$, тогда $[S]_\tau = [S]_\text{секв}$. То есть любая топологическая точка прикосновения является секвенциальной.
+\end{theorem}
+
+\begin{proof}
+	Имеем $B(x) = \{W_n\}_{n=1}^\infty$ --- счетную локальную база, такую что 
+	$$W_1 \supset W_2 \supset W_3 \supset \dots$$ 
+	Тогда 
+	$$
+	\forall x \in [S]_\tau \deff \forall U(x) \in \tau \Rightarrow U(x)\cap S \neq \varnothing  
+	$$
+	Тогда это выполнено и для элементов локальной базы $B(x) = \{W_n\}_{n=1}^\infty$: 
+	$$
+	\forall n \in \N \Rightarrow W_n \cap S \neq \varnothing \Rightarrow \ \exists x_n \in W_n \cap S 
+	$$
+	Значит существует $\{x_n\}_{n=1}^\infty$. Тогда:
+	$$
+	\forall U(x) \exists N \in \N \ W_N \subset U(x) (\text{определение локальной базы}) \Rightarrow \forall n \geq N: \ x_n \in W_n \subset W_N \subset U(x)
+	$$
+	Значит $x_n \stackrel{\tau}{\rightarrow} x$, то есть $x$ --- секвенциальная точка прикосновения.
+\end{proof}

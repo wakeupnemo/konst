@@ -1,0 +1,193 @@
+\newpage
+\section{Пространство $\CL(X)$ для банахова пространства $X$ как банахова алгебра. Открытость резольвентного множества, непустота и компактность спектра элемента банаховой алгебры.}
+\begin{definition}
+	Пусть $\CA$ --- векторное пространство над полем $K$, снабженное операцией $A \times A \to A$, называемой умножение. Тогда $\CA$ называется алгеброй над $K$, если для любых $x,y,z \in \CA$, $\lambda, \mu \in K$ выполнено
+	\begin{itemize}
+		\item $(x + y) \cdot z = x \cdot z + y \cdot z$
+		\item $z \cdot (x + y) = z \cdot x + z \cdot y$
+		\item $(\lambda x) \cdot (\mu y) = (\lambda \mu ) (x \cdot y)$
+	\end{itemize}
+\end{definition}
+Далее все алгебры будут рассматриваться над полем комплексных чисел. 
+\begin{definition}
+	Банахово пространство $\CA$  называется банаховой алгеброй, если $\CA$ --- ассоциативная алгебра с единицей. Причем для единичного элемента по умножению выполняется $\|e\|  = 1$ и $\|x y\| \leq \|x\| \|y\|$. 
+\end{definition}
+\begin{example}
+	$\CL(X)$ --- банахова алгебра относительно операции композиции. 
+\end{example}
+\begin{definition}
+	Пусть $\CA$ --- банахова алгебра. Говорят, что элемент $x \in \CA$ обратим, если существует $y \CA$, что 
+	$$
+	xy = yx = e
+	$$
+	элемент $y$ обозначается $x^{-1}$.
+\end{definition}
+\begin{definition}
+	Обозначим множество обратимых элементов алгебры $\CA$
+	$$
+	G(\CA) = \{x \in \CA \mid \exists x^{-1} \in \CA\}
+	$$
+\end{definition}
+Обозначим $x_\lambda = x - \lambda e$. 
+\begin{definition}
+	Резольвентным множеством элемента $x$ банаховой алгебры $\CA$ назовем множество 
+	$$
+	\rho(x) = \{\lambda \in \Cx \mid x_\lambda \in G(\CA)\}
+	$$
+\end{definition}
+\begin{definition}
+	Спектром элемента $x$ банаховой алгебры $\CA$ назовем множество 
+	$$
+	\sigma(x) = \Cx \setminus \rho(x)
+	$$
+\end{definition}
+\begin{lemma}
+	Для любого $x \in \CA$ такого, что ряд 
+	$$
+	\sum_{n=1}^\infty \|x^n\| 
+	$$
+	сходится, элемент $e - x$ обратим и 
+	$$
+	(e - x)^{-1} = \sum_{n=0}^{\infty} x^n \in \CA
+	$$
+\end{lemma}
+\begin{proof}
+	Так как $\CA$ --- банахово, то из сходимости ряда из норм следует сходимость ряда 
+	$$
+	\sum_{n=0}^\infty x^n
+	$$
+	к некоторому элементу $\CA$. Рассмотрим
+	$$
+	S_N = \sum_{n=0}^N x^n
+	$$
+	тогда 
+	$$
+	(e - x) S_N = e - x^{N+1} \xrightarrow{N \to \infty} e 
+	$$
+	в силу $\|x^{N+1}\| \xrightarrow{N \to \infty} 0$. Таким образом 
+	$$
+	(e - x) \sum_{n=0}^{\infty} x^n  = e
+	$$
+	Аналогично проверяется, что данный элемент является левым обратным. Лемма доказана. 
+\end{proof}
+\begin{next0}
+	Для любого $x \in G(\CA)$ для $r = \frac{1}{\|x^{-1}\|}$ выполнено вложение
+	$$
+	O_r(x) \subset G(\CA)
+	$$
+	что означает открытость множества $G(\CA)$ в банаховом пространстве $\CA$.
+\end{next0}
+\begin{theorem}\label{th:spectrumprops}
+	Для любого элемента $x$ банаховой алгебры $\CA$ выполнено: 
+	\begin{enumerate}
+		\item $\rho(x)$ --- открыто в $\Cx$.
+		\item $\sigma(x)$ замкнуто в $\Cx$ и выполнено 
+		$$
+		\sigma(x) \subset \{\lambda \in \Cx \mid |\lambda| \leq \|x\|\}.
+		$$
+		\item $\sigma(x) \neq \varnothing$.	
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Начнем со второго пункта. Пусть $|\lambda| > \|x\|$, тогда 
+	$$
+	x_\lambda = x - \lambda e = -\lambda\left(e - \frac{x}{\lambda}\right) = -\lambda(e - y)
+	$$
+	где $\|y\| < 1$. По предыдущей лемме элемент $e - y$ --- обратим, а значит обратим и $x_\lambda$, причем
+	$$
+	x_\lambda^{-1} = R_x(\lambda)  = - \sum_{n=0}^\infty \frac{x^n}{\lambda^{n+1}}
+	$$
+	Значит $\lambda \in \rho(x)$, откуда следует, что 
+	$$
+	\sigma(x) = \Cx \setminus \rho(x) \subset \{|\lambda| \leq \|x\|\}
+	$$
+	
+	Пусть теперь $\lambda \in \rho(x)$. Рассмотрим $\mu \in \Cx$ такое что 
+	$$
+	|\mu| < \frac{1}{\|R_x(\lambda)\|}
+	$$
+	Тогда 
+	$$
+	x_{\lambda + \mu} = x_\lambda - e\mu = x_\lambda(e - \mu R_x(\lambda))
+	$$
+	В силу выбора $\mu$ элемент $(e - \mu R_x(\lambda))$ --- обратим. Так как $x_\lambda$ --- обратим, то и $x_{\lambda + \mu}$ --- обратим, как композиция. Таким образом
+	$$
+	\lambda + \mu \in \rho(x)
+	$$
+	откуда 
+	$$
+	O_\mu(\lambda) \subset \rho(x)
+	$$
+	что и означает открытость $\rho(x)$.
+	
+	Покажем теперь, что спектр не пуст. Для этого заметим, что для любых $\mu, \lambda \in \rho(x)$ верно
+	$$
+	R_x(\lambda) - R_x(\mu) = R_x(\mu) (\lambda - \mu)R_x(\lambda)
+ 	$$
+ 	Для любого $\lambda \in \rho(x)$ и для любого $\Delta \lambda \in O_{\frac{1}{\|R_x(\lambda)\|}}(0)$ верно 
+ 	$$
+ 	\lambda + \Delta \lambda \in \rho(x)
+ 	$$
+ 	и 
+ 	$$
+ 	R_x(\lambda + \Delta \lambda) = \sum_{n=0}^\infty (\Delta \lambda)^n (R_x(\lambda))^{n+1}
+ 	$$
+ 	откуда получаем
+ 	$$
+ 	R_x(\lambda + \Delta \lambda ) - R_x(\lambda) = \sum_{n=1}^\infty (\Delta \lambda)^n (R_x(\lambda)^{n+1}
+ 	$$
+ 	Оценим норму разности
+ 	$$
+ 	\|R_x(\lambda + \Delta \lambda ) - R_x(\lambda)\| \leq \sum_{n=1}^\infty(\Delta \lambda)^n \|R_x(\lambda)\|^{n+1} = \frac{|\Delta \lambda | \|R_x(\lambda)\|^2}{1 - \|\Delta \lambda | \|R_x(\lambda)\|} \xrightarrow{\Delta \lambda \to 0} 0
+ 	$$
+ 	Таким образом 
+ 	$$
+ 	R_x(\lambda + \Delta \lambda) \to R_x(\lambda)
+ 	$$
+ 	Теперь, пользуясь замечанием, вычислим предел
+ 	$$
+ 	\lim\limits_{\substack{\mu \to \lambda \\ \mu \in \rho(x) }}\frac{R_x(\mu) - R_x(\lambda)}{\mu - \lambda} = \lim\limits_{\substack{\mu \to \lambda \\ \mu \in \rho(x) }} R_x(\mu) R_x(\lambda) = (R_x(\lambda))^2
+ 	$$
+ 	Тогда для произвольного $\Phi \in \CA^*$, функция комплексного переменного 
+ 	$$
+ 	f(\lambda) = \Phi(R_x(\lambda))
+ 	$$
+ 	является непрерывно дифференцируемой в каждой точке $\lambda \in \rho(\lambda)$ причем 
+ 	$$
+ 	\frac{d}{d \lambda} f(\lambda) = \lim\limits_{\Delta \lambda \to 0} \Phi\left(\frac{R_x(\lambda + \Delta \lambda ) - R_x(\lambda)}{\Delta \lambda}\right) = \Phi(R_x(\lambda)^2)
+ 	$$
+ 	Далее, для $|\lambda| > \|x\|$ мы знаем выражение для резольвенты 
+ 	$$
+ 	R_x(\lambda) = - \sum_{n=0}^\infty \frac{x^n}{\lambda^{n+1}}
+ 	$$
+ 	тогда 
+ 	$$
+ 	f(\lambda) = - \sum_{n=0}^\infty \frac{\Phi(x^n)}{\lambda^{n+1}}
+ 	$$
+ 	то есть справедлива асимптотическая оценка 
+ 	$$
+ 	f(\lambda) =  O\left(\frac{1}{\lambda}\right), \ \lambda \to \infty
+ 	$$
+ 	Предположим, что $\sigma(x) = \varnothing$, это означает, что $\rho(x) = \Cx$. Тогда для любого функционала $\Phi \in \CA^*$, функция $f(\lambda)$ --- регулярна в каждой точке комплексной плоскости, то есть целая, причем $f(\lambda) = O\left(\frac{1}{\lambda}\right), \ \lambda \to \infty$. Тогда по теореме Лиувилля 	$f(\lambda) = 0$, тогда для любого функционала $\Phi$
+ 	$$
+  \Phi(R_x(\lambda)) = 0
+ 	$$
+ 	По следствию теоремы Хана-Банаха $R_x(\lambda) = 0$, но нулевой оператор необратим. Противоречие, значит $\sigma(x) \neq \varnothing$.
+\end{proof}
+Как водится, простые следствия из безымянных утверждений носят громкие имена. 
+\begin{theorem}[Гельфанд, Мазур]\label{th:gelmaz}
+	Пусть в банаховой алгебре $\CA$ обратим любой нетривиальный элемент, тогда $\CA$ изометрически изоморфна $\Cx$.
+\end{theorem}
+\begin{proof}
+	Построим этот изоморфизм явно. Пусть $x \in \CA$. По утверждению выше, его спектр не пуст, тогда существует $\lambda_x \in \Cx$ такое, что элемент $x - \lambda_x e$ необратим, но в банаховой алгебре $\CA$ все ненулевые элементы обратимы, а значит 
+	$$
+	x - \lambda_x e = 0 \Leftrightarrow x = \lambda_x e
+	$$
+	Догадливый читатель уже увидел искомый изоморфизм 
+	$$\varphi\colon \CA \to \Cx \quad
+	\varphi(x) = \lambda_x
+	$$
+\end{proof}
+\begin{remark}
+	Вспомним, что все банаховы алебры в этом курсе рассматриваются над полем $\Cx$. Так, теорема выше не будет верна для банаховых алгебр над $\R$. 
+\end{remark}

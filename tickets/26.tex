@@ -1,0 +1,147 @@
+\newpage
+\section{Теорема Хана-Банаха и ее следствия в линейном нормированном пространстве.}
+
+\begin{definition}
+	Элемент пространства $\CL(X, \Cx)$ называется линейным непрерывным функционалом, а пространство $\CL(X, \Cx)$ с операторной нормой называется сопряженным пространством к пространству $X$ и обозначается $X^*$
+\end{definition}
+
+\begin{theorem}[Хан, Банах]\label{th:h-b}
+	Пусть выполнены следующие условия:
+	\begin{enumerate}
+		\item $X$ --- вещественное линейное пространство.
+		\item $L \subset X$ --- подпространство.
+		\item $f: L \to \R$ --- вещественное линейное отображение.
+		\item $\exists p: X \to \R$ --- функция такая что
+		\begin{itemize}
+			\item $p(x + y) \leq p(x) + p(y)$ (полуаддитивность)
+			\item $\forall \lambda > 0: \ p(\lambda x ) = \lambda p(x)$ (положительная однородность)
+		\end{itemize}
+		\item $\forall x \in L: \ f(x) \leq p(x)$
+	\end{enumerate}
+	Тогда существует $g: X \to \R$ --- вещественное линейное отображение, такое что 
+	$$
+	g\big\vert_{L} = f \text{ и }  \forall x \in X: g(x) \leq p(x)
+	$$
+\end{theorem}
+\begin{proof}
+	Рассмотрим семейство
+	$$
+	\Phi = \left\{(M,h) \mid\begin{matrix}
+		&M\subset X \text{ --- подпространство } \\ 
+		&L \subset M, \ h \colon M \to \R \text{ --- вещественно линейный функционал}, \\ 
+		&h\big|_L = f, \\ &\forall x \in M \colon h(x) \leq p(x)
+	\end{matrix}\right\}
+	$$	
+	Оно не пусто, так как $(L,f) \in \Phi$. Введем на $\Phi$ частичный порядок
+	$$
+	(M_1, h_1) \leq (M_2, h_2) \Leftrightarrow M_1 \subset M_2 \text{ и } \ h_1 \big\vert_{M_1} = h_2 \big\vert_{M_1} 
+	$$
+	Проверка аксиом частичного порядка очевидна. Таким образом $(\Phi, \leq)$ --- ЧУМ. По теореме Хаусдорфа (\ref{th:Hausdorf}) в $(\Phi, \leq)$ существует максимальный по включению ЛУМ $N$. Рассмотрим
+	$$
+	M_* = \bigcup_{(M,h) \in N} M
+	$$
+	Тогда $M_*$ --- подпространство $X$, так как если $x, y \in M_*$, то $x \in M_x, y \in M_y$, но $M_x,M_y \in N$, значит сравнимы, не умаляя общности $M_x \subset M_y$, тогда $\alpha x + \beta y \in M_y \subset M_*$. Рассмотрим
+	$$
+	h_*\colon M_* \to \R \quad h_*\big\vert_{M} = h \ \forall(M,h) \in N
+	$$
+	Тогда $h_* \leq p$ на $M_*$, $h_*\big\vert_{L} = f$. Осталось доказать, что $M_* = X$. Предположим противное, то есть $\exists x_0 \in X\setminus M_*$, тогда строим
+	$$
+	M_0 = M_* \oplus \Lin\{x_0\}
+	$$
+	И строим $h_0(x + t{x_0})  = h_*(x) + at$, где $a = h_0(x_0)$ нам пока не известно. Тогда ясно, что 
+	$$
+	h_0 \big\vert_{M_*} = h_*
+	$$
+	Нужно определить $a$ так, чтобы $\forall x \in M_0\colon h_0(x) \leq p(x) $. Если мы найдем такое $a$, то $M_0$ будет сравнимо со всеми элементами $N$ и строго больше, что будет противоречить максимальности ЛУМА $N$. 
+	
+	Поймем, что мы хотим от $a$, чтобы было выполнено $h_0(x) \leq p(x)$ Пусть $t> 0$, тогда
+	$$
+	h_0(x + tx_0) \leq p(x + tx_0) \Rightarrow a \leq p\left(\frac{x}{t} + x_0\right) - h_*\left(\frac{x}{t}\right)
+	$$
+	Перейдя к инфинуму получим
+	$$
+	a \leq \inf_{x \in M_*}\left[p(x+x_0) - h_*(x)\right]
+	$$
+	Пусть теперь $ t < 0$, тогда аналогично получим
+	$$
+	-a \leq p\left(\frac{x}{|t|} -x_0\right) - h_*\left(\frac{x}{|t|}\right)
+	$$
+	Переходя к супремуму с учетом предыдущего получим: 
+	$$
+	\sup_{z \in M_*}\left(h_*(z) - p(z - x_0)\right) \leq a \leq  \inf_{x \in M_*}\left[p(x+x_0) - h_*(x)\right]
+	$$
+	Реализуется ли эта ситуация? Оказывается да, ведь $\forall z, x \in M_*$ 
+	$$
+	h_*(z) + h_*(x) = h_*(x + z) \leq p(x+z) \leq p(x+x_0) + p(z - x_0)
+	$$
+	Значит 
+	$$
+	\forall z,x \in M_* \colon h_*(z) - p(z -x_0) \leq p(x + x_0) -h_*(x)
+	$$
+	Взяв супремум по $x$ и $z$ получим в точности необходимое. Значит такое $a$ существует и теорема доказана.
+\end{proof}
+\begin{claim}
+	Между $f \in X^*$ и $\Rea f: X \rr \R$ существует изометрия.
+\end{claim}
+\begin{proof}
+	Заметим, что если $f \in X^*$, то 
+	$$
+	f = U + iV, U = \Rea f, \ V = \Ima f
+	$$
+	Тогда в силу линейности легко видеть, что 
+	$$
+	f(x) = U(x) - iU(ix) = \Rea f(x) - i \Rea f(ix)
+	$$
+	Причем: 
+	$$
+	|U(x)| \leq |f(x)| \leq \|f\| \Rightarrow \|U\| \leq \|f\|
+	$$
+	С другой стороны:
+	$$
+	f(x) = |f(x)|e^{i \varphi} \Rightarrow |f(x)| = f(e^{-i \varphi} x ) = U(x e^{-i\varphi}) \leq \|U\| \|x e^{-i\varphi}\| = \|U\|\|x\| 
+	$$
+	Таким образом $\|f\| = \|\Rea f\|$. Значит существует изометрический изоморфизм:
+	$$
+	X^* \ni f \mapsto \Rea f: X \rr \R 
+	$$
+\end{proof}
+\begin{next0}
+	Пусть $X$ --- ЛНП, $L \subset X$ --- подпространство. Пусть $g \in L^*$, тогда существует 
+	$$
+	f \in X^*\colon f\big|_L = g, \quad \|f\| = \|g\|
+	$$
+\end{next0}
+
+\begin{lemma}\label{lem:f}
+	Пусть $X \neq\{0\}$, $x_0 \in X, \ x_0 \neq 0$, тогда существует линейный непрерывный функционал $f \in X^*$ такой, что 
+	$$
+	f(x_0) = 1 
+	$$
+\end{lemma}
+\begin{proof}
+	Рассмотрим 
+	$$
+	L_0 = \Lin{x_0} = \{t x_0 \mid t \in \Cx \} \subset X
+	$$
+	Построим  $f_0: L_0 \to \Cx$ следующим образом:
+	$$
+	\forall t \in \Cx: \ f_0(tx_0) = t 
+	$$
+	Тогда 
+	$$
+	\|f_0\| = \sup\limits_{ t \neq 0}\frac{\|f_0(t x_0)\|}{\|tx_0\|} = \sup\limits_{ t \neq 0}\frac{|t|}{|t| \|x_0\|} = \frac{1}{\|x_0\|} < + \infty
+	$$
+	Значит $f_0 \in \CL(L_0, \Cx)$. В силу предыдущего утверждения имеем:
+	$$
+	p(x) = \frac{\|x\|}{\|x_0\|} = \|x\| \|f_0\| \geq \Rea f_0 (x) = U_0(x)
+	$$
+	Тогда по теореме Хана-Банаха: сущетсвует $U: X \rr \R$ --- продолжение $U_0$ на все пространство и 
+	$$
+	U(x) \leq p(x)
+	$$
+	Кроме того $\|U\| \geq \frac{1}{\|x_0\|} = \|U_0\|$. Значит $\|U_0\| =  \|U\|$. Тогда имеем:
+	$$
+	f = U(x) - iU(ix)
+	$$
+	Который удовлетворяет условию леммы.
+\end{proof}

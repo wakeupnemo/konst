@@ -1,0 +1,245 @@
+\newpage
+\section{Вполне упорядоченные множества. Теорема Цермело и контрпример Серпинского к теореме Фубини}
+
+\begin{definition}
+	$(X, \leq)$ --- ЧУМ называется вполне упорядоченным, если 
+	$$
+	\forall S \subset X: \ S \neq \varnothing \ \exists z \in S: \ \forall x \in S \ z \leq x
+	$$
+	То есть любое непустое множество содержит миноранту
+\end{definition}
+\begin{theorem}[Цермело]
+	Любое непустое множество $X$ можно вполне упорядочить. То есть существует отношение порядка $\leq$ в $X$, что $(X, \leq)$ --- ВУМ
+\end{theorem}
+\begin{proof}
+	Рассмотрим семейство $F$:
+	$$
+	F = \{(S, \leq_S)\mid S \neq \varnothing, S \subset X, \ \leq_S \text{ --- отношение порядка в } S: \ (S, \leq_S) \text{ --- ВУМ} \} 
+	$$
+	$F$ --- непусто, так как 
+	$$
+	X \neq \varnothing \ \Rightarrow \  \exists x \in X \Rightarrow S_x = \{x\}, \ \leq_{\{x\}} = (x,x) \Rightarrow (\{x\}, \leq_{\{x\}}) \in F
+	$$
+	Введем в $F$ отношение порядка $\prec$:
+	$$
+	(S_1, \leq_1) \prec (S_2, \leq_2) \deff
+	\begin{cases}
+		\circled{1} \ S_1 \subset S_2 \\
+		\circled{2} \ \forall x, y \in S_1 \ x \leq_1 y \Rightarrow x \leq_2 y \\
+		\circled{3} \ \forall  x \in S_1, \ \forall y \in S_2 \setminus S_1 \Rightarrow x \leq_2 y
+	\end{cases}
+	$$
+	Проверка, что $\prec$ --- отношение порядка. (Здесь и далее в этом доказательстве мы будем жрать говно): 
+	\begin{enumerate}
+		\item 
+		$$(S, \leq_S) \in F \Rightarrow
+		\begin{cases}
+		 	\circled{1} \ S \subset S \\
+		 	\circled{2} \ \forall x,y \in S  \\
+		 	\circled{3} \ S \setminus S = \varnothing
+		\end{cases}
+	$$
+	\item Пусть
+	$$
+	\begin{cases}
+		(S_1, \leq_1) \prec (S_2, \leq_2) \\
+		(S_2, \leq_2) \prec (S_1, \leq_1)
+	\end{cases}
+	$$
+	Имеем
+\begin{align*}
+	&\circled{1} \ \begin{cases}
+		S_1 \subset S_2 \\
+		S_2 \subset S_1 
+	\end{cases} \Rightarrow S_1 = S_2 \\
+	&\circled{2} \ \forall x,y \in S_1 = S_2 \Rightarrow x \leq_1 y \Rightarrow x \leq_2 y \\
+	&\circled{3} \ \forall x,y \in S_2 = S_1 \ x \leq_2 y \Rightarrow x \leq_1 y
+\end{align*}
+	Таким образом $\leq_1 = \leq_2$ и $(S_1, \leq_1) = (S_2, \leq_2)$
+	\item 
+	Пусть $(S_1, \leq_1) \prec (S_2, \leq_2) \prec (S_3, \leq_3)$
+	\begin{align*}
+		& \circled{1} \ S_1 \subset S_2 \subset S_3 \Rightarrow S_1 \subset S_3 \\
+		& \circled{2} \ \forall x,y \in S_1 \ x \leq_1 y \Rightarrow x \leq_2  \Rightarrow x \leq_3 y
+	\end{align*}
+	Пусть $(S_1, \leq_1) \prec (S_2, \leq_2) \prec (S_3, \leq_3)$ тогда $\forall x \in S \ \forall y \in S_3 \setminus S_2$ Имеет место альтернатива:
+	\begin{align*}
+		&\text{Либо } y \in S_2 \setminus S_1 \Rightarrow x \leq_2 y \Rightarrow x \leq_3 y \checkmark \\
+		&\text{Либо } y \in S_3 \setminus S_2 \Rightarrow x \in S_1 \subset S_2 \Rightarrow x \in S_2 \Rightarrow x \leq_3 y \checkmark
+	\end{align*}
+\end{enumerate}
+	Теперь проверим условие леммы Цорна для чума $(F, \prec)$. Пусть $L \subset F$ --- ЛУМ. Рассмотрим
+	$$
+	S_L := \bigcup\limits_{(S_i, \leq_i)} S_i \subset X
+	$$
+	Введем на $S_L$ отношение порядка:
+	$$
+	x, y \in S_L \Rightarrow x \leq_L y  \deff \exists (S, \leq) \in L: x,y \in S \wedge x \leq y
+	$$
+	Проверим что это действительно отношение порядка в $S_L$: 
+	\begin{enumerate}
+		\item 
+		$$
+		\forall x \in S_L \Rightarrow \exists (S_x, \leq_x) \in L: \ x \in S_x \Rightarrow x \leq_x x \Rightarrow x \leq_L x
+		$$
+		\item Пусть $x,y \in S_L$ и 
+		$$
+		\begin{cases}
+			x \leq_L y \\
+			y \leq_L x
+		\end{cases} \Rightarrow
+		\begin{cases}
+			\exists (S_1, \leq_1) \in L : \ x,y \in S_1 \wedge x \leq_1 y \\
+			\exists (S_2, \leq_2) \in L: \ x,y \in S_2 \wedge y \leq_2 x
+		\end{cases}
+		$$
+		Но $L$ --- ЛУМ, тогда $(S_1, \leq_1), (S_2, \leq_2)$ --- сравнимы. Без ограничения общности \newline $(S_1, \leq_1) \prec (S_2, \leq_2)$ тогда
+		$$
+		\begin{cases}
+			x,y \in S_1 \wedge x \leq_1 y \Rightarrow x \leq_2 y \\
+			x,y \in S_2 \wedge y \leq_2 y \
+		\end{cases} \Rightarrow x = y
+		$$ 
+		\item 
+		$$
+		x,y,z \in S_L
+		\begin{cases}
+			x \leq_L y \\
+			y \leq_L z 
+		\end{cases}
+		\Rightarrow 
+		\begin{cases}
+			\exists (S_1, \leq_1) \in L \ x,y \in S_1 \wedge x \leq_1 y
+			\exists (S_2, \leq 2) \in L \ y,z \in S_2 \wedge y \leq_2 z
+		\end{cases}
+		$$
+		Аналогично $L$ --- ЛУМ имеем:
+		\begin{itemize}
+			\item Если $(S_1, \leq_1) \prec (S_2, \leq_2)$
+			$$
+			x\leq_2 y \wedge y \leq_2 z \Rightarrow
+			\begin{cases}
+				x \leq_2 z \\
+				x,z \in S_2 
+			\end{cases} \Rightarrow x \leq_L y
+			$$
+			\item Если $(S_2, \leq_2) \prec (S_1, \leq_1)$
+			$$
+			\begin{cases}
+				y \leq_1 z \wedge x \leq_1 y \\
+				y,z \in S_1 \wedge x,y \in S_1
+			\end{cases}
+			\Rightarrow 
+			\begin{cases}
+				x \leq_1 z \\
+				x,z \in S_1 
+			\end{cases}
+			\Rightarrow x \leq_L z 
+			$$
+		\end{itemize}
+	\end{enumerate}
+	Таким образом $(S_L, \leq_L)$ --- ЧУМ. Покажем, что на самом деле это ВУМ. $\forall M \subset S_L, M \neq \varnothing$ имеем:
+	$$
+	\exists \underbrace{(S_{M}, \leq_{M})}_{\text{ВУМ}}\in L \Rightarrow \underbrace{S_M \cap M}_{\text{непустое подмножество ВУМ}} \neq \varnothing
+	$$
+	Тогда $\exists z \in S_M \cap M$ --- миноратна $S_M \cap M$ в $(S_M, \leq_M)$. Покажем, что $z$ --- миноранта $M$ в $(S_L, \leq_L)$. Для любого $x \in M$ имеем альтернативу:
+	\begin{itemize}
+		\item $x \in S_M$ тогда 
+		$$
+		\begin{cases}
+			z, x \in S_M \\
+			z \leq_{S_M} x
+		\end{cases} \Rightarrow z \leq_{L} x \ \checkmark
+		$$
+		\item $x \notin S_M$ тогда 
+		$$
+		\exists (S_x, \leq_{S_x}) \in L: \ x \in S_x 
+		$$
+		Но $L$ --- ЛУМ, тогда $(S_x, \leq_{S_x}), (S_M, \leq_{S_M})$ --- сравнимы. Причем $x \notin S_M$ значит $(S_M, \leq_{S_M}) \prec (S_x, \leq_{S_x})$, тогда:
+		$$
+		\begin{cases}
+			z,x \in S_x \\
+			z \leq_{S_x} x
+		\end{cases} \Rightarrow z \leq_{L} x \ \checkmark
+		$$
+	\end{itemize}
+Таким образом $(S_L, \leq_L)$ --- ЛУМ и $(S_L, \leq_L) \in F$ и $\forall (S, \leq) \in L \Rightarrow (S, \leq) \prec (S_L, \leq_L)$, действительно:
+\begin{align*}
+	&\circled{1} \ S \in S_L \ \checkmark \\
+	&\circled{2} \ \forall x,y \in S \Rightarrow x \leq y \Rightarrow x \leq_L y \ \checkmark \\
+	&\circled{3} \ \forall x \in S, \forall y \in S_L \setminus S  \Rightarrow \exists (S_y, \leq_y):	\ y \in S_y \Rightarrow (S, \leq) \prec (S_y, \leq_y) \Rightarrow \begin{cases}
+		x \leq_y y \\
+		x,y \in S_y
+	\end{cases}
+	\Rightarrow x \leq_L y \ \checkmark 
+\end{align*} 
+Таким образом $(S_L, \leq_L)$ --- мажоранта лума $L$. Применяем лемму Цорна: $\exists (S_*, \leq_*) \in F$ --- максимальный элемент в $(F, \prec)$. Покажем, что $S_* = X$. Предположим, что существует элемент 
+$x^* \in X \setminus S_*$ тогда определим $S:= S_* \cup \{x_*\}$ и отношение порядка $\leq$:
+$$
+\begin{cases}
+	\forall x,y \in S_* \Rightarrow x \leq y \Leftrightarrow x \leq_*y  \\
+	\forall x \in S_* \Rightarrow x \leq_* x \wedge x_* \leq x
+\end{cases}
+$$
+Тогда $(S, \leq)$ --- ВУМ, противоречие с максимальностью $(S_*, \leq_*)$.
+
+ Таким образом $(X, \leq_*)$ --- ВУМ
+\end{proof}
+
+\begin{next0}
+	Пусть $X \neq \varnothing$, $|X| = \alpha$ --- мощность $X$, тогда в $X$ можно ввести отношение порядка $\leq$ , такое что
+	\begin{enumerate}
+		\item $(X, \leq)$ --- ВУМ 
+		\item $\forall x \in X \Rightarrow S(x) = \{y \in X  \mid y \leq x \wedge y \neq x\} \Rightarrow  |S(x)| < \alpha$
+	\end{enumerate}
+\end{next0}
+\begin{proof}
+	По теореме Цермело введем $\leq$ т.ч $(X, \leq)$ --- ВУМ. Если $\forall x \in X \ |S(x)| < \alpha$ --- победа. В противном случае рассмотрим 
+	$$
+	M = \{x \in X \mid |S(x)| = \alpha\} \neq \varnothing 
+	$$
+	То есть получили непустое подмножество в ВУМЕ $(X, \leq)$, значит существует миноранта $M$: $z \in M$, тогда:
+	$$
+	|S(z)| = \alpha \wedge \forall y \in S(z) \Rightarrow |S(y)| < \alpha
+ 	$$
+ 	$S(z)$ и $X$ равномощны, тогда существует биекция $f: X \rightarrow S(z)$. Определим новое отношение: $\leq_f$ в $X$:
+ 	$$
+ 	x,y \in X \Rightarrow x \leq_f y \deff f(x) \leq f(y) \text{ в } (S(z), \leq)
+ 	$$
+ 	Тогда для нового отношения имеем:
+ 	$$
+ 	\forall x \in X \Rightarrow \{y \in X \mid y \leq_f x \wedge x \neq y\} = \{y \in X \mid f(y) < f(x) \wedge f(x) \neq f(y) \} = f^{-1}(S(f(x)))
+ 	$$
+ 	Но так как $f(x) \in S(x)$, то $|S(f(x))| < \alpha$ таким образом $(X, \leq_f)$ --- искомый ВУМ.
+\end{proof}
+\begin{theorem}[пример Серпинского]
+	$\exists f : [0,1] \times [0,1] \rightarrow [0,1]$ измерима по Лебегу по каждой переменной отдельно: 
+	\begin{gather*}
+		g(x) = \int\limits_{0}^{1} f(x,y)dy \text{ --- измерима} \\
+		h(y) = \int\limits_{0}^{1} f(x,y)dx \text{ --- измерима}
+	\end{gather*}
+	При этом: 
+	$$
+	\int\limits_{0}^1 g(x)dx\neq \int\limits_{0}^1h(y)dy \Leftrightarrow \int\limits_{0}^1dx \int\limits_{0}^1 f(x,y)dy \neq \int\limits_{0}^1dy \int\limits_{0}^1 f(x,y)dx
+	$$
+\end{theorem}
+\begin{proof}
+	По доказанному следствию рассмотрим $([0,1], \leq_*)$ --- ВУМ такой что $\forall z \in [0,1] \ S(z) = \{x \in [0,1] \mid x \leq_* z \wedge z \neq x\}$ $|S(z)| \leq |[0,1]| = C$. В предположении верности континум гипотизы имеем:
+	$$
+	\forall z \in [0,1] \ |S(z)| \leq |\mathbb{N}|
+	$$
+	Тогда рассмотрим 
+	\begin{gather*}
+		M = \{(x,y) \in [0,1] \times [0,1] \mid x \leq_* y \} \\
+		M_x = \{y \in [0,1] \mid x \leq_* y \} = [0,1] \setminus S(y) \\
+		M_y = \{x \in [0,1] \mid x \leq_* y \}S(y)
+	\end{gather*}
+	Тогда $M_x, M_y$ --- измеримы и $\mu M_x = 1, \ \mu M_y  =  0$. Тогда рассмотрим функцию $$f(x,y) = \chi_M(x,y)$$ Тогда:
+	$$
+	\forall x : \ g(x) = \int\limits_{0}^1 f(x,y)dy = \int\limits_{0}^1 \chi_{M_x}(x,y)dy = \mu M_x = 1 \Rightarrow \int\limits_{0}^1 g(x) dx = 1
+	$$
+	С другой стороны: 
+	$$
+	\forall y \in [0,1]: \ h(y) = \int\limits_{0}^1 f(x,y)dx = \int\limits_{0}^1 \chi_{M_y} dx = \mu M_y = 0 \Rightarrow \int\limits_{0}^1h(y)dy = 0
+	$$
+\end{proof}

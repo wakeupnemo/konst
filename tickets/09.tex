@@ -1,0 +1,80 @@
+\newpage
+\section{Декартово произведение топологических пространств. Топология Тихонова}
+\begin{definition}
+	Пусть $\mathscr{A} \neq \varnothing$ --- множество индексов и $\forall \alpha \in \mathscr{A}: (X_a, \tau_a)$ --- ТП. Тогда рассмотрим всевозможные функции $x(\cdot): \mathscr{A} \rr X_\alpha: \forall \alpha \ x(\alpha) \in X_\alpha$. Тогда множество всех таких функций называется декартовым произведением 
+	$$
+	\underset{\alpha \in \mathscr{A}}{\times}  X_\alpha \text{ --- декартово произведение $X_\alpha$ по $\alpha \in \mathscr{A}$}
+	$$
+	Если $X_\alpha = X$, то
+	$$
+	X^\mathscr{A} := \underset{\alpha \in \mathscr{A}}{\times}  X
+	$$
+\end{definition}
+Теперь построим в этом множестве топологию. Для каждого $\alpha$ определим функцию, действующую из декартова произведения в соответствующее $X_\alpha$: 
+$$\pi_\alpha : \underset{\beta \in \mathscr{A}}{\times}  X_\beta \rr X_\alpha$$ 
+Такую что:
+$\forall x \in \underset{\beta \in \mathscr{A}}{\times}  X_\beta: \pi_\alpha(x) = x(\alpha)$. Про нее можно мыслить как проекцию $x$ на соответствующее $X_\alpha$.
+\begin{definition}
+	Для семейства топологических пространств $(X_\alpha, \tau_\alpha)$ по $\alpha \in \mathscr{A} \neq \varnothing$. Топологией Тихононова $\tau_T$ в декартовом произведении $\underset{\alpha \in \mathscr{A}}{\times}  X_\alpha$ называется слабейшая в этом декартовом произведении топология, такая что $\forall \alpha \in \mathscr{A}$ определенные выше $\pi_\alpha$ --- топологически непрерывны. 
+\end{definition}
+Определение совсем не конструктивное, поэтому сейчас мы построим эту топологию явно.
+\begin{claim}
+	Тихоновская топология $\tau_T$ в декартовом произведении $\underset{\alpha \in \mathscr{A}}{\times} X_\alpha$ имеет предбазу:
+	$$
+	\sigma_T = \{\pi_\alpha^{-1}(V) \mid V \in \tau_\alpha, \alpha \in \mathscr{A}\}
+	$$
+\end{claim}
+\begin{proof}
+	Во-первых: 
+	$$
+	\pi_\alpha^{-1}(X_\alpha) = \underset{\beta \in \mathscr{A}}{\times} X_\beta
+	$$
+	Значит выполнен критерий предбазы (\ref{th:csb}), значит $\sigma_T$ задает некоторую топологию, которую мы ненароком обозначим $\tau_T$. C другой стороны если $\tau$ --- некоторая топология в $\underset{\alpha \in \mathscr{A}}{\times} X_\alpha$, такая что $\forall \alpha \in \mathscr{A} :\pi_\alpha$ --- топологически непрерывно, то (прообраз открытого открыт):
+	$$
+	\forall V \in \tau_\alpha \Rightarrow (\pi_\alpha)^{-1}(V)  = \{x \mid x(\alpha) \in V\}\in \tau
+	$$
+	Тогда, так как $\tau$ --- топология, произвольные конечные пересечения открытых множеств принадлежат топологии:
+	$$
+	\forall V_k \in \tau_{\alpha_k}, \ \forall \alpha_1, \dots, \alpha_k \in \mathscr{A} \ k \in \overline{1, N}: \bigcap_{k = 1}^N \pi_\alpha^{-1}(V_k) \subset \tau
+	$$
+	Но заметим, что $\beta_T =  \left\{\bigcap_{k = 1}^N \pi_\alpha^{-1}(V_k) \mid  V_k \in \tau_{\alpha_k}\ \alpha_1, \dots, \alpha_k \in \mathscr{A} \ k \in \overline{1, N}, N \in \N\right\}$. Тогда $\tau_T \subset \tau$. То есть любая топология обеспечивающая непрерывность $\pi_\alpha$ содержит построенную $\tau_T$, значит это слабейшая топология и таким образом $\tau_T$ --- топология Тихонова.
+\end{proof}
+\begin{remark}
+	Если в исходных пространствах топология задана базой $\beta_\alpha$ --- база $\tau_\alpha$, то предбазу топологии тихонова можно определить как:
+	$$
+	\hat{\sigma_T} = \{\pi_\alpha^{-1}(V) \mid \alpha \in \mathscr{A}, V \in \beta_\alpha\}
+	$$
+\end{remark}
+
+\begin{theorem}[Тихонова о топологической компактности декартова произведения]
+	Пусть $\mathscr{A} \neq \varnothing$ и $\forall \alpha \in \mathscr{A}$ имеем $(X_\alpha, \tau_\alpha)$ --- компактные топологическое пространства. Тогда декартово произведение этих пространств с топологией Тихонова $\left(\underset{\alpha \in \mathscr{A}}{\times} X_\alpha, \tau_T\right)$ тоже топологический компакт.
+\end{theorem}
+\begin{proof}
+	Применим теорему Александера о предбазе (\ref{th:asb}). Предбаза Тихоновской топологии:
+	$$
+	\sigma_T = \{\pi_\alpha^{-1}(V) \mid V \in \tau_\alpha, \alpha \in \mathscr{A}\}
+	$$
+	Пусть $P$ --- некоторое $\sigma_T$-покрытие $\underset{\alpha \in \mathscr{A}}{\times} X_\alpha$, то есть:
+	$$
+	\exists I \subset \mathscr{A}, \ \forall \alpha \in I  \ \exists M_\alpha \subset \tau_\alpha : P = \{\pi_\alpha^{-1}(V) \mid \alpha \in I, \ V \in M_\alpha\} \text{ и } \underset{\alpha \in \mathscr{A}}{\times} X_\alpha = \bigcup_{\alpha \in I }\bigcup_{V \in M_\alpha} \pi_\alpha^{-1}(V)
+	$$
+	Теперь нам хочется выбрать конечное подпокрытие используя компактность исходных пространств. 
+	
+	Покажем, что найдется $\alpha_0 \in I$ такой что $M_{\alpha_0}$ --- является $\tau_{\alpha_0}$-покрытием $X_{\alpha_0}$. Предположим противное, если такого индекса не найдется, то 
+	$$
+	\forall  \alpha \in I: M_\alpha \text{ --- не покрытие $X_\alpha$} \Rightarrow \exists x_\alpha \in X_\alpha: x_\alpha \notin \bigcup_{V \in M_\alpha}V
+	$$
+	Строчкой выше мы каждому индексу из $I$ сопоставили точку $x_\alpha \in X_\alpha$, остальным индексам сопоставим любой элемент, тогда мы определили элемент декартова произведения 
+	$$
+	x \in \underset{\alpha \in \mathscr{A}}{\times} X_\alpha: x(\alpha) = x_\alpha
+	$$
+	По построению эта точка для каждого своего аргумента  не покрывается ни одним  $M_\alpha$:
+	$$
+	\forall \alpha \in I: \forall V \in M_a: \pi_\alpha(x) = x_\alpha \notin V \Leftrightarrow \forall \alpha \in I, \ \forall V \in M_a: x \notin \pi_\alpha^{-1}(V)
+	$$
+	Таким образом, $x \in \underset{\alpha \in \mathscr{A}}{\times} X_\alpha$ но не покрывается $P$ --- противоречие. Таким образом $\exists \alpha_0 \in I$ такой индекс, что $M_{\alpha_0}$ --- покрытие $X_{\alpha_0}$, так как $(X_{\alpha_0}, \tau_{\alpha_0})$ --- компактное топологическое пространство, то существует конечное подпокрытие: 
+	$$
+	V_1, \dots, V_N \in M_{\alpha_0}: \ X_{\alpha_0} = \bigcup_{k=1}^N V_k
+	$$
+	Тогда $\pi_{\alpha_0}(V_1), \dots, \pi_{\alpha_0}(V_N) \in P$ --- конечное подпокрытие  $\underset{\alpha \in \mathscr{A}}{\times} X_\alpha$, значит по теореме Александера $\left(\underset{\alpha \in \mathscr{A}}{\times} X_\alpha, \tau_T\right)$ --- топологический компакт.
+\end{proof}

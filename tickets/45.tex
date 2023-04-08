@@ -1,0 +1,64 @@
+\newpage
+\section{Теорема о спектре компактного оператора $A \in \CL(X)$ в банаховом пространстве $X$.}
+\begin{theorem}
+	Пусть $A \in \CK(X)$ --- компактный оператор. Тогда 
+	\begin{enumerate}
+		\item $\forall \lambda \in \sigma(A) \setminus \{0\} \Rightarrow \lambda \in \sigma_p(A)$
+		\item Множество $\sigma(A)$ не более чем счетно и не имеет предельных точек кроме, быть может $0$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Пусть $\lambda \in \sigma(A) \setminus \{0\}$. Предположим, что $\lambda \notin \sigma_p(A)$, тогда $\Ker A_\lambda = \{0\}$. Тогда в силу 
+		$$
+		\dim \Ker A_\lambda = \dim \Ker A^*_\lambda 
+		$$
+		теоремы Фредгольма и замкнутости образа $\Ima A_\lambda$ получаем
+		$$
+		\Ima A_\lambda = {}^\perp (\Ker A^*_\lambda) = {}^\perp\{0\} = X
+		$$
+		Но тогда по теореме Банаха об обратном операторе $A_\lambda$ обратим, противоречие с тем, что $\lambda \in \sigma(A)$. 
+		\item Для $\delta > 0$ рассмотрим множества 
+		$$
+		\Lambda_\delta = \{ \lambda \in \sigma_p(A) \mid |\lambda| \geq \delta\}
+		$$
+		Покажем, что все они конечны или пусты. Предположим противное, то есть, что существует $\delta > 0$ для которого $\Lambda_\delta$ бесконечно, тогда оно содержит счетную последовательность различных собственных значений 
+		$$
+		\{\lambda_m\}_{m=1}^\infty \subset \Lambda_\delta
+		$$
+			Каждому собственному значению соответствует собственный вектор $x_m$. 
+			Так как все $x_m$ отвечают различным собственным значениям, то $x_m$ линейно независимы. Определим 
+		$$
+		M_n = \Lin \{x_m\}_{m=1}^n
+		$$
+		Тогда имеем 
+		$$
+		A(M_n) \subset M_n \quad A_{\lambda_{n+1}} \subset M_n
+		$$
+		и
+		$$
+		M_n \subset M_{n+1}, \quad M_n \neq M_{n+1}
+		$$
+		Применим теорему Рисса о почти перпендикуляре для линейного нормированного пространства $M_{n+1}$ и его подпространства $M_n$. Тогда получим
+		$$
+		\exists z_n \in M_{n+1}: \ \|z_n\| = 1 \text{ и } \rho(z_n, M_n) > \frac{1}{2}
+		$$
+		Тогда покажем, что последовательность $\{A(z_n)\}_{n=1}^\infty$ не содержит фундаментальной подпоследовательности, что будет противоречить компактности оператора $A$. Действительно, если $m < n$, то 
+		$$
+		A(z_m) \in A(M_{m+1}) \subset M_{m+1} \subset M_n
+		$$
+		и
+		$$
+		A_{\lambda_{n+1}}(z_n) \in A_{\lambda_{n+1}}(M_{n+1}) \subset M_n
+		$$
+		Тогда 
+		$$
+		w = A(z_m) - A_{\lambda_{n+1}}(z_n) \in M_n
+		$$
+		Тогда 
+		$$
+		\|A(z_n) - A(z_m)\| = \|A(z_n) + A(z_m) - A_{\lambda_{n+1}}(z_n)  - w - A(z_m)\| = \|\lambda_{n+1} z_m - w\| \leq |\lambda_{n+1}|\rho(z_n, M_n) \leq \frac{\delta}{2}
+		$$
+		Что и требовалось. 
+	\end{enumerate}
+\end{proof}

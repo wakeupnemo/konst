@@ -1,0 +1,194 @@
+\newpage
+\section{Оператор, сопряженный оператору $A \in \CL(X,Y)$. Теорема о равенстве норм операторов $A$ и $A^*$. Равенства $^\perp (\Ker A^*)$ сильному замыканию $\Ima A$ и $(\Ker A)^\perp$ слабому* замыканию $\Ima A^*$. }
+
+\begin{definition}
+	Пусть $X,Y$ --- линейные нормированные пространства. $A \in \CL(X,Y)$. Сопряженный оператор действует $A^*\colon Y^* \to X^*$
+	\[\begin{tikzcd}[ampersand replacement=\&]
+		X \& Y \\
+		{X^*} \& {Y^*}
+		\arrow["A", from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow[from=1-2, to=2-2]
+		\arrow["{A^*}", from=2-2, to=2-1]
+	\end{tikzcd}\]
+	По формуле $$\forall g \in Y^*:  \quad A^*g = gA$$
+\end{definition}
+\begin{remark}
+	Существенно, что сопряженный оператор определяется для непрерывного оператора, так как суперпозиция $g \circ A$ должна лежать в $X^*$, это достигается именно непрерывностью $A$.
+\end{remark}
+$A^*$ очевидно линеен, найдем его норму.
+$$
+\|A^*g\| = \sup\limits_{\|x\| \leq 1} |(A^*g)(x)|= \sup\limits_{\|x\| \leq 1}|g(Ax)|  \leq \sup\limits_{\|x\| \leq 1}\|g\|\|Ax\| = \|g\| \|A\| \Rightarrow \|A^*\| \leq \|A\|
+$$
+Справедливо и обратное неравенство. По следствию теоремы Хана-Банаха
+$$
+\|A(x)\| = \sup\limits_{\substack{\|g\| \leq 1 \\ g \in Y^* }} |g(Ax)| = \sup\limits_{\substack{\|g\| \leq 1 \\ g \in Y^* }} \|(A^*g)(x)\| \leq  \sup\limits_{\substack{\|g\| \leq 1 \\ g \in Y^* }} \|A^*g\|\|x\| = \|A^*\| \|x\| \Rightarrow \|A\| \leq \|A^*\| 
+$$
+Таким образом $\|A\| = \|A^*\|$. 
+
+
+Пусть $X,Y$ --- ЛНП. $A \in \CL(X,Y)$. Установим связь $\Ker A$, $\Ima A$ и $\Ker A^*$, $\Ima A^*$. 
+\begin{definition}
+	Пусть $S \subset X$, тогда правым аннулятором множества $S$ называется 
+	$$
+	S^\perp = \{f \in X^* \mid \forall x \in S: f(x) = 0\}
+	$$
+\end{definition}
+Очевидно, что $S^\perp \subset X^*$ --- подпространство. 
+
+\begin{claim}\label{claim:twcl}
+	$S^\perp$ --- $\tau_{w^*}$-замкнуто в $X^*$
+\end{claim}
+\begin{proof}
+	Пусть $g \in [S^\perp]_{\tau_{w^*}}$, тогда произвольная окрестность $g$ пересекается с $S^\perp$ по непустому множеству. Это верно и для элементов предбазы, то есть
+	$$
+	\forall \eps > 0 \ \forall x \in S \Rightarrow V^*(g,x,\eps) \cap S^\perp \neq \varnothing
+	$$
+	Рассмотрим $f \in V^*(g,x,\eps) \cap S^\perp$, имеем
+	$$
+	|f(x) - g(x)| = |g(x)| < \eps 
+	$$
+	Так как это верно для любого $\eps$, то $g(x) = 0$, значит $g \in S^\perp$, что и требовалось.
+\end{proof}
+\begin{next}
+	Если $X$ --- ЛНП, то $S^\perp$ замкнуто по операторной норме.  
+\end{next}
+\begin{definition}
+	Пусть $S \subset X^*$, тогда левым аннулятором множества $S$ называется
+	$$
+	^\perp S = \{x \in X \mid \forall f \in S\colon f(x) = 0\}
+	$$
+\end{definition}
+Левый аннулятор является подпространством в $X$. 
+\begin{claim}
+	$^\perp S $ --- замкнуто в $X$ относительно нормы. 
+\end{claim}
+\begin{proof}
+	Можно поступить как с правым аннулятором, а можно записать 
+	$$
+	^\perp S = \bigcap_{f \in S}\Ker f 
+	$$
+	Ядра функционалов замкнуты как прообразы $\{0\}$, a пересечение замкнутых множеств замкнуто.
+\end{proof}
+\begin{theorem}[Фредгольм]\label{th:fr}
+	Если $A \in \CL(X,Y)$, $X,Y$ --- ЛНП. Тогда
+	$$
+	\begin{cases}
+		\Ker A = \prescript{\perp}{}{(\Ima A^*)} \\   
+		\Ker A^* = (\Ima A)^\perp
+	\end{cases}
+	$$
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item Пусть $ x \in \Ker A$, это равносильно $Ax = 0 \in Y$, по следствию теоремы Хана-Банаха это равносильно 
+		$$
+		\forall g \in Y^* \Rightarrow g(Ax) = 0
+		$$
+		По определению сопряженного оператора получаем 
+		$$\forall g \in Y^* \colon (A^*g)(x) = 0$$
+		То есть $x \in \prescript{\perp}{}{(\Ima A^*)} $
+		\item Пусть теперь $g \in \Ker A^*$ аналогичная цепочка равносильностей, только теперь вместо теоремы Хана-Банаха используем определение нулевого оператора
+		$$
+		A^*g = 0 \in X^* \Leftrightarrow \forall x \in X\colon (A^*g)(x) = 0 \Leftrightarrow \forall x \in X\colon g(Ax) = 0
+		$$
+		По определению последнее равносильно $g \in (\Ima A)^\perp$
+	\end{itemize}
+\end{proof}
+\begin{next1}
+	$$\begin{cases}
+		(\Ker A)^\perp = ({}^\perp(\Ima A^*))^\perp \\{}^\perp(\Ker A^*) =  {}^\perp((\Ima A)^\perp) 
+	\end{cases}$$
+\end{next1}
+{\footnotesize \color{violet}
+\begin{lemma}\label{lem:densyty}
+	\hfill
+	\begin{enumerate}
+		\item[a)] 	Пусть $S$ --- всюду плотно в $X$, тогда $S^\perp = \{0\}$
+		\item[б)] Пусть $M$ --- всюду плотно в $X^*$, тогда $^\perp M  = \{0\}$
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	\begin{enumerate}
+		\item[a)] Так как $S$ --- всюду плотно, то
+		$$
+		\forall x \in X \colon \exists x_n \in S\colon x_n \xrightarrow{\|\|} x \Rightarrow \forall f \in S^\perp \Rightarrow 0  = f(x_n) \to f(x) \Rightarrow f(x) = 0
+		$$
+		Из произвольности $x$ следует  $f = 0 $. 
+		\item[б)] $M$ --- всюду плотно в $X^*$, тогда
+		$$
+		\forall g \in X^*: \exists g_n \in M \colon g_n \xrightarrow{\|\|} g \Rightarrow \forall x \in {}^\perp M \Rightarrow 0  = g_n(x) \to g(x) \Rightarrow g(x) = 0
+		$$
+		По следствию теоремы Хана-Банаха $x = 0$
+	\end{enumerate}
+\end{proof}
+Теперь из теоремы Фредгольма можно вывести следующее следствие.
+\begin{next2}\label{n:fr1}
+	\hfill
+	\begin{itemize}
+		\item Если $\Ima A$ --- всюду плотен в $Y$, то $ \Ker A^* = \{0\}$
+		\item 	Если $\Ima A^*$ --- всюду плотен в $X^*$, то $\Ker A = \{0\}$
+	\end{itemize}
+\end{next2}
+}
+
+\begin{lemma}\label{lem:doubleann1}
+	Пусть $L \subset X$ --- подпространство. Тогда
+	$$
+	{}^\perp(L^\perp) = [L]_{\|\|}
+	$$
+\end{lemma}
+\begin{proof}
+	Совершенно ясно, что $L \subset {}^\perp(L^\perp)$. При этом ${}^\perp(L^\perp)$--- замкнуто в $X$ относительно нормы, тогда 
+	$$
+	[L]_{\|\|} \subset  {}^\perp(L^\perp)
+	$$
+	Предположим, что включение строгое, то есть 
+	$$
+	\exists z \in  {}^\perp(L^\perp) \setminus [L]_{\|\|}
+	$$
+	По следствию теоремы Хана-Банаха 
+	$$
+	\exists f \in X^* \colon f\big|_{[L]_{\|\|}} = 0 \quad f(z) = 1
+	$$
+	В силу первого условия $f \in L^\perp$, но  так как $z \in  {}^\perp(L^\perp)$, то 
+	$$
+	f(z) = 0
+	$$
+	Противоречие с $f(z) = 0$, значит $[L]_{\|\|} =  {}^\perp(L^\perp)$.
+\end{proof}
+Тогда продолжая утверждение следствия 1 можем записать 
+$$
+[\Ima A]_{\|\|} = {}^\perp (\Ker A^*)
+$$
+
+\begin{lemma}\label{lem:annul}
+	Пусть $M \subset X^*$ --- подпространство, тогда 
+	$$
+	({}^\perp M)^\perp = [M]_{\tau_{w^*}}
+	$$
+\end{lemma}
+\begin{proof}
+	Ясно, что $M \subset ({}^\perp M)^\perp$. В силу \ref{claim:twcl} $({}^\perp M)^\perp$ --- $\tau_{w^*}$-замкнуто, тогда 
+	$$
+	[M]_{\tau_{w^*}} \subset ({}^\perp M)^\perp
+	$$
+	Аналогично лемме \ref{lem:doubleann1} рассмотрим
+	$$
+	f \in ({}^\perp M)^\perp \setminus [M]_{\tau_{w^*}}
+	$$
+	По следствию теоремы Хана-Банаха (для локально выпуклых топологических векторных пространств)
+	$$
+	\exists \omega \in Y\colon \omega\big|_{[M]_{\tau_{w^*}}} = 0 \quad \omega(f) \neq 0 
+	$$
+	Где $Y$ --- множество линейных $\tau_{w^*}$-непрерывных функционалов над $X^*$. В силу \ref{th:shulian} такие функционалы однозначно определяются элементом из $X$. $\exists x \in X\colon \forall g \in X^*\colon \omega(g) = g(x)$. Тогда $x \in ^\perp M$, но тогда 
+	$$
+	f(x) = \omega(f) = 0
+	$$
+	Противоречие.
+\end{proof}
+Значит мы можем продолжить следствие 1 и записать 
+$$
+(\Ker A)^\perp = [\Ima A^*]_{\tau_{w^*}}
+$$
+

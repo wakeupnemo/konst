@@ -1,0 +1,243 @@
+\newpage
+\section{Лекция 2. Следствия теоремы Хана-Банаха, эквивалентность норм в конечномерном лнп, продолжения исследования полноты пространства операторов}
+\begin{claim}\label{cl:hb-con1}
+	Если $X$ --- ЛНП, $L \subset X$ --- замкнутое подпростанство и $x_0 \in X \setminus L$, то 
+	$$
+	\exists f \in X^*: \ f |_{L} = 0 \quad f(x_0) = 1
+	$$
+	И норма этого функционала: $\|f\| = \frac{1}{\rho(x_0, L)}$
+\end{claim}
+\begin{proof}
+	Рассмотрим $L_0 = L \oplus \Lin\{x_0\}$, тогда $\forall x \in L_0$:
+	$$
+	x = z + tx_0, \quad z \in L, \ t \in \Cx
+	$$
+	Положим 
+	$$
+	\varphi (x) = \varphi(z + tx_0) = t
+	$$
+	Тогда:
+	$$
+	\|\varphi\| = \sup\limits_{ t \neq 0, z \in L} \frac{|\varphi(z + t x_0)}{\|z + t x_0\|} = \sup\limits_{ t \neq 0, z \in L} \frac{|t|}{\|z + tx_0\|} = \sup\limits_{ y \in L} \frac{1}{\|x_0 - y\|} = \frac{1}{\inf\limits_{ y \in L} \|x_0 - y\|} = \frac{1}{\rho(x_0, L)}
+	$$
+	Так как $L$ --- замкнуто, то $\rho(x_0, L) \neq 0$. Таким образом $\varphi \in L_0^*$, тогда по теореме Хана-Банаха:
+	$$
+	\exists f \in X^*: \ f|_{L_0} = \varphi, \|f\| = \|\varphi\|
+	$$
+	Что и требовалось.
+\end{proof}
+Для доказательства следующего факта нам понадобится вспомогательное утверждение.
+\begin{claim}
+	Пусть $Z$ --- конечномерное ЛНП, $Y$ --- ЛНП, $A : Z \to Y $ --- линейный оператор, тогда
+	$$
+	 \|A\| < +\infty
+	$$
+\end{claim}
+\begin{proof}
+	Пусть $\dim Z = N$ и $\{e_1, \dots, e_N\}$ --- базис в $Z$. То есть для $x \in Z$:
+	$$
+	x = \sum_{k=1}^{N} \alpha_k e_k
+	$$
+	Тогда для оператора $A: Z \to Y$: 
+	$$
+	\|A(x)\| = \left\| \sum_{k=1}^{N} \alpha_k A(e_k)\right\| \leq \sum_{k=1}^{N}|\alpha_k| \|A(e_k)\| \leq \left(\max\limits_{k \in \overline{1, N}} \|A(e_k)\|\right) \sum_{k=1}^{N}|\alpha_k|
+	$$
+	Обозначив $M_A = \max\limits_{k \in \overline{1, N}} \|A(e_k)\|$ перепишем оценку выше:
+	$$
+	\|A\| \leq M_A \sum_{k=1}^N|\alpha_k|
+	$$
+	Ясно, что если рассмотреть координаты как функионалы от $x$, то можно завести в $Z$ новую норму:
+	$$
+	\|x\|_e = \sum_{k=1}^N|\alpha_k(x)|
+	$$
+	Но так как $Z$ конечномерное топологическое векторное пространство, то в силу утверждения (\ref{claim:hom}) $Z$ гомеоморфно $\Cx^N$, а значит является локально компактным пространством. Значит
+	$$
+	\exists U(0) \in (Z, \| \|): \quad [U(0)]_{\|\|} \text{ --- компакт}
+	$$
+	Тогда $\exists r > 0$:
+	$$
+	B_r(0) \subset U(0) \subset [U(0)]_{\| \|}
+	$$
+	Так как $[U(0)]_{\| \|}$ --- компакт, то замкнутый шар 
+	$B_r(0)$ как замкнутое подмножество компакта тоже является компактом в $(Z, \|\|)$, тогда, так как в векторной топологии умножение на $\frac{1}{r}$ является гомеоморфизмом, то 
+	$$
+	\frac{1}{r}B_r(0) = B_1(0) 
+	$$
+	Тоже является компактом. Рассмотрим
+	$$
+	\Lambda : Z \to C^N \quad \Lambda(x) = (\alpha_1(x), \dots \alpha_N(x))^T
+	$$
+	Опять, вспоминая утверждение $\ref{claim:hom}$, имеем, что $\Lambda$ --- гомеоморфизм, значит отображает компакт в компакт, значит
+	$$
+	\Lambda(B_1(0)) \text{ --- компакт в $\Cx^N$}
+	$$
+	Но тогда $\Lambda(B_1(0))$ --- замкнутое и ограниченное множество, значит
+	$$
+	\exists R > 0: \|x\| \leq 1 \Rightarrow |\alpha_k(x)| \leq R
+	$$
+	Тогда 
+	$$
+	\|x\|_e = \sum_{k=1}^N|\alpha_k| \leq RN
+	$$
+	Таким образом:
+	$$
+	\forall x \in Z\setminus  \{0\}: \left\|\frac{x}{\|x\|}\right\|_e \leq RN \Rightarrow \|x\|_e \leq RN \|x\|
+	$$
+	Значит можно продолжить выкладку:
+	$$
+	\|A\| \leq M_A \sum_{k=1}^N|\alpha_k| \leq M_A RN \|x\|
+	$$
+	Значит $\|A\| \leq + \infty$, что и требовалось.
+\end{proof}
+\begin{definition}
+	Пусть $Z$ --- линейное пространство и $\|\|_1, \|\|_2$ --- нормы в этом пространстве, тогда говорят, что эти нормы эквивалентны, если
+	$$
+	\forall x \in Z:	\begin{cases}
+		\|x\|_1 \leq C_2 \|x\|_2 \\
+		\|x\|_2 \leq C_1 \|x\|_1
+	\end{cases}
+	$$
+\end{definition}
+Фактически в прошлом утверждении попутно доказана эквивалентность всех норм в конечномерном пространстве.
+\begin{claim}
+	Если $X$ --- бесконечномерно, то $X^*$ --- тоже бесконечномерно
+\end{claim}
+\begin{proof}
+	Рассмотрим $\forall \{x_1, \dots, x_N\} \subset X$ --- систему линейно независимых векторов из $X$, далее мы покажем, что 
+	$$
+	\exists f_1, \dots, f_N \in X^*, \quad f_k(x_n) = \delta_{kn}
+	$$
+	В таком случае $f_i$ --- будут линейно независимы и в таком случае в силу произвольности $N$, $X^*$ будет бесконечномерно.
+	Построение $f_1, \dots, f_N$: 
+	
+	Рассмотрим $L_N = \Lin\{x_1, \dots, x_N\}$, и положим $\forall \alpha_1, \dots, \alpha_N \in \Cx, \ \forall n \in \overline{1, N}$:
+	$$
+	\varphi_n\left(\sum_{k=1}^{N}\alpha_k x_k\right) = \alpha_n
+	$$
+	В силу утверждения выше $\varphi_1, \dots, \varphi_n \in (L_N)^*$. Тогда по теореме Хана-Банаха: 
+	$$
+	\exists f_1 \dots, f_n \in X^* \quad f_n|_{L_N} = \varphi_n
+	$$
+	Таким образом нужные функционалы построены и утверждение доказано.
+\end{proof}
+\begin{claim}
+	Пусть $X,Y$ --- ЛНП. $\tau_U$ и $\tau_S$ --- равномерная операторная топология и сильная операторная топология в $\CL(X, Y)$. Тогда
+	\begin{enumerate}
+		\item $\tau_S \subset \tau_U$
+		\item Если $X$ --- бесконечномерно и $Y \neq 0$, то $\tau_S \neq \tau_U$
+	\end{enumerate}
+\end{claim}
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Предбаза $\tau_S$:
+		$$
+		\sigma_S = \{V(A,x, \eps)\mid A \in \CL(X,Y), x\in X, \eps >0\}
+		$$
+		Покажем, что $\sigma_S \subset \tau_U$. Пусть $T \in V(A, x, \eps)$, тогда
+		$$
+		\|T(x) - A(x)\| < \eps
+		$$ 
+		Пусть $r > 0$, рассмотрим шар $O_r(T) \subset \CL(X,Y)$, если $T_1 \in O_r(T)$, то 
+		$$
+		\|T_1 - T\| < r \Rightarrow \|T_1(x) - T(x)\| \leq \|T_1 - T\| \|x\| \leq r \|x\|
+		$$
+		Тогда получим:
+		$$
+		\|T_1(x) - A(x)\| \leq r\|x\| + \|A(x) - T(x)\| 
+		$$
+		Взяв $r =  \eps - \frac{\|A(x) - T(x)\|}{\|x\| + 1}$ получим
+		$$
+		\|T_1(x) - A(x)\| < \eps 
+		$$
+		Что и требовалось.
+		\item Покажем, что если $X$ --- бесконечномерно, а $Y \neq \{0\}$, то единичный шар по топологии $\tau_U$ не попадет в $\tau_S$
+		$$
+		O_1(0) \in \tau_U\setminus \tau_S
+		$$
+		Рассмотрим произвольную окрестность нуля $U(0) \in \tau_S$. Покажем, что $U(0) \nsubseteq O_1(0)$. В $U(0)$ вложен элемент базы:
+		$$
+		\exists x_1, \dots, x_N \in X, \ \exists\eps > 0 \ : \bigcap_{k=1}^N V(0, x_k, \eps) \subset U(0)
+		$$
+		С помощью теоремы Хана-Банаха построим функционал, который не попадет в $O_1(0)$. Рассмотрим
+		$$
+		L_N = \Lin \{x_1, \dots, x_N\} \subset X
+		$$
+		В силу бесконечномерности $X$ $\exists x_0 \in X \setminus L_N$. Как конечномерное подпространство топологического векторного пространства $L_N$ --- замкнуто (\ref{th:clfinds}). По следствию из теоремы Хана-Банаха (\ref{cl:hb-con1}) 
+		$$
+		\exists f \in X^* \quad f|_{L_N} = 0 \quad f(x_0) = 1
+		$$
+		$Y$ не нулевое, тогда существует $y_0 \in Y$, $y_0 \neq 0$. Тогда построим последовательность операторов:
+		$$
+		A_n(x) = nf(x)y_0
+		$$
+		Тогда 
+		$$
+		\forall n \in \N: \ A_n \in \bigcap_{k=1}^N V(0, x_k, \eps) \subset U(0)
+		$$
+		Но операторная норма $A_n$ растет:
+		$$
+		\|A_n\| = n\|f\|\|y_0\| \rr \infty \ (n \rr \infty)
+		$$
+		Таким образом $\exists n_0: \ A_{n_0} \notin O_1(0)$. Что и требовалось.
+	\end{enumerate}
+\end{proof}
+Продолжим изучение полноты пространства операторов.
+\begin{example}
+	Если $Y$ --- банахово, а $X$ --- не полное, то  может оказаться, что$(\CL(X,Y), \tau_s)$ --- не полно
+\end{example}
+\begin{proof}
+	Рассмотрим $Y = \Cx$, $X = (l_1, \|\|_\infty)$. Тогда рассмотрим 
+	$$
+	f_n \in L(X, \Cx) \quad f_n(x) = \sum_{k=1}^n x(k), \ x \in l_1
+	$$
+	Тогда
+	$$
+	|f_n(x)| \leq \sum_{k=1}^n \underbrace{|x(k)|}_{\leq \|x\|_\infty} \leq \|x\|_\infty n \Rightarrow \|f\| \leq n
+	$$
+	C другой стороны можно рассмотреть 
+	$$
+	z_n = (\underbrace{1, \dots, 1}_{n \text{ штук}}, 0, \dots) \in l_1
+	$$
+	Имеем: $\|z_n\|_\infty = 1$ и 
+	$
+	|f_n(z_n)| = n
+	$.
+	Таким образом $\|f_n\| = n$. Теперь пусть $x \in l_1$, тогда
+	$$
+	|f_{n+p}(x) - f_n(x)| = \left|\sum_{k = n+1}^{n+p}x(k)\right| \leq \sum_{k = n+1}^{n+p} \leq \eps \text{ (в силу сходимости ряда)}
+	$$
+	Значит $\{f_n\}$ --- фундаментальная по топологии $\tau_S$. Тогда существует предел
+	$$
+	\forall x \in X: \ f(x) = \lim\limits_{n \to \infty}f_n(x) \in \Cx
+	$$
+	Но $f \notin \CL(X, \Cx)$! Так как:
+	$$
+	\|f\| \geq |f(z_n)| = n \rr \infty
+	$$
+	А значит $\CL(X, \Cx)$ не полно по топологии $\tau_S$
+\end{proof}
+Заметим, что нам помешала неограниченность норм. В связи с этим докажем утверждение.
+\begin{claim}\label{cl:secofop}
+	Пусть $\{A_n\} \subset \CL(X, Y)$ такова, что
+	\begin{enumerate}
+		\item $\{\|A_n\|\}_{n=1}^\infty$ --- ограниченна в $\R$
+		\item $\forall x \in X  \ \exists \lim\limits_{n \to \infty}A_n(x) = T(x)$
+	\end{enumerate}
+	Тогда $T \in \CL(X,Y)$, $\|T\| \leq \varliminf\limits_{n \to \infty} \|A_n\| \leq R$ и $A_n \xrightarrow{\tau_s} T$
+\end{claim}
+\begin{proof}
+	Из пункта 2 автоматически получаем, что $A_n \xrightarrow{\tau_s} T$. Далее, рассмотрим $x \in X, \ \|x\| \leq 1$, тогда
+	$$
+	\|T(x)\| = \lim\limits_{n \to \infty}\|A_n(x)\| \leq R\|x\|
+	$$
+	Отсюда $\|T\| \leq R$. С другой стороны можно выбрать подпоследовательность, сходящуюся к частичному пределу.
+	$$
+	\exists n_1 \mathrel{<} n_2 \dots : \ \lim\limits_{k \to \infty}\|A_{n_k}\| = \varliminf_{n \to \infty}\|A_n\|
+	$$
+	Тогда можно сесть на эту подпоследовательность в оценке: 
+	$$
+	\|T(x)\| = \lim\limits_{k \to \infty}\|A_{n_k}\| \leq \lim_{k \rr \infty} \|x\| = \varliminf_{n \rr \infty} \|A_{n}\|\|x\|
+	$$
+	Значит $\|T\| \leq \varliminf\limits_{n \to \infty} \|A_n\|$, что и требовалось.
+\end{proof}

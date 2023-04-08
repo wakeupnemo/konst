@@ -1,0 +1,54 @@
+\newpage
+\section{Теорема о спектральном радиусе элемента банаховой алгебры. Критерий равенства спектрального радиуса норме элемента банаховой алгебры.}
+\begin{theorem}
+	Для любого элемента $x$ банаховой алгебры $\CA$ справедливо следующее выражение для спектрального радиуса
+	$$
+	r(x) = \max_{\lambda \in \sigma(x)} |\lambda| = \lim\limits_{n \to \infty} \sqrt[n]{\|x^n\|}
+	$$
+\end{theorem}
+\begin{proof}
+	Рассмотрим $\lambda \in \sigma$, покажем, что $\lambda^n \in \sigma(x^n)$. Если бы это было нет так и $\lambda^n \in \rho(x^n)$, то 
+	$$
+	x^n - \lambda e = x_\lambda y = y x_\lambda 
+	$$
+	где $y = x^{n-1} + \lambda x^{n-2} + \dots + \lambda^{n-2} x + \lambda^{n-1} e$ откуда
+	$$
+	\begin{cases}
+		x_\lambda y R_{x^n}(\lambda^n) = e \\
+		R_{x^n}(\lambda^n) y x_\lambda = e
+	\end{cases} \Rightarrow \exists (x_\lambda)^{-1}
+	$$
+	и значит $\lambda \in \rho(x)$, противоречие. Итак, из того, что $\lambda \in \sigma(x)$ следует, что $\lambda^n \in \sigma(x^n)$. Тогда 
+	$$
+	|\lambda^n|  = |\lambda|^n \leq \|x^n\| \Rightarrow |\lambda| \leq \sqrt[n]{\|x^n\|}
+	$$
+	Переходя к пределу по $\lambda \in \sigma(x)$ получим
+	$$
+	r(x) \leq \sqrt[n]{\|x^n\|}
+	$$
+	Переходя к нижнему пределу по $n$ получим
+	$$
+	r(x) \leq \liminf_{n \to \infty} \sqrt[n]{\|x^n\|} 
+	$$
+	Пусть теперь $|\lambda| > r(x)$. Тогда для любого $\Phi \in \CA^*$ положим $f(\lambda)= \Phi(R_x(\lambda)$. И выражение для $f(\lambda)$:
+	$$
+	f(\lambda) = -\sum_{n=0}^\infty\frac{\Phi(x^n)}{\lambda^{n+1}}
+	$$
+	В силу сходимости ряда общий член стремится к нулю для любого $\Phi$, что значит имеет место слабая сходимость
+	$$
+	\frac{x^n}{\lambda^{n}} \rightharpoonup 0
+	$$
+	(на одну лямбду забиваем). Из слабой сходимости следует сильная ограниченность, то есть 
+	$$
+	\exists R_\lambda > 0\colon \left\| \frac{x^n}{\lambda^{n+1}}\right\| \leq R_\lambda
+	$$
+	Откуда 
+	$$
+	|\lambda| \geq \frac{\sqrt[n]{\|x^n\|}}{\sqrt[n]{R_\lambda}}
+	$$
+	Но $\sqrt[n]{R_\lambda} \to 1$, так как это константа. Значит 
+	$$
+	|\lambda| \leq \limsup_{n \to \infty} \sqrt[n]{\|x^n\|}
+	$$
+	Переходя к пределу по $\lambda\in \rho(x)$ и используя оценку на спектральный радиус снизу, получаем искомое выражение.
+\end{proof} 

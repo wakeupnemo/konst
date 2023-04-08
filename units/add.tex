@@ -1,0 +1,121 @@
+\newpage
+
+\begin{claim}
+	Если $X$ --- бесконечномерно, то $X^*$ --- тоже бесконечномерно
+\end{claim}
+\begin{proof}
+	Рассмотрим $\forall \{x_1, \dots, x_N\} \subset X$ --- систему линейно независимых векторов из $X$, далее мы покажем, что 
+	$$
+	\exists f_1, \dots, f_N \in X^*, \quad f_k(x_n) = \delta_{kn}
+	$$
+	В таком случае $f_i$ --- будут линейно независимы и в таком случае в силу произвольности $N$, $X^*$ будет бесконечномерно.
+	Построение $f_1, \dots, f_N$: 
+	
+	Рассмотрим $L_N = \Lin\{x_1, \dots, x_N\}$, и положим $\forall \alpha_1, \dots, \alpha_N \in \Cx, \ \forall n \in \overline{1, N}$:
+	$$
+	\varphi_n\left(\sum_{k=1}^{N}\alpha_k x_k\right) = \alpha_n
+	$$
+	В силу утверждения выше $\varphi_1, \dots, \varphi_n \in (L_N)^*$. Тогда по теореме Хана-Банаха: 
+	$$
+	\exists f_1 \dots, f_n \in X^* \quad f_n|_{L_N} = \varphi_n
+	$$
+	Таким образом нужные функционалы построены и утверждение доказано.
+\end{proof}
+\begin{claim}
+	Пусть $X,Y$ --- ЛНП. $\tau_U$ и $\tau_S$ --- равномерная операторная топология и сильная операторная топология в $\CL(X, Y)$. Тогда
+	\begin{enumerate}
+		\item $\tau_S \subset \tau_U$
+		\item Если $X$ --- бесконечномерно и $Y \neq 0$, то $\tau_S \neq \tau_U$
+	\end{enumerate}
+\end{claim}
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Предбаза $\tau_S$:
+		$$
+		\sigma_S = \{V(A,x, \eps)\mid A \in \CL(X,Y), x\in X, \eps >0\}
+		$$
+		Покажем, что $\sigma_S \subset \tau_U$. Пусть $T \in V(A, x, \eps)$, тогда
+		$$
+		\|T(x) - A(x)\| < \eps
+		$$ 
+		Пусть $r > 0$, рассмотрим шар $O_r(T) \subset \CL(X,Y)$, если $T_1 \in O_r(T)$, то 
+		$$
+		\|T_1 - T\| < r \Rightarrow \|T_1(x) - T(x)\| \leq \|T_1 - T\| \|x\| \leq r \|x\|
+		$$
+		Тогда получим:
+		$$
+		\|T_1(x) - A(x)\| \leq r\|x\| + \|A(x) - T(x)\| 
+		$$
+		Взяв $r =  \eps - \frac{\|A(x) - T(x)\|}{\|x\| + 1}$ получим
+		$$
+		\|T_1(x) - A(x)\| < \eps 
+		$$
+		Что и требовалось.
+		\item Покажем, что если $X$ --- бесконечномерно, а $Y \neq \{0\}$, то единичный шар по топологии $\tau_U$ не попадет в $\tau_S$
+		$$
+		O_1(0) \in \tau_U\setminus \tau_S
+		$$
+		Рассмотрим произвольную окрестность нуля $U(0) \in \tau_S$. Покажем, что $U(0) \nsubseteq O_1(0)$. В $U(0)$ вложен элемент базы:
+		$$
+		\exists x_1, \dots, x_N \in X, \ \exists\eps > 0 \ : \bigcap_{k=1}^N V(0, x_k, \eps) \subset U(0)
+		$$
+		С помощью теоремы Хана-Банаха построим функционал, который не попадет в $O_1(0)$. Рассмотрим
+		$$
+		L_N = \Lin \{x_1, \dots, x_N\} \subset X
+		$$
+		В силу бесконечномерности $X$ $\exists x_0 \in X \setminus L_N$. Как конечномерное подпространство топологического векторного пространства $L_N$ --- замкнуто (\ref{th:clfinds}). По следствию из теоремы Хана-Банаха (\ref{cl:hb-con1}) 
+		$$
+		\exists f \in X^* \quad f|_{L_N} = 0 \quad f(x_0) = 1
+		$$
+		$Y$ не нулевое, тогда существует $y_0 \in Y$, $y_0 \neq 0$. Тогда построим последовательность операторов:
+		$$
+		A_n(x) = nf(x)y_0
+		$$
+		Тогда 
+		$$
+		\forall n \in \N: \ A_n \in \bigcap_{k=1}^N V(0, x_k, \eps) \subset U(0)
+		$$
+		Но операторная норма $A_n$ растет:
+		$$
+		\|A_n\| = n\|f\|\|y_0\| \rr \infty \ (n \rr \infty)
+		$$
+		Таким образом $\exists n_0: \ A_{n_0} \notin O_1(0)$. Что и требовалось.
+	\end{enumerate}
+\end{proof}
+
+
+\begin{claim}
+	$\tau_{w^*}$ в $X^*$ где $X$ --- локально выпукла --- хаусдорфова
+\end{claim}
+\begin{proof}
+	Соответствующие окрестности $f,g \in X^*$, если $f \neq g \Rightarrow \exists x \in X: \ f(x) \neq g(x)$, тогда
+	$$
+	V_*(f,x,\eps) \cap V_*(g,x,\eps) = \varnothing
+	$$
+	где $\eps = \frac{|f(x) - g(x)|}{2} > 0$
+\end{proof}
+Таким образом слабая топология тоже является хаусдорфовой. 
+
+\begin{claim}
+	$\tau_w$ --- это слабейшая топология в $X$, относительно которой $\forall f \in X^*$ топологически непрерывен. 
+\end{claim}
+\begin{proof}
+	Пусть $\tilde{\tau}$ топология относительно которой все функционалы $f\in X^*$ непрерывны. Тогда 
+	$$
+	\forall x \in X\ \forall f \in X^* \colon \forall \eps > 0 \Rightarrow\exists \tilde{U}(x) \in \tilde{\tau}\colon \forall y \in \tilde{U}(x) \Rightarrow |f(y) - f(x)| < \eps
+	$$
+	Тогда такой $y$ лежит в элементе предбазы $\tau_{w^*}$ порожденной $x,f,\eps$ то есть
+	$$
+	\tilde{U}(x) \subset V(x,f,\eps)
+	$$
+	Но тогда $\forall y \in V(x,f,\eps) \ \Rightarrow V(y,f,\delta) \subset V(x,f,\eps)$ где $\delta = \eps - |f(x) - f(y)|$ (неравество треугольника), таким образом
+	$$
+	\forall y \in V(x,f,\eps)\colon \exists \tilde{U} \in \tilde{\tau}: \tilde{U} \subset V(y,f,\delta) \subset V(x,f,\eps)
+	$$
+	Значит $V(x,f,\eps)$ является $\tilde{\tau}$-открытым для любого $x$ и $f$. Так как этим исчерпываются элементы предбазы, то  
+	$$
+	\tau_w \prec \tilde{\tau}
+	$$
+	Что и требовалось.
+\end{proof}

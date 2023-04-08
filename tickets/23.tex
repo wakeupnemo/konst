@@ -1,0 +1,97 @@
+\newpage
+\section{Теорема Банаха о замкнутом графике. Теорема Хеллингера-Теплица о непрерывности симметричного на гильбертовом пространстве линейного оператора.}
+
+
+\begin{theorem}[Банаха о замкнутом графике]
+	Пусть $X,Y$ --- банаховы пространства. И $A\colon X \to Y$ --- линейный оператор с замкнутым графиком, то есть 
+	$$
+	\Gr A = \left\{\left(\begin{matrix}
+		x \\
+		Ax
+	\end{matrix}\right) \in X \times Y \mid x \in X \right\} \text{ --- замкнуто в } X \times Y
+	$$
+	Тогда $A \in \CL(X, Y)$
+\end{theorem}
+\begin{proof}
+	Рассмотрим оператор $T : \Gr A \to X$:
+	$$
+	\forall x \in X \quad T \left(\begin{matrix}
+		x \\ Ax
+	\end{matrix}\right) = x 
+	$$
+	Очевидно, $T$ --- линеен. Покажем, что $\Ker T =\{0\}$. Пусть $ \left(\begin{matrix} x \\ Ax \end{matrix}\right) \in \Ker T$ тогда
+	$$
+	T \left(\begin{matrix}
+		x \\ Ax
+	\end{matrix}\right) = x = 0 \Rightarrow Ax = A(0) = 0 \Rightarrow \left(\begin{matrix}
+		x \\ Ax
+	\end{matrix}\right) = \left(\begin{matrix}
+		0 \\ 0
+	\end{matrix}\right)
+	$$ 
+	Кроме того ясно, что $\Ima T = X$. Проверим, что $T \in \CL(\Gr A,X)$ 
+	$$
+	\left\| T\left(\begin{matrix}
+		x \\ Ax
+	\end{matrix}\right) \right\| = \|x\| \leq \|x\| + \|Ax\| = \left\| \left(\begin{matrix}
+		x \\ Ax
+	\end{matrix}\right)\right\| \Rightarrow \|T\| \leq 1
+	$$ Для попадания в условие теоремы Банаха об обратном операторе (\ref{th:inv_op}), остается проверить, что $\Gr A$ --- банахово, но $\Gr A$ --- замкнуто в банаховом $X \times Y$, а значит --- банахово. Таким образом существует обратный оператор $$\exists T^{-1} : X \to \Gr A \text{ --- непрерывен}$$
+	Рассмотрим 
+	$$
+	P \colon X \times Y \to Y \quad P \left(\begin{matrix}
+		x \\ y
+	\end{matrix}\right) = y
+	$$
+	$ P \in \CL(X \times Y, Y)$, действительно 
+	$$
+	\left\|P \left(\begin{matrix}
+		x \\ y
+	\end{matrix}\right)\right\| = \|y\| \leq \|x\| + \|y\| = \left\| \left(\begin{matrix}
+		x \\ y
+	\end{matrix}\right)\right\| \Rightarrow \|P\| \leq 1 
+	$$
+	Тогда рассмотрим $ P \circ T^{-1} \colon X \to Y$, $\forall x \in X$ имеем
+	$$
+	PT^{-1}(x) = P \left(\begin{matrix}
+		x \\ Ax
+	\end{matrix}\right) = Ax
+	$$
+	Таким образом $A = P \circ T^{-1}$, значит $A \in \CL(X, Y)$ как композиция непрерывных. 
+\end{proof}
+
+
+\begin{theorem}[Хеллингер, Теплиц]
+	Пусть линейный оператор $A \colon H \to H$, где $H$ --- гильбертово. Причем 
+	$$
+	\forall x,y \in H \Rightarrow (A(x), y) = (x, A(y))
+	$$
+	Тогда $A \in \CL(H)$.
+\end{theorem}
+\begin{proof}
+	Пусть $A$ симметричен и линеен на $A$, покажем, что график $A$ замкнут. Пусть 
+	$$
+	\begin{pmatrix}
+		x_n \\ Ax_n
+	\end{pmatrix} \in \Gr A \quad \text{и} \quad \begin{pmatrix}
+	x_n \\ Ax_n
+\end{pmatrix} \xrightarrow{H \times H} \begin{pmatrix}
+x\\ y
+\end{pmatrix}
+	$$
+	Тогда в силу симметрии $\forall z \in H$: 
+	$$
+	(Ax_n, z) = (x_n, Az)
+	$$
+	Но скалярное произведение непрерывно при фиксированном $z$, тогда 
+	$$
+	(Ax_n, z) \to (y, z) = (x, Az) = (Ax, z)
+	$$
+	Значит $\forall z \in H$:
+	$$
+	(y - Ax, z) =  0 \Rightarrow \|y - Ax\|^2 = 0 \Rightarrow y = Ax 
+	$$
+	Значит $\begin{pmatrix}
+		x \\ y
+	\end{pmatrix} \in \Gr A$. Таким образом график $A$ замкнут, и значит по теореме о замкнутом графике $A \in \CL(H)$.
+\end{proof}

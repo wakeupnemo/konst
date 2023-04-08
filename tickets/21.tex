@@ -1,0 +1,232 @@
+\newpage
+\section{Сильная операторная топология $\tau_s$ в пространстве $\CL(X,Y)$ линейных ограниченных операторов, действующих в нормируемых пространствах $X$ и $Y$. Теорема Банаха-Штейнгауза и теорема о полноте пространства $(\CL(X,Y), \tau_s)$.}
+
+\begin{definition}
+	Топологию индуцированную на пространство $\CL(X,Y)$ с пространства с $(Y^X, \tau_T)$, где $\tau_T$ --- топология Тихонова, будем обозначать $\tau_s$ и называть сильной операторной топологией. 
+\end{definition}
+
+Пространство $(\CL(X,Y), \tau_S)$ --- топологическое векторное так как $Y$ --- линейное нормированное а значит топологическое векторное. Обобщим определение полноты на топологические векторные пространства.
+\begin{definition}
+	Пусть $(Z, \tau)$ --- топологическое векторное пространство. Говорят, что $\{z_n\} \subset Z$ --- последовательность Коши если
+	$$
+	\forall U(0) \in \tau \ \exists N \in \N: \ \forall n,m \geq N \Rightarrow z_n - z_m \in U(0)
+	$$
+\end{definition}
+\begin{remark}
+	Если $(Z, \tau)$ --- нормируемое пространство, то определение выше соответствует обычному определению фундаментальной последовательности.
+\end{remark}
+
+\begin{definition}
+	Топологическое векторное пространство $(Z, \tau)$ называется полным, если любая последовательность Коши является сходящейся. 
+\end{definition}
+
+{\footnotesize \color{violet}
+\begin{claim}\label{cl:secofop}
+	Пусть $\{A_n\} \subset \CL(X, Y)$ такова, что
+	\begin{enumerate}
+		\item $\{\|A_n\|\}_{n=1}^\infty$ --- ограниченна в $\R$
+		\item $\forall x \in X  \ \exists \lim\limits_{n \to \infty}A_n(x) = T(x)$
+	\end{enumerate}
+	Тогда $T \in \CL(X,Y)$, $\|T\| \leq \varliminf\limits_{n \to \infty} \|A_n\| \leq R$ и $A_n \xrightarrow{\tau_s} T$
+\end{claim}
+\begin{proof}
+	Из пункта 2 автоматически получаем, что $A_n \xrightarrow{\tau_s} T$. Далее, рассмотрим $x \in X, \ \|x\| \leq 1$, тогда
+	$$
+	\|T(x)\| = \lim\limits_{n \to \infty}\|A_n(x)\| \leq R\|x\|
+	$$
+	Отсюда $\|T\| \leq R$. С другой стороны можно выбрать подпоследовательность, сходящуюся к частичному пределу.
+	$$
+	\exists n_1 \mathrel{<} n_2 \dots : \ \lim\limits_{k \to \infty}\|A_{n_k}\| = \varliminf_{n \to \infty}\|A_n\|
+	$$
+	Тогда можно сесть на эту подпоследовательность в оценке: 
+	$$
+	\|T(x)\| = \lim\limits_{k \to \infty}\|A_{n_k}\| \leq \lim_{k \rr \infty} \|A_{n_k}\|\|x\| = \varliminf_{n \rr \infty} \|A_{n}\|\|x\|
+	$$
+	Значит $\|T\| \leq \varliminf\limits_{n \to \infty} \|A_n\|$, что и требовалось.
+\end{proof}
+}
+
+В утверждении \ref{cl:linfuncon} мы получили, что для непрерывности предельного оператора достаточна ограниченность норм. Пусть $\{A_n\} \subset \CL(X,Y)$ поймем, какое свойство мы хотим от $X$, чтобы условие ограниченности норм было выполнено. 
+
+Последовательность $\{A_n\}$ --- ограниченна, если
+$$
+\forall x \in X \Rightarrow \{A_n(x)\} \text{ --- ограниченна в $Y$}
+$$
+Обобщим понятие ограниченности на топологические векторные пространства. 
+\begin{definition}
+	Пусть $(Z, \tau)$ --- топологическое векторное пространство. Множество $M \subset Z$ называется $\tau$-ограниченным, если 
+	$$
+	\forall U(0) \in \tau \  \exists R > 0: \forall r  \geq R \Rightarrow M \subset r U(0)
+	$$
+\end{definition}
+\begin{claim}
+	В $(\CL(X, Y), \tau_S)$ множество $M \subset \CL(X, Y)$ --- является $\tau_S$-ограниченным, если и только если
+	$$
+	\forall x \in X \Rightarrow \{A(x) \mid A \in M \} \text{ --- ограниченно в $Y$}
+	$$
+\end{claim}
+\begin{proof}
+	Ограниченность последовательности в $Y$ перепишем следующим образом
+	$$
+	\forall x \in X: \exists R = R(x): \ \forall A \in M \Rightarrow \|A(x)\| \leq R
+	$$
+	Приступим к доказательству.
+	\begin{enumerate}
+		\item[$\Rightarrow$] Пусть $x\in X$, возьмем следующую окрестность нуля:
+		$$
+		V(0,x,1) = \{T \in \CL(X, Y) \mid \|T(x)\| < 1\}
+		$$
+		В силу ограниченности $M$: 
+		$$
+		\exists R > 0 \ \forall r \geq R: \forall A \in M \ \Rightarrow A \in V(0,x,1)r \Rightarrow \frac{1}{r}A \in V(0,x,1)
+		$$
+		Возьмем $r = R$, тогда
+		$$
+		\forall A \in M \colon \left\|\frac{1}{R}A(x)\right\| < 1 \Rightarrow \|A(x)\| < R
+		$$
+		Что и требовалось 
+		\item[$\Leftarrow$] Пусть теперь 
+		$$
+		\forall x \in X: \exists R = R(x): \ \forall A \in M \Rightarrow \|A(x)\| \leq R
+		$$
+		Тогда возьмем произвольную окрестность нуля $U(0) \in \tau_S$, эта окрестность содержит элемент базы, то есть $\exists x_1, \dots, x_N \in X$ такие что
+		$$
+		U(0) \supset \bigcap_{n =1}^N V(0, x_n, \eps )
+		$$
+		Домножим это пересечение на $r$, будем иметь
+		$$
+		T \in r\bigcap_{n =1}^N V(0, x_n, \eps ) \Leftrightarrow \forall n \in \overline{1, N}: \left\|\frac{T(x_n)}{r}\right\| < \eps 
+		$$
+		Значит:
+		$$
+		r\bigcap_{n =1}^N V(0, x_n, \eps ) = \bigcap_{n =1}^N V(0, x_n, r\eps )
+		$$
+		Мы знаем, что для каждого $x$ есть ограниченность:
+		$$
+		\forall n \in \overline{1, N}: \exists R_n : \forall A \in M \Rightarrow\|A(x_n)\| \leq R_n
+		$$
+		Взяв максимум $R = \max\limits_{n \in \overline{1,N}}R_n$ моментально получаем:
+		$$
+		\forall r \geq \frac{R}{\eps}: \forall A \in M \Rightarrow \|A(x_n)\| < R \leq \eps r  \Rightarrow M \subset r\bigcap_{n =1}^N V(0, x_n, \eps ) \subset rU(0)
+		$$
+		Что и требовалось.
+	\end{enumerate}
+\end{proof}
+\begin{definition}
+	Пусть $(Z, \rho)$ --- метрическое пространство. Множество $S \subset Z$ называется нигде не плотным, если 
+	$$
+	\Int [S] = \varnothing
+	$$
+\end{definition}
+\begin{remark}
+	Очевидно, что это определение равносильно:
+	$$
+	\forall r > 0, \ \forall z \in Z \Rightarrow B_r(z) \nsubseteq [S]
+	$$
+\end{remark}
+\begin{definition}
+	\hfill 
+	\begin{itemize}
+		\item Метрическое пространство $(Z, \rho)$ --- называется первой категории по Бэру, если 
+		$$
+		Z = \bigcup_{n=1}^\infty S_n
+		$$
+		Где $S_n$ --- нигде не плотные множества
+		\item Если $(Z, \rho)$ не является первой категории по Бэру, то оно называется второй категории по Бэру.
+	\end{itemize} 
+\end{definition}
+
+\begin{theorem}[Банаха - Штейнгауза]\label{th:banach-sht}
+	Пусть $(X, \|\|)$ --- второй категории, $M \subset \CL(X,Y)$ --- $\tau_S$-ограничено, тогда $M$ --- $\tau_U$-ограничено.
+\end{theorem}
+\begin{proof}
+	 Пусть $M \subset \CL(X, Y)$ является $\tau_S$-ограниченным, то есть 
+	$$
+	\forall x \in X: \exists R = R(x): \ \forall A \in M \Rightarrow \|A(x)\| \leq R
+	$$
+	А нам нужна $\tau_U$-ограниченность, то есть нам бы хотелось, чтобы
+	$$
+	\exists R_0 > 0: \forall 
+	A \in M \Rightarrow \|A\| \leq R_0
+	$$
+	Распишем определение операторной нормы в терминах точек из $x$: 
+	$$
+	\forall x \in B_1(0) \subset X, \ \forall 
+	A \in M: \ \|A(x)\| \leq R_0
+	$$
+	Это равносильно
+	$$
+	\forall x \in B_1(0) \subset X: \ A(x) \in B_{R_0}(0) = R_0B_1(0) \subset Y
+	$$
+	Взяв полный прообраз, продолжим цепочку равносильностей:
+	$$
+	\forall x \in B_1(0) \subset X, \forall A \in M : \ \frac{x}{R_0} \in A^{-1}(B_1(0))
+	$$
+	Отмечу, что $A^{-1}$ \textbf{не обратный оператор}, а формальное обозначение полного прообраза, вопрос существования обратного оператора тут не рассматривается. Тогда 
+	$$
+	\forall A \in M: X \supset B_{\frac{1}{R_0}}(0) \subset A^{-1}(B_1(0))
+	$$
+	Утверждение выше --- это наше желание, для $\tau_U$-ограниченности. Это желание можно переписать следующим образом. Верно ли, что $\exists R_0 > 0$ что
+	$$
+	B_{\frac{1}{R_0}}(0) \subset \bigcap_{A \in M}A^{-1}(B_1(0))?
+	$$
+	В силу линейности функционала и свойств прообраза, это пересечение выпукло и замкнуто в $X$. Кроме того, оно симметрично относительно нуля. Значит, если $\exists r > 0, x_0 \in X$:
+	$$
+	B_r(x_0) \subset \bigcap_{A \in M}A^{-1}(B_1(0)) \Rightarrow  \frac{1}{2}B_{r_0}(x_0) + \frac{1}{2}B_{r_0}(-x_0) = B_{r_0}(0)  \subset \bigcap_{A \in M}A^{-1}(B_1(0))
+	$$
+	Значит нам достаточно, чтобы в это пересечение попал какой-нибудь шар.
+	Введем обозначение
+	$$
+	K = \bigcap_{A \in M}A^{-1}(B_1(0))
+	$$ 
+	Начнем умножать $K$ на натуральные числа и объединять, тогда будем иметь
+	$$
+	x \in \bigcup_{n=1}^\infty nK \Leftrightarrow \exists n : \frac{x}{n} \in K \Leftrightarrow \forall A \in M:  A\left(\frac{x}{n}\right) \in B_1(0) \Leftrightarrow \forall A \in M : \ \|A(x)\| \leq n
+	$$
+	Но в силу поточечной ограниченности $M$: 
+	$$
+	\forall x \in X \Rightarrow \exists n_x = R(x) + 1 \Rightarrow \|A(x)\| \leq n_x \Rightarrow x \in n_x K
+	$$
+	Значит
+	$$
+	X = \bigcup_{n=1}^\infty nK
+	$$
+	Так как $X$ --- второй категории, $K$ --- замкнуто, то $\exists n_0$:
+	$$
+	\Int n_0K \neq \varnothing
+	$$
+	Значит $\exists r_0>0, \ x_0 \in X$:
+	$$
+	B_{r_0}(x_0) \subset n_0 K \Rightarrow B_{\frac{r_0}{n_0}}(x_0) \subset K
+	$$
+	Что и требовалось.
+\end{proof}
+\begin{next1}
+	Если $X$ --- банахово пространство, $\{A_n\} \subset \CL(X, Y)$ $\forall x \in X \Rightarrow \{A_n(x)\}$ --- ограниченна в $Y$. Тогда $\{\|A_n\|\}$ --- ограничена.
+\end{next1}
+\begin{proof}
+	Автоматически из теоремы выше и теоремы Бэра о категории (\ref{th:bear}).
+\end{proof}
+
+\begin{next2}[Полнота $(\CL(X,Y), \tau_s)$]
+	Если $X,Y$ --- банаховы пространства, $\{A_n\} \subset \CL(X,Y)$ --- $\tau_S$-фундаментальна, то есть 
+	$$
+	\forall x \in X \Rightarrow \{A_n(x)\} \text{ --- фундаментальна в $Y$}
+	$$
+	То $\exists T \in \CL(X,Y)$ такой что $A_n \xrightarrow{\tau_S}T$, $\|T\| \leq \varliminf\limits_{n \to \infty}\|A_n\| < + \infty$
+\end{next2}
+\begin{proof}
+	$Y$ --- банахово, $\{A_n\}$ --- $\tau_S$-фундаментальна. Значит 
+	$$
+	\forall x \in X \ \exists \lim\limits_{n \to \infty} A_n(x) = T(x) \in Y
+	$$
+	$T\colon X \to Y$--- линейный оператор. $\{A_n\}$ --- $\tau_S$-фундаментальна, значит $\tau_S$-ограниченна, откуда по предыдущем следствию получаем, что 
+	$$
+	\{\|A_n\|\} \text{ --- ограниченна}
+	$$
+	Тогда в силу \ref{cl:secofop} 
+	$$
+	\|T\| \leq \varliminf_{n \to \infty}\|A_n\| < +\infty
+	$$
+	То есть $T \in \CL(X,Y)$ и $A_n \xrightarrow{\tau_S} T$
+\end{proof}

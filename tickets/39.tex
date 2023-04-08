@@ -1,0 +1,110 @@
+\newpage
+\section{Теорема Фредгольма о конечномерности ядра $\Ker A_\lambda$ и замкнутости множества значений $\Ima A_\lambda$ для компактного оператора $A \in \CL(X,Y)$ и нетривиального числа $\lambda$ в банаховом пространстве $X$. Критерий разрешимости уравнения $A_\lambda x = y$ для $y \in X$.}
+\begin{theorem}[Первая теорема Фредгольма]\label{th:fr1}
+	\hfill
+	
+	Пусть $X$ --- банахово $A\in \CL(X)$ --- компактный оператор. Пусть $\lambda \in \Cx \setminus \{0\}$. Рассмотрим
+	$$
+	A_\lambda = A - \lambda I, \quad I \colon X \to X \text{ --- тождественный, } 
+	$$
+	Тогда
+	\begin{enumerate}
+		\item $\Ker A_\lambda$ --- конечномерен. 
+		\item $\Ima A_\lambda$ --- замкнут. 
+	\end{enumerate}
+	
+\end{theorem}
+\begin{remark}
+	$A_\lambda x = y$ называется уравнением Фредгольма. 
+\end{remark}
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item Покажем, что из любой последовательности $\{x_n\} \subset \Ker A_\lambda, \|x_n\| \leq R$ можно выделить сходящуюся подпоследовательность $x_{n_k}\to x \in \Ker A_\lambda$. Имеем
+		$$
+		\begin{cases}
+			Ax_n = \lambda x_n  \Leftrightarrow x_n = \frac{1}{\lambda}Ax_n\\
+			AB_R(0) \text{ --- вполне ограниченно}
+		\end{cases} 
+		$$
+		Тогда $ \exists n_1< n_2 < \dots$ $Ax_{n_k}$ --- фундаментальна, значит $x_{n_k}$ --- фундаментальна, что и требовалось.
+		\item В силу предыдущего пункта $\Ker A_\lambda = \Lin \{e_1, \dots ,e_N\}$. То есть
+		$$
+		\forall x \in \Ker A_\lambda \Rightarrow x = \sum_{k=1}^N \alpha_k(x)e_k
+		$$
+		Продолжая Хану-Банаху функционалы $\alpha_k$ до $f_k \in X^*$ можно рассмотреть пересечение их ядер
+		$$
+		M = \bigcap_{k=1}^N\Ker f_k
+		$$
+		Ясно, что
+		$$
+		M \cap \Ker A_\lambda = \{0\}
+		$$
+		Кроме того, любой $x \in X$ представляется как сумма из $M$ и $\Ker A_\lambda$
+		$$
+		x = \underbrace{\sum_{k=1}^N f_k(x) e_k}_{\in \Ker A_\lambda} + \underbrace{\left(x - \sum_{k=1}^N f_k(x) e_k\right)}_{\in M}
+		$$
+		Значит
+		$$
+		\Ker A_\lambda \oplus M = X
+		$$
+		Заметим, что $A_\lambda \colon M \to X$ --- инъективен, так как $X = \Ker A_\lambda \oplus M$, то $A_\lambda(M) = \Ima A_\lambda$, поэтому мы можем сузиться на подпространство $M$ и анализировать образ $\Ima A_\lambda$ на нем. 
+		
+		
+		Пусть $\exists C > 0$:
+		$$
+		\forall x \in M\colon \|A_\lambda x\| \geq C\|x\| 
+		$$
+		Покажем в этом предположении замкнутость $\Ima A_\lambda$.
+		$$
+		\forall y \in [A_\lambda(M)]_X = [\Ima A_\lambda]_X \Rightarrow \begin{cases}
+			\exists y_n = A_\lambda(x_n) \to y \\
+			x_n \in M
+		\end{cases}
+		$$
+		Рассмотрим $\{x_n\}_{n=1}^\infty$
+		$$
+		\|x_n - x_m\| \leq \frac{1}{C}\|A_\lambda(x_n - x_m)\| = \|y_n - y_m\| \to 0 
+		$$
+		Значит $\{x_n\}_{n=1}^\infty$ --- фундаментальна в банаховом пространстве $X$, то есть
+		$$
+		\exists x \in X \colon x_n \to x 
+		$$
+		Но тогда в силу непрерывности $A_\lambda$, $y = A_\lambda(x) \Rightarrow y \in \Ima A_\lambda$, что и требовалось. 
+		
+		Теперь покажем, что действительно $\exists C>0$:
+		$$
+		\forall x \in M\colon \|A_\lambda x\| \geq C\|x\| 
+		$$
+		Предположим противное, то есть 
+		$$
+		\forall C > 0 \exists x_C \in M\colon \|A_\lambda x_C\| < C\|x_C\|
+		$$
+		Тогда, как минимум, $x_C \neq 0$. Рассмотрим $C_n = \displaystyle\frac{1}{n}$ и $z_n = \displaystyle\frac{x_{\frac{1}{n}}}{\|x_{\frac{1}{n}}\|} \in M, \ \|z_n\| = 1$. По предположению 
+		$$
+		\|A_\lambda z_n \| < \frac{1}{n} 
+		$$
+		Вспомним, что $A$ --- компактный оператор, так как все $z_n$ --- лежат на сфере, то образ последовательности $z_n$ --- вполне ограничен, тогда 
+		$$
+		\exists n_1 < n_2 < \dots \Rightarrow \{A z_{n_k} \}_{k=1}^\infty\text{ --- фундаметальна в $X$}
+		$$
+		Но тогда последовательность $z_{n_k}$ будет фундаментальна как сумма фундаментальной и бесконечно малой последовательностей:
+		$$
+		z_{n_k} = \frac{A z_{n_k} - A_\lambda z_{n_k}}{\lambda}
+		$$
+		$X$ --- банахово, значит $\exists x \in X, \ z_{n_k} \to x$. Поймем какими свойствами обладает $x$. Так как $\|z_{n_k}\| = 1$, то $\|x\| = 1$. Так как $M$ --- замкнуто, то $x \in M$. Кроме того 
+		$$
+		\begin{cases}
+			A_\lambda z_{n_k} \xrightarrow{k \to \infty} 0 \\
+			A_\lambda z_{n_k} \xrightarrow{k \to \infty} A_\lambda x
+		\end{cases} \Rightarrow A_\lambda x = 0 \Rightarrow x \in \Ker A_\lambda
+		$$
+		Получается $x \in M \cap \Ker A_\lambda$, но тогда $x = 0$, противоречие с $\|x\| = 1$. Таким образом теорема доказана. 
+	\end{enumerate}	
+\end{proof}
+\begin{next0}
+	В условиях предыдущей теоремы. Пусть $z \in X$, уравнения  $A_\lambda x = z$ разрешимо если и только если для любого решения союзного однородного уравнения $(A_\lambda)^*g = 0 \in X^*$ выполнено $g(z) = 0$
+\end{next0}
+\begin{proof}
+	В силу предыдущей теоремы $\Ima A_\lambda$ --- замкнут, тогда в силу \ref{cl:frspirit} получаем, что $\Ima A_\lambda = {}^\perp (\Ker A_\lambda^*)$. Пусть $_\lambda x = z$ разрешимо, что равносильно $z \in \Ima A = {}^\perp (\Ker A_\lambda^*)$, что равносильно $\forall g \in \Ker A_\lambda^* \Leftrightarrow A_\lambda)^*g = 0$ $g(z) = 0$. Что и требовалось. 
+\end{proof}

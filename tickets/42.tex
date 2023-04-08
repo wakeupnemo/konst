@@ -1,0 +1,48 @@
+\newpage
+\section{Теорема об эквивалентности непрерывной обратимости оператора $A \in \CL(X,Y)$ и непрерывной обратимости его сопряженного оператора $A^* \in \CL(Y^*,X^*)$ для банахова пространства $X$ и нормированного пространства $Y$.}
+
+\begin{claim}
+	\hfill
+	\begin{enumerate}
+		\item Пусть $X,Y$ --- ЛНП, $X$ --- банахово и $A \in \CL(X,Y)$ таков, что $\exists A^{-1 }$. Тогда $\exists (A^*)^{-1} \in L(X^*, Y^*)$ при этом $(A^*)^{-1} = (A^{-1})^*$
+		\item Пусть $X,Y$ --- ЛНП и $A^* \in \CL(Y^*, X^*)$ таков, что $\exists (A^*)^{-1}\colon X^* \to Y^*$, тогда $\exists A^{-1} \in \CL(\Ima A, X)$
+	\end{enumerate}	
+\end{claim}
+\begin{proof}
+	\hfil
+	\begin{enumerate}
+		\item Проверяется непосредственным вычислением операторов $(A^*)(A^{-1})^*$ и $(A^{-1})^*(A^*)$ по определению + использование банаховости $X$. 
+		\item По теореме Фредгольма (\ref{th:fr})
+		$$
+		\Ker A = {}^\perp(\Ima A^*) = {}^\perp (X^*) = \{0\}
+		$$
+		И
+		$$
+		[\Ima A]_{\|\|} = {}^\perp(\Ker A^*) = {}^\perp\{0\}= Y
+		$$
+		Значит образ всюду плотен в $Y$. Пусть $x \in X$ по следствию теоремы Хана-Банаха
+		$$
+		\|Ax\| = \sup\limits_{g \in Y*, \|g\| \leq 1}|g(Ax)| = \sup\limits_{g \in Y*, \|g\| \leq 1} |(A^*g)(x)|
+		$$
+		Так как $(A^*)^{-1} \in \CL(X^*, Y^*)$, то в силу критерия топологической непрерывности $A^* \colon Y^* \to X^*$ --- открытое отображение. Тогда 
+		$$
+		A^*B_1^{Y^*}(0) \supset A^*O_1^{Y^*}(0) \supset O_r^{X^*}(0) \supset  B_\frac{r}{2}^{X^*}(0)
+		$$
+		Значит
+		$$
+		\sup\limits_{g \in Y*, \|g\| \leq 1} |(A^*g)(x)| = \sup\limits_{f \in A^*B_1^{Y^*}(0)} |f(x)| \geq \sup\limits_{f \in X^*, \|f\| \leq \frac{r}{2}} |f(x)| < \frac{r}{2}\|x\|
+		$$
+		То есть
+		$$
+		\forall x \in X \Rightarrow \|Ax\| \geq \frac{r}{2}\|x\|
+		$$
+		Но тогда
+		$$
+		\|A^{-1}Ax\| = \|x\| \leq \frac{2}{r}\|Ax\| \Rightarrow \|A^{-1}\| \leq \frac{2}{r}
+		$$
+		Это означает, что $A^{-1} \in \CL(\Ima A, X)$
+	\end{enumerate}
+\end{proof}
+\begin{remark}
+	Если во втором пункте $X$ --- полное, то $\Ima A$ --- замкнут и $A^{-1} \in \CL(Y,X)$
+\end{remark}

@@ -1,0 +1,233 @@
+\newpage
+\section{Векторная топология}
+
+\begin{definition}
+	Пусть $X$ --- линейное пространство над $\R$, топология в $X$ называется векторной, если
+	\begin{itemize}
+		\item $\forall x \in X \Rightarrow X \setminus \{x\} \in \tau$. То есть выполняется аксиома Т1
+		\item Сложение и умножение на скаляр в $(X, \tau)$ являются $\tau$-непрерывными. То есть
+		\begin{itemize}
+			\item $\forall x,y \in X \ \forall U(x + y) \in \tau \Rightarrow \exists V(x), W(y) \in \tau: \ V(x) + W(y) \subset U(x + y)$
+			\item $\forall x \in X \ \forall \alpha \in \R:  \forall U(\alpha x) \in \tau: \ \exists V(x), \ \exists \eps > 0: \forall \lambda \in \R : |\lambda - \alpha| < \eps \Rightarrow \lambda V(x) \subset U(\alpha x )$
+		\end{itemize}
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	Пусть $X$ --- линейное пространство, тогда если на $X$ введена функция: $\|\cdot\|: X \rr [0, +\infty)$ такая что:
+	\begin{itemize}
+		\item $\|x\| = 0 \Leftrightarrow x = 0 \in X$ 
+		\item $\forall \lambda \in \R, \forall x \in X: \|\lambda x \| = |\lambda| \|x\| $
+		\item $\forall x,y \in X: \|x + y\| \leq \|x\| + \|y\|$
+	\end{itemize} 
+	В таком случае $(X, \|\|)$ называется линейным нормированным пространством.
+\end{definition}
+\begin{claim}
+	Всякое линейное нормированное пространство является топологическим векторным пространством относительно топологии порожденной метрикой $\rho(x,y) = \|x - y \|$
+\end{claim}
+\begin{proof}
+	\begin{itemize}
+		\item Аксиома отделимости справедлива для любых метрических пространств. 
+		\item Пусть $x,y \in X$, $U(x+y) \supset O_r(x+y) = \{z \in X \mid \|x + y -z \| < r\}$. Но силу неравенства треугольника: 
+		$$
+		\exists V(x) = O_{\frac{r}{2}}(x), W(y) = O_{\frac{r}{2}}(y): \Rightarrow O_{\frac{r}{2}}(x) + O_{\frac{r}{2}}(y) \subset O_r(x + y)
+		$$
+		Значит сложение непрерывно.
+		\item Пусть $\alpha \in \R, \ x \in X$. Для произвольной $U(\alpha x )$ имеем вложение: $O_r(\alpha x) \subset U(\alpha x)$. Подберем такое $\gamma$, что: 
+		$$
+		\forall \lambda \in R: | \lambda - \alpha| < \gamma \Rightarrow \lambda O_\gamma(x) \subset O_r(\alpha x)
+		$$ 
+		Для любого элемента из шара $y \in O_\gamma(x)$ хотим:
+		$$
+		\|\alpha x - \lambda y \| \leq \underbrace{|\alpha - \lambda|}_{< \gamma} \|x\| + \underbrace{|\lambda|}_{< |\alpha| + \gamma }\underbrace{\|y - x\|}_{< \gamma} < \gamma ( \|x\| + 1 + |\alpha|) < r
+		$$
+		Тогда взяв $\gamma < \min\left\{1, \frac{ r}{1 + |\alpha| + \|x\|}\right\}$ получим требуемое вложение: 
+		$$
+		\forall \lambda \in \R: |\lambda - \alpha| < \gamma \Rightarrow \lambda O_\gamma(x)\subset O_r(\alpha x) \subset U(\alpha x)
+		$$
+	\end{itemize}
+\end{proof}
+\begin{claim}
+	Для ТВП $(X, \tau)$ верны следующие утверждения:
+	\begin{itemize}
+		\item $
+		\forall G \in \tau \ \forall x \in X \Rightarrow x + G \in \tau
+		$
+		\item $\forall \alpha \in \R, \ \alpha \neq 0: \forall G \in \tau \Rightarrow \alpha G \in \tau$
+	\end{itemize}
+\end{claim}
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item 
+			Рассмотрим отображение $y \in X, x \in X: \ f_x(y): (X,\tau) \rr (X,\tau): f_x(y)  = y - x$ так как топология векторная, то $f_x$ --- непрерывно, значит:
+		$$
+		\forall G \in \tau: f_x^{-1}(G) = x + G \in \tau
+		$$
+		\item  Пассмотрим отображение: 
+		$$
+		g_\alpha : (X,\tau) \rr (X,\tau): \forall x \in X : g_\alpha (x) = \frac{x}{\alpha} 
+		$$
+		Умножение на фиксированный скаляр $\frac{1}{\alpha}$ --- непрерывно по свойствам векторной топологии, тогда 
+		$$
+		\forall G \in \tau: \ g_\alpha^{-1}(G) = \alpha G \in \tau
+		$$
+	\end{itemize}
+\end{proof}
+Далее будет несколько лемм, которые говорят о том, что в векторной топологии есть окрестности по свойствам напоминающие шары в метрической топологии. 
+\begin{lemma}
+	\label{lem:sym1}
+	Пусть $(X, \tau)$  --- ТВП, тогда 
+	$$
+	\forall U(0) \in \tau \Rightarrow \exists V(0)  \text{ --- симметричная окрестность}
+	$$
+	То есть $ V(0) = -V(0)$  такая что:
+	$$
+	U(0) \supset V(0) + V(0)
+	$$
+\end{lemma}
+\begin{proof}
+	Подкованный читатель знает, что: 
+	$$
+	0 = 0 + 0
+	$$
+	Тогда в силу топологической непрерывности сложения: 
+	$$
+	\forall U(0) \in \tau \Rightarrow \exists U_1(0), U_2(0):  U_1(0) + U_2(0) \subset U(0)
+	$$
+	Тогда положим: 
+	$$
+	V(0) := U_1(0) \cap U_2(0) \cap (-U_1(0)) \cap (-U_2(0)) \in \tau
+	$$
+	Тогда полученная окрестность очевидно будет симметричной и $V(0) + V(0) \subset U(0)$
+\end{proof}
+\begin{definition}
+	Пусть $X$ --- линейное пространство, $M \subset X$, тогда $M$ --- называется уравновешенным если: 
+	$$
+	\forall \lambda \in \R: |\lambda| < 1 \Rightarrow \lambda M \subset M 
+	$$
+\end{definition}
+\begin{lemma}
+	\label{lem:tvs1}
+	Пусть $(X, \tau)$ --- векторное топологическое пространство, тогда 
+	$$
+	\forall U(0) \in \tau \ \exists V(0) \text{ --- уравеновешенная окрестность}: V(0) \subset U(0)
+	$$
+\end{lemma}
+\begin{proof}
+	Напрягая мозг в очередной раз запишем:
+	$$
+	0 \cdot \bar{0} = \bar{0} 
+	$$
+	Где $0$ --- скалярный ноль, а $\bar{0} \in X$, тогда в силу непрерывности произведения: 
+	$$
+	\forall U(0) \in \tau \ \exists W(0) \in \tau, \ \exists \eps > 0: \forall |\lambda| < \eps \Rightarrow \lambda W(0) \subset U(0)
+	$$
+	Тогда взяв:
+	$$
+	\tau \ni V(0) : = \bigcup_{|\lambda| < \eps} \lambda W(0) \subset U(0)
+	$$
+	Тогда такая окрестность будет уравновешенным: 
+	$$
+	\forall \alpha \in \R |\alpha| < 1 \Rightarrow \alpha V(0) = \alpha \bigcup_{|\lambda| < \eps}\lambda W(0) = \bigcup_{|\lambda| < \eps}\alpha\lambda W(0) \subset V(0)
+	$$
+	Кроме этого мы БЕСПЛАТНО получили, что $V(0)$ --- является симметричной. 
+\end{proof}
+\begin{claim}
+ $(X, \tau)$ --- ТВП, тогда $(X, \tau)$ --- удовлетворяет аксиоме отделимости Т2, то есть является Хаусдорфовым.
+\end{claim}
+\begin{proof}
+	Имеем: $\forall x,y \in X: x \neq y \Rightarrow 0 \neq x - y$, тогда по аксиоме Т1: 
+	$$
+	0 \in X \setminus \{x - y\} \in \tau
+	$$
+	Тогда мы имеем окрестность нуля $U(0) = X \setminus \{x - y\}$, тогда по лемме (\ref{lem:tvs1}) $\exists V(0) \in \tau, \ V(0) = -V(0)$ и 
+	$$
+	V(0) + V(0) = V(0) - V(0) \subset X \setminus \{x - y\}
+	$$
+	Тогда рассмотрим: 
+	$$
+	W(x) = (x + V(0)), \ W(y) = (y + V(0))
+	$$
+	Предположим, что их пересечение непусто: 
+	$$
+	\exists z \in (x + V(0)) \cap (y + V(0))
+	$$
+	Тогда $z = x + u = y + v$, где $u,v \in V(0)$, тогда:
+	$$
+	x - y = v - u \subset V(0) - V(0) = V(0) +  V(0) \subset X \setminus \{x - y\}
+ 	$$
+ 	Противоречие. Таким образом найдены непересекающиеся окрестности $x$ и $y$.
+\end{proof}
+Теперь докажем более сильное утверждение про отделимость.
+\begin{claim}
+	Пусть $(X, \tau)$ --- ТВП. $K \subset X$ --- топологический компакт, $S \subset X$ --- $\tau$-замкнутое множество. И $K \cap S = \varnothing$. Тогда 
+	$$
+	\exists V(0)  \in \tau: \ (K + V(0))\cap (S + V(0)) = \varnothing
+	$$
+	$V(0)$ --- симметричная.
+\end{claim}
+\begin{proof}
+	Воспользуемся замкнутостью $S$: $X \setminus S \in \tau$, и так как $K \cap S = \varnothing$, то $K \subset X \setminus S$. Тогда 
+	$$
+	\forall x \in K \Rightarrow X\setminus S - x  = U(0)
+	$$
+	Тогда по лемме (\ref{lem:sym1}), найдется симметричная окрестность. $V_x(0) \in \tau$, $V_x(0) = - V_x(0)$. И 
+	$$
+	V_x + V_x + V_x + V_x \subset U(0)
+	$$
+	(В лемме говорится о сумме двух окрестностей, но ясно что этот процесс можно продолжать). Тогда мы получили:
+	$$
+	\forall x \in K : \ x + V_x + V_x + V_x + V_x \subset X\setminus S
+	$$
+	С другой стороны, так как $x + V_x \in \tau$, мы, очевидно, имеем открытое покрытие $K$:
+	$$
+	P = \{x + V_x \mid x \subset K\}
+	$$
+	Тогда $P$ имеет конечное подпокрытие: 
+	$$
+	\{x_1 + V_{x_1}, \dots, x_N + V_{x_N}\}, x_n \in K \text{ и } K \subset \bigcup_{n=1}^N(x_n + V_{x_n})
+	$$
+	Построим 
+	$$
+	V(0) = \bigcap_{n=1}^N V_{x_n} \in \tau
+	$$
+	Так как $V_{x_n}$ --- симметричные, то и $V(0)$ --- симметричная окрестность нуля.
+	Предположим, что $\exists z \in (K + V(0)) \cap (S + V(0))$. 
+	$$
+	z \in x + V(0) \subset x_n + V_{x_n} + V(0) \subset x_n + V_{x_n} + V(x_n)
+	$$
+	Так как точка $x$ покрывается одним из множеств $x_n + V_{x_n}$ а $V(0)$ --- пересечение соответствующих окрестностей. С другой стороны $z \in S + V(0)$, тогда
+	$$
+	y + V(0) \ni z \in x_n +V_{x_n} + V_{x_n}
+	$$
+	Тогда: 
+	$$
+	S \ni y \in x_n + V_{x_n} + V_{x_n} - V_{x_n} = x_n + V_{x_n} + V_{x_n} + V_{x_n} \subset X \setminus S
+	$$
+	Противоречие. 
+\end{proof}
+Докажем еще одну лемму:
+\begin{lemma}
+	\label{lem:dest}
+	Пусть $(X, \tau)$ --- топологическое векторное пространство, тогда 
+	$$
+	\forall U(0) \in \tau \Rightarrow \exists V(0) \in \tau: \ [V(0)]_\tau \subset U(0)
+	$$
+\end{lemma}
+\begin{proof}
+	Рассмотрим окрестность нуля $U(0) \in \tau$ тогда, $S = X\setminus U(0)$ --- $\tau$-замкнуто. Рассмотрев компакт $K = \{0\}$, получим, что $K \cap S = \varnothing$. Теперь по предыдущей лемме: 
+	$$
+	\exists V(0) \in \tau \text{ --- симметричная }: (K + V(0))\cap (S + V(0)) \neq \varnothing
+	$$
+	Но так как $K = \{0\}$, то $K + V(0) = V(0)$. Получается, что 
+	$$
+	V(0) \subset X \setminus (S + V(0))
+	$$
+	Но $S + V(0) \in \tau$, так как $V(0) \in \tau$, значит $V(0) \subset X \subset (S + V(0))$ --- содержится в замкнутом множестве, тогда 
+	$$
+	[V(0)]_\tau \subset X \setminus (S + V(0)) \subset X \setminus S = U(0)
+	$$
+\end{proof}
+\begin{next0}
+	Для топологического векторного пространства $(X, \tau)$ выполнена аксиома отделимости Т3.
+\end{next0}

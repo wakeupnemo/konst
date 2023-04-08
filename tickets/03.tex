@@ -1,0 +1,82 @@
+\newpage
+\section{Топологические пространства, база и предбаза топологии. Критерий базы и предбазы топологии}
+
+\begin{definition}
+	Пусть $X$ --- непустое множество, $\tau \subset 2^X$ --- семейство его подмножеств. Тогда пара $(X, \tau)$ называется топологическим пространством, если:
+	\begin{itemize}
+		\item $X, \varnothing \in \tau$
+		\item $\forall \{U_\alpha\}_{\alpha \in \mathbb{A}} \subset \tau \Rightarrow \bigcup\limits_{\alpha \in \bb{A}}U_\alpha \in \tau$
+		\item $\forall U, V \in \tau \Rightarrow U \cap V \in \tau$
+	\end{itemize}
+При этом $\tau$ --- называется топологией в $X$, а элементы $\tau$ --- $\tau$-открытыми множествами.
+\end{definition} 
+
+\begin{definition}
+	Пусть $X \neq \varnothing$ и $\beta \subset 2^X$ --- семейство подмножеств $X$. Тогда говорят, что $\beta$ --- база топологии в $X$, если 
+	$$
+	\tau = \left\{\bigcup\limits_{G \in M }G \mid M \subset \beta \right\} \text{ --- топология в } X
+	$$
+\end{definition}
+
+\begin{theorem}[Критерий базы]\label{th:base_criterian}
+	Пусть $X \neq \varnothing$ и $\beta \subset 2^X$, тогда $\beta$ --- база топологии в $X$ iff 
+	\begin{itemize}
+		\item $\beta$ --- покрытие $X$ 
+		\item $\forall G_1, G_2 \in \beta \Rightarrow \forall x \in G_1 \cap G_2 \ \exists G \in \beta \Rightarrow x \in G \subset  G_1 \cap G_2$
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Пусть $\beta$ --- база, тогда 
+		$$
+		\tau = \left\{\bigcup\limits_{G \in M }G \mid M \subset \beta \right\} \text{ --- топология в } X
+		$$
+		$X \in \tau$, тогда $X = \bigcup\limits_{G \in \beta }G$, то есть $\beta$ --- покрытие $X$. Пусть $G_1, G_2 \in \beta$, тогда $G_1, G_2 \in \tau$, тогда 
+		$$
+		G_1 \cap G_2 \in \tau \Rightarrow \exists M \subset \beta \ G_1 \cap G_2 = \bigcup\limits_{G \in M } G
+		$$
+		Тогда $\forall x \in G_1 \cap G_2 \ \exists G \in M: \ x \in G \subset  G_1 \cap G_2$
+		
+		Обратно. Пусть выполнены условия критерия, покажем, что 
+		$$
+		\tau = \left\{\bigcup\limits_{G \in M }G \mid M \subset \beta \right\} 
+		$$
+		Является топологией в $X$.
+		\begin{itemize}
+			\item $X \in \tau$ так как $\beta$ --- покрытие $X$.
+			\item $\varnothing \in \tau$ как пустое объединение.
+			\item $\{U_\alpha\}_{\alpha \in \bb{A}} \subset \tau$, тогда для каждого $U_\alpha$ существует $M_\alpha \subset \beta$:
+			$$
+			\bigcup\limits_{\alpha \in \bb{A}}U_\alpha = \bigcup\limits_{\alpha \in \bb{A}} \bigcup\limits_{G \in M_\alpha}G = \bigcup\limits_{G \in M^* }G \in \tau
+			$$
+			Где $M^* = \bigcup\limits_{\alpha \in \bb{A}}M_\alpha \subset \beta$
+			\item $\forall U,V \in \tau$, тогда используя второе условие критерия для каждого $x$ из пересечения имеем элемент базы из пересечения: $G_x \in \beta$. Тогда:
+			$$
+			U \cap V = \bigcup\limits_{x \in U \cap V}G_x \in \tau
+			$$
+		\end{itemize}
+\end{proof}
+
+\begin{definition}
+	\label{subbase}
+	Пусть $X \neq \varnothing$ и $\sigma \subset 2^X$. $\sigma$ --- называется предбазой топологии в $X$, если:
+	$$
+	\beta = \left\{\bigcap\limits_{k=1}^NV_k \mid N \in \bb{N}, V_k \in \sigma \right\} \text{ --- база топологии}
+	$$
+\end{definition}
+
+\begin{theorem}[Критерий предбазы]
+	\label{th:csb}
+	Пусть $X \neq \varnothing$ и $\sigma \subset 2^X$, тогда $\sigma$ --- предбаза топологии в $X$ iff $\sigma$ --- покрытие $X$.
+\end{theorem}
+\begin{proof}
+	Если $\beta= \left\{\bigcap\limits_{k=1}^NV_k \mid N \in \bb{N}, V_k \in \sigma \right\}$ --- база, то $\sigma$ --- покрытие $X$, так как 
+	$$
+	X = \bigcup\limits_{G \in \beta } G \subset \bigcup\limits_{G \in \sigma}G \subset X
+	$$
+	Обратно, воспользуемся критерием базы. $\beta$ --- покрытие так как $\sigma \subset \beta$ и $\sigma$ --- покрытие. Второе условие выполнено автоматически, так как:
+	$$
+	\forall U,V \in \beta \Rightarrow U \cap V = \bigcap\limits_{k=1}^{N_1}V_k \cap \bigcap\limits_{k=1}^{N_2} U_k = \bigcap\limits_{k=1}^{N^*}V_k \in \beta
+	$$
+	Таким образом $\beta$ --- база.
+\end{proof}

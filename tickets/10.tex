@@ -1,0 +1,425 @@
+\newpage
+\section{Топологические векторные пространства. Замкнутость локально компактного подпространства и локальная компактность конечномерного подпространства топологического векторного пространства.}
+
+\begin{definition}
+	Пусть $X$ --- линейное пространство над $\R$ (все утверждения с доказательствами сохраняются и для $\Cx$), топология в $X$ называется векторной, если
+	\begin{itemize}
+		\item $\forall x \in X \Rightarrow X \setminus \{x\} \in \tau$. То есть выполняется аксиома Т1
+		\item Сложение и умножение на скаляр в $(X, \tau)$ являются $\tau$-непрерывными. То есть
+		\begin{itemize}
+			\item $\forall x,y \in X \ \forall U(x + y) \in \tau \Rightarrow \exists V(x), W(y) \in \tau: \ V(x) + W(y) \subset U(x + y)$
+			\item $\forall x \in X \ \forall \alpha \in \R:  \forall U(\alpha x) \in \tau: \ \exists V(x), \ \exists \eps > 0: \forall \lambda \in \R : |\lambda - \alpha| < \eps \Rightarrow \lambda V(x) \subset U(\alpha x )$
+		\end{itemize}
+	\end{itemize}
+\end{definition}
+{\footnotesize \color{violet}
+\begin{claim}
+	Для ТВП $(X, \tau)$ верны следующие утверждения:
+	\begin{itemize}
+		\item $
+		\forall G \in \tau \ \forall x \in X \Rightarrow x + G \in \tau
+		$
+		\item $\forall \alpha \in \R, \ \alpha \neq 0: \forall G \in \tau \Rightarrow \alpha G \in \tau$
+	\end{itemize}
+\end{claim}
+\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item 
+		Рассмотрим отображение $y \in X, x \in X: \ f_x(y): (X,\tau) \rr (X,\tau): f_x(y)  = y - x$ так как топология векторная, то $f_x$ --- непрерывно, значит:
+		$$
+		\forall G \in \tau: f_x^{-1}(G) = x + G \in \tau
+		$$
+		\item  Рассмотрим отображение: 
+		$$
+		g_\alpha : (X,\tau) \rr (X,\tau): \forall x \in X : g_\alpha (x) = \frac{x}{\alpha} 
+		$$
+		Умножение на фиксированный скаляр $\frac{1}{\alpha}$ --- непрерывно по свойствам векторной топологии, тогда 
+		$$
+		\forall G \in \tau: \ g_\alpha^{-1}(G) = \alpha G \in \tau
+		$$
+	\end{itemize}
+\end{proof}
+Далее будет несколько лемм, которые говорят о том, что в векторной топологии есть окрестности по свойствам напоминающие шары в метрической топологии. 
+\begin{lemma}
+	\label{lem:sym1}
+	Пусть $(X, \tau)$  --- ТВП, тогда 
+	$$
+	\forall U(0) \in \tau \Rightarrow \exists V(0)  \text{ --- симметричная окрестность}
+	$$
+	То есть $ V(0) = -V(0)$  такая что:
+	$$
+	U(0) \supset V(0) + V(0)
+	$$
+\end{lemma}
+
+\begin{proof}
+	Подкованный читатель знает, что: 
+	$$
+	0 = 0 + 0
+	$$
+	Тогда в силу топологической непрерывности сложения: 
+	$$
+	\forall U(0) \in \tau \Rightarrow \exists U_1(0), U_2(0):  U_1(0) + U_2(0) \subset U(0)
+	$$
+	Тогда положим: 
+	$$
+	V(0) := U_1(0) \cap U_2(0) \cap (-U_1(0)) \cap (-U_2(0)) \in \tau
+	$$
+	Тогда полученная окрестность очевидно будет симметричной и $V(0) + V(0) \subset U(0)$
+\end{proof}
+
+\begin{definition}
+	Пусть $X$ --- линейное пространство, $M \subset X$, тогда $M$ --- называется уравновешенным если: 
+	$$
+	\forall \lambda \in \R: |\lambda| < 1 \Rightarrow \lambda M \subset M 
+	$$
+\end{definition}
+\begin{lemma}
+	\label{lem:tvs1}
+	Пусть $(X, \tau)$ --- векторное топологическое пространство, тогда 
+	$$че
+	\forall U(0) \in \tau \ \exists V(0) \text{ --- уравновешенная окрестность}: V(0) \subset U(0)
+	$$
+\end{lemma}
+
+\begin{proof}
+	Напрягая мозг в очередной раз запишем:
+	$$
+	0 \cdot \bar{0} = \bar{0} 
+	$$
+	Где $0$ --- скалярный ноль, а $\bar{0} \in X$, тогда в силу непрерывности произведения: 
+	$$
+	\forall U(0) \in \tau \ \exists W(0) \in \tau, \ \exists \eps > 0: \forall |\lambda| < \eps \Rightarrow \lambda W(0) \subset U(0)
+	$$
+	Тогда взяв:
+	$$
+	\tau \ni V(0) : = \bigcup_{|\lambda| < \eps} \lambda W(0) \subset U(0)
+	$$
+получим уравновешенную окрестность: 
+	$$
+	\forall \alpha \in \R |\alpha| < 1 \Rightarrow \alpha V(0) = \alpha \bigcup_{|\lambda| < \eps}\lambda W(0) = \bigcup_{|\lambda| < \eps}\alpha\lambda W(0) \subset V(0)
+	$$
+	Кроме этого мы БЕСПЛАТНО получили, что $V(0)$ --- является симметричной. 
+\end{proof}
+
+\begin{claim}
+	$(X, \tau)$ --- ТВП, тогда $(X, \tau)$ --- удовлетворяет аксиоме отделимости Т2, то есть является Хаусдорфовым.
+\end{claim}
+
+\begin{proof}
+	Имеем: $\forall x,y \in X: x \neq y \Rightarrow 0 \neq x - y$, тогда по аксиоме Т1: 
+	$$
+	0 \in X \setminus \{x - y\} \in \tau
+	$$
+	Тогда мы имеем окрестность нуля $U(0) = X \setminus \{x - y\}$, тогда по лемме (\ref{lem:tvs1}) $\exists V(0) \in \tau, \ V(0) = -V(0)$ и 
+	$$
+	V(0) + V(0) = V(0) - V(0) \subset X \setminus \{x - y\}
+	$$
+	Тогда рассмотрим: 
+	$$
+	W(x) = (x + V(0)), \ W(y) = (y + V(0))
+	$$
+	Предположим, что их пересечение непусто: 
+	$$
+	\exists z \in (x + V(0)) \cap (y + V(0))
+	$$
+	Тогда $z = x + u = y + v$, где $u,v \in V(0)$, тогда:
+	$$
+	x - y = v - u \subset V(0) - V(0) = V(0) +  V(0) \subset X \setminus \{x - y\}
+	$$
+	Противоречие. Таким образом найдены непересекающиеся окрестности $x$ и $y$.
+\end{proof}
+
+Теперь докажем более сильное утверждение про отделимость, это свойство называют четвертой аксиомой отделимости. 
+\begin{claim}
+	Пусть $(X, \tau)$ --- ТВП. $K \subset X$ --- топологический компакт, $S \subset X$ --- $\tau$-замкнутое множество. И $K \cap S = \varnothing$. Тогда 
+	$$
+	\exists V(0)  \in \tau: \ (K + V(0))\cap (S + V(0)) = \varnothing
+	$$
+	$V(0)$ --- симметричная.
+\end{claim}
+
+\begin{proof}
+	Воспользуемся замкнутостью $S$: $X \setminus S \in \tau$, и так как $K \cap S = \varnothing$, то $K \subset X \setminus S$. Тогда 
+	$$
+	\forall x \in K \Rightarrow X\setminus S - x  = U(0)
+	$$
+	Тогда по лемме (\ref{lem:sym1}), найдется симметричная окрестность. $V_x(0) \in \tau$, $V_x(0) = - V_x(0)$. И 
+	$$
+	V_x + V_x + V_x + V_x \subset U(0)
+	$$
+	(В лемме говорится о сумме двух окрестностей, но ясно что этот процесс можно продолжать). Тогда мы получили:
+	$$
+	\forall x \in K : \ x + V_x + V_x + V_x + V_x \subset X\setminus S
+	$$
+	С другой стороны, так как $x + V_x \in \tau$, мы, очевидно, имеем открытое покрытие $K$:
+	$$
+	P = \{x + V_x \mid x \in K\}
+	$$
+	Тогда $P$ имеет конечное подпокрытие: 
+	$$
+	\{x_1 + V_{x_1}, \dots, x_N + V_{x_N}\}, x_n \in K \text{ и } K \subset \bigcup_{n=1}^N(x_n + V_{x_n})
+	$$
+	Построим 
+	$$
+	V(0) = \bigcap_{n=1}^N V_{x_n} \in \tau
+	$$
+	Так как $V_{x_n}$ --- симметричные, то и $V(0)$ --- симметричная окрестность нуля.
+	Предположим, что $\exists z \in (K + V(0)) \cap (S + V(0))$. 
+	$$
+	z \in x + V(0) \subset x_n + V_{x_n} + V(0) \subset x_n + V_{x_n} + V(x_n)
+	$$
+	Так как точка $x$ покрывается одним из множеств $x_n + V_{x_n}$ а $V(0)$ --- пересечение соответствующих окрестностей. С другой стороны $z \in S + V(0)$, тогда
+	$$
+	y + V(0) \ni z \in x_n +V_{x_n} + V_{x_n}
+	$$
+	Тогда: 
+	$$
+	S \ni y \in x_n + V_{x_n} + V_{x_n} - V_{x_n} = x_n + V_{x_n} + V_{x_n} + V_{x_n} \subset X \setminus S
+	$$
+	Противоречие. 
+\end{proof}
+
+Докажем еще одну лемму:
+\begin{lemma}
+	\label{lem:dest}
+	Пусть $(X, \tau)$ --- топологическое векторное пространство, тогда 
+	$$
+	\forall U(0) \in \tau \Rightarrow \exists V(0) \in \tau: \ [V(0)]_\tau \subset U(0)
+	$$
+\end{lemma}
+
+\begin{proof}
+	Рассмотрим окрестность нуля $U(0) \in \tau$ тогда, $S = X\setminus U(0)$ --- $\tau$-замкнуто. Рассмотрев компакт $K = \{0\}$, получим, что $K \cap S = \varnothing$. Теперь по предыдущей лемме: 
+	$$
+	\exists V(0) \in \tau \text{ --- симметричная }: (K + V(0))\cap (S + V(0)) = \varnothing
+	$$
+	Но так как $K = \{0\}$, то $K + V(0) = V(0)$. Получается, что 
+	$$
+	V(0) \subset X \setminus (S + V(0))
+	$$
+	Но $S + V(0) \in \tau$, так как $V(0) \in \tau$, значит $V(0) \subset X \setminus (S + V(0))$ --- содержится в замкнутом множестве, тогда 
+	$$
+	[V(0)]_\tau \subset X \setminus (S + V(0)) \subset X \setminus S = U(0)
+	$$
+\end{proof}
+
+
+\begin{definition}
+	Пусть $(X_1, \tau_1), (X_2, \tau_2)$ --- два топологических пространства. И $\psi: X_1 \rr X_2$ --- биекция, тогда если $ \psi (X_1, \tau_1) \rr (X_2, \tau_2)$ и $\psi^{-1}: (X_2, \tau_2) \rr (X_1, \tau_1)$ --- топологически непрерывны, то $\psi$ --- называется гомеоморфизмом. А эти пространства называются гомеоморфными.
+\end{definition}
+Приведем несколько утверждений по поводу гомеоморфных пространств:
+\begin{claim}
+	Если $\psi$ --- гомеоморфизм, то 
+	\begin{enumerate}
+		\item $\forall G \in \tau_1 \Rightarrow \psi(G) \in \tau_2 $
+		\item $M \subset X_1$ --- $\tau_1$-замкнуто, то $\psi(M)$ --- $\tau_2$-замкнуто. 
+		\item Если $M \subset X_1$, то $\psi\left([M]_{\tau_1}\right) = \left[\psi(M)\right]_{\tau_2}$
+		\item Если $K \subset X_1$ --- $\tau_1$-компакт, то $\psi(K)$ --- $\tau_2$-компакт.
+	\end{enumerate}
+\end{claim}
+\begin{proof}
+	\begin{enumerate}
+		\item Так как обратное отображение непрерывно, то прообраз открытого открыт:
+		$$
+		\psi(G) = (\psi^{-1})^{-1}(G) = \{x_2 \in X_2 \mid \psi^{-1}(x_2) \in G\} \in \tau_2
+		$$
+		\item рассмотрев $X \setminus M$ и применив предыдущее утверждение получаем требуемое.
+		\item 
+		$$
+		\psi\left(\bigcap_{
+			\substack{
+				{S \subset X_1} \\
+				{M \subset S } \\
+				{X_1\setminus S \in \tau}
+			}
+		}S\right) = (\psi^{-1})^{-1}\left(\bigcap S\right) = \bigcap (\psi^{-1})^{-1}(S) = \bigcap_{\substack{S \subset X_1 \\ M \subset S \\ X_1\setminus S \in \tau}} \psi(S)
+		$$
+		$\psi(S)$ --- $\tau_2$-замкнуто, а $M \subset S \Leftrightarrow \psi(M) \subset \psi(S) = N$ Тогда:
+		$$
+		\psi\left([M]_{\tau_1}\right) = \bigcap_{\substack{N \subset X_2 \\ \psi(M) \subset N \\ X_2\setminus N \in \tau}}N = \text{(по определению)} = \left[\psi(M)\right]_{\tau_2}   
+		$$
+		\item Пусть $P$ --- $\tau_2$-покрытие $\psi(K)$, тогда:
+		$$
+		\{\psi(V) \mid V \in P \} \text{ --- $\tau_1$-покрытие $K$}
+		$$
+		Значит найдется конечное подпокрытие: $\exists V_1, \dots ,V_N \in P$, такие что $\psi^{-1}(V_1), \dots, \psi^{-1}(V_N)$ --- подпокрытие $K$, тогда $V_1, \dots,V_N$ --- подпокрытие $\psi(K)$, значит $\psi(K)$ --- компакт.
+	\end{enumerate}
+\end{proof}
+}
+\begin{definition}
+	ТВП $(X, \tau)$ --- называется локально компактным, если $\exists U(0) \in \tau$, такая что $[U(0)]_\tau$ --- компакт в $(X, \tau)$
+\end{definition}
+\noindent \textbf{Идея доказательства замкнуности конечномерного подпространства}. \newline
+Следующее утверждение, которое мы докажем, свяжет локальную компактность и замкнутость. После мы воспользуемся следующим. Eсли $L$ конечномерно, то существует изоморфизм между $L$ и $\R^n$ мы докажем, что такой изоморфизм всегда является гомеоморфизмом. $\R^n$  является локально компактным пространством, кроме того ясно, что это свойство сохраняется при гомеоморфизме. Это и завершит полное доказательство.
+\begin{claim}
+	\label{claim:localcompact}
+	Если $(X, \tau)$ --- ТВП и $L \subset X$ --- подпространство такое что $(L, \tau_L)$ --- локально компактно ($\tau_L$ --- индуцированная топология), то $L$ --- $\tau$-замкнуто в $(X,\tau)$
+\end{claim}
+\begin{proof}
+	По условию $\exists U \in \tau, 0 \in U$, такая что $[U \cap L]_{\tau_L} = K$--- компакт в $(L, \tau_L)$, по лемме (\ref{lem:sym1}) найдется симметричная окрестность нуля $U_1 \in \tau$, такая что
+	$$
+	U_1 + U_1 \subset U
+	$$
+	Кроме того по лемме (\ref{lem:dest}) найдется окрестность нуля $U_2 \in \tau$, такая что $[U_2]_\tau \subset U_1$. Рассмотрев $V:= U_2\cap (-U_2)$ --- симметричную окрестность с таким же свойством, получим:
+	$$
+	[V]_\tau + [V]_\tau \subset U \in \tau
+	$$
+	Возьмем произвольную точку $x \in X$, и рассмотрим множество:
+	$$
+	S_x := L \cap (x + [V]_\tau)
+	$$
+	Так как трансляция замкнутого множества не меняет замкнутости, то $x + [V]_\tau$ --- $\tau$-замкнуто в $(X, \tau)$, тогда $S_x$ --- $\tau_L$-замкнуто в $(L, \tau_L)$. Если $S_x \neq \varnothing$, то $S_x$ --- будет компактом в $(L, \tau_L)$. Действительно:
+	$$
+	\exists x_0 \in S_x \Rightarrow \forall y \in S_x: y - x_0 = \underbrace{(y-x)}_{\in [V]_\tau} - \underbrace{(x_0-x)}_{\in [V]_\tau}\in [V]_\tau - [V]_\tau = [V]_\tau + [V]_\tau \subset U
+	$$
+	Таким образом $y - x_0 \in U$,  при этом $y,x_0 \in S_x \subset L$, значит $y- x_0 \in L\cap U \subset K$ --- $\tau_L$-компакт,  тогда:
+	$$
+	S_x \subset x_0 + K
+	$$
+	Трансляция не меняет компактности, в силу непрерывности сложения. Таким образом мы погрузили замкнутое множество в компакт, значит оно является компактом.
+	Тогда возьмем $\forall x \in [L]_\tau$, значит $\forall W \in \tau$ --- окрестности нуля:
+	$$
+	(x + W)\cap L \neq \varnothing
+	$$
+	Рассмотрим 
+	$$
+	\beta_V = \{W \in \tau \mid 0 \in W\subset V\}
+	$$
+	$\beta_V$ --- локальная база нуля в $(X, \tau)$, так как для любой окрестности нуля $U$:
+	$$
+	U \supset U \cap V \subset V  \text{ содержит ноль и открыто } \Rightarrow  U \cap V \in \beta_V
+	$$
+	Теперь смотрим на множество $S_W$ для каждого $W \in \beta_V$:
+	$$
+	S_W = (x + [W]_\tau)\cap L 
+	$$ 
+	\begin{itemize}
+		\item Оно не пусто $ S_W = (x + [W]_\tau)\cap L \supset (x+ W)\cap L \neq \varnothing$
+		\item Оно $\tau_L$-замкнуто по построению 
+		\item $S_W \subset (x + [V]_\tau)\cap L$ --- компакт в $(L, \tau_L)$
+	\end{itemize}
+	Таким образом $\forall W \in \beta_V$ $S_W$ --- компакт в $(L, \tau_L)$. Теперь нам хочется доказать, что пересечение $\bigcap_{W \in \beta_V}S_W \neq \varnothing$. Докажем это в два этапа.
+	\begin{itemize}
+		\item Рассмотрим конечный набор $W_1, \dots, W_N \in \beta_V$, тогда покажем, что $\bigcap_{k=1}^N S_{W_k} \neq \varnothing$. Действительно:
+		$$
+		\bigcap_{k=1}^N S_{W_k} = L \cap (x + [W_1]_\tau)\cap \dots \cap (x + [W_N]_\tau) \supset L \cap \left( x + \bigcap_{k=1}^N [W_k]_\tau\right) \supset L \cap \left(x + \left[\bigcap_{k=1}^N W_k\right]_\tau\right) = S_{\bigcap_{k=1}^N W_k}
+		$$
+		Но $\bigcap_{k=1}^N W_k \in \beta_V$, тогда по доказанному выше $S_{\bigcap_{k=1}^N W_k}$ не пусто.
+		\item Теперь предположим $\bigcap_{W \in \beta_V}S_W = \varnothing$, тогда рассмотрим $S_V \in \beta_V$, так как пересечение всех $S_W$ --- пусто, то 
+		$$
+		S_V = S_V \setminus \bigcap_{W \in \beta_V}S_W  = \bigcup_{W \in \beta_V} S_V \setminus S_W 
+		$$
+		Так как $S_W$ --- $\tau_L$-замкнуто, тогда $L \setminus S_W \in \tau_L$, тогда 
+		$$
+		S_V = \bigcup_{W \in \beta_V} S_V \setminus S_W \subset \bigcup_{W \in \beta_V}\underbrace{L \setminus S_W}_{\in \tau_L} 
+		$$
+		Таким образом получили открытое покрытие компакта $S_L$. Радостно получаем конечное подпокрытие:
+		$$
+		\exists W_1, \dots W_N \in \beta_V: \ S_V \subset \bigcup_{k=1}^N L \setminus S_{W_k} \Rightarrow S_V = \bigcup_{k=1}^N S_V \setminus S_{W_k}  = S_V \setminus \bigcap_{k=1}^N S_{W_k}
+		$$
+		Значит $\bigcap_{k=1}^N S_{W_k} = \varnothing$, противоречие с предыдущим пунктом.
+	\end{itemize}  
+	Таким образом $\bigcap_{W \in \beta_V}S_W \neq \varnothing$. Значит $\exists z \in \bigcap_{W \in \beta_V}S_W  \subset L$ тогда:
+	$$
+	\forall W \in \beta_V: \ z \in x + [W]_\tau 
+	$$
+	Для любой окрестности нуля $\forall \tilde{U} \in \tau, 0 \in \tilde{U}$:
+	$$
+	\exists \hat{U}: \tilde{U} \supset 	[\hat{U}]_\tau  \supset [\hat{U}\cap V]_\tau = [W]_\tau
+	$$
+	Таким образом: 
+	$$
+	\forall \tilde{U}(0) \in \tau: z - x \in \tilde{U}(0) 
+	$$
+	Получили, что $z,x$ --- топологически неотделимы, но в силу свойств векторной топологи такого не может быть, значит $x = z \in L$, таким образом $L$ --- $\tau$-замкнуто. УРА
+\end{proof}
+Для доказательства того, что изоморфизм будет гомеоморфизмом нам понадобится следующая лемма.
+{\footnotesize \color{violet}
+\begin{lemma}[Критерий топологической непрерывности линейного функционала в ТВП]
+	Пусть $(X, \tau)$ --- ТВП и $f: X \rr \R$ --- линейное отображение. Тогда $f: (X, \tau) \rr \R$ --- является топологически непрерывным тогда и только тогда, когда $\Ker f $ --- $\tau$-замкнуто
+\end{lemma}
+\begin{proof}
+	\hfill
+	\begin{enumerate}
+		\item[$\Rightarrow$] Если $f$ --- непрерывно, тогда $\Ker f = f^{-1}(\{0\})$ --- замкнуто, так как $\{0\}$ замкнуто в $\R$ 
+		\item[$\Leftarrow$] Пусть ядро $\Ker f$ --- $\tau$-замкнуто. Тогда $ X \setminus \Ker f \in \tau$. Если $Ker f  = X$, то $\forall x \in X : \ f(x) = 0$, константное отображение является непрерывным. 
+		
+		Теперь считаем, что $Ker f \neq X$. Значит 
+		$$
+		\exists x_0 \in X \setminus \Ker f \in \tau
+		$$
+		Значит существует окрестность нуля $$V:= X\setminus Ker f - x_0: \  0 \in V, V \in \tau$$ По построению $(x_0 + V) \cap \Ker f = \varnothing$. Так как $V$ --- окрестность нуля, то по лемме (\ref{lem:tvs1}) $\exists W \in \tau, W \subset V$ --- уравновешенная окрестность нуля, то есть 
+		$$\forall \lambda\in \R, \ |\lambda| < 1:\ \lambda W \subset W$$
+		Тогда, сужаясь на эту окрестность, имеем $(x_0 + W)\cap Ker f = \varnothing$. Рассмотрим $f(W) \subset \R$.
+		
+		Предположим, что $f(W)$ --- неограниченно в $\R$, тогда 
+		$$
+		\forall \alpha \in \R : \ \exists x \in W : \ |f(x)| > |\alpha|
+		$$
+		Рассмотрим $\lambda = \frac{\alpha}{f(x)} \in \R$. Ясно что $|\lambda| < 1$, тогда по свойствам окрестности $W$: $\lambda W \subset W$, значит 
+		$$
+		\lambda x \in W \Rightarrow f( \lambda x ) = \lambda f(x) = \alpha \in f(W)
+		$$
+		В силу произвольности $\alpha$ получаем, что $f(W)=\R$. Но в таком случае рассмотрев $\alpha = - f(x_0) \in \R$ мы всегда сможем  \sout{сварить суп} найти такой $x$, что $x \in W, \  f(x) = - f(x_0)$. Из этого равенства моментально следует, что 
+		$$
+		x + x_0 \in \Ker f
+		$$
+		С другой стороны $x \in W$, получаем противоречие с $(x_0 + W)\cap Ker f = \varnothing$
+		Значит $f(W)$--- ограниченно. Эта ограниченность образа окрестности нуля сигнализирует о непрерывности функционала, покажем это строго. Имеем:
+		$$
+		\exists M > 0: \ \forall x \in W \Rightarrow |f(x)| \leq M 
+		$$
+		Значит 
+		$$
+		\forall \eps > 0 \exists V = \frac{\eps}{M}W \in \tau.
+		$$
+		Тогда для произвольных $z, y \in X: z \in y + V$ имеем:
+		$$
+		f(z) - f(y) \in f(\frac{\eps}{M}W) = \frac{\eps}{M}f(W) \Rightarrow |f(z) - f(y)| \leq \frac{\eps}{M}\cdot M = \eps 
+		$$
+		Таким образом $f$ --- непрерывен. 
+	\end{enumerate}
+\end{proof}
+}
+\begin{claim}
+	\label{claim:hom}
+	Для $L \subset X, \dim L = n$ изоморфизм $\varphi: \R^n \rr (L, \tau_L)$ является гомеоморфизмом
+\end{claim}
+\begin{proof}
+	Нужно доказать, что $\varphi$ и $\varphi^{-1}$ --- топологически непрерывны. Будем проводить индукцию по размерности пространства $n$. 
+	\begin{itemize}
+		\item При $n = 1$ $\varphi: \R \rr L$ --- изоморфизм. Пусть $\varphi(1) = e \in L$, тогда 
+		$$
+		\forall \alpha: \ \varphi(\alpha) = \alpha \varphi(1) = \alpha e
+		$$
+		Так как $\alpha \mapsto \alpha e \in X$ является $\tau$-непрерывным как умножение скаляр в векторной топологии, то $\varphi$ --- $\tau_L$-непрерывно. Теперь рассмотрим обратное отображение $\varphi^{-1}$. Для произвольной точки $\alpha e \in L$:
+		$$
+		\varphi^{-1}(\alpha e) = \alpha 
+		$$
+		Значит $\varphi^{-1}: L \rr \R$ --- линейный функционал. Причем так как это изоморфизм, то $\Ker \varphi^{-1} = \{0\}$ --- замкнутое множество. Таким образом $\varphi^{-1}$ --- непрерывен по предыдущей лемме. Значит $L$ гомеоморфно $\R$.
+		\item Пусть $n \in \N$ любое $n$-мерное подпространство гомеоморфно $R^n$ а значит $\tau_L$-замкнуто. Рассмотрим $\dim L = n+1$ и имеем изоморфизм $\varphi: \R^{n+1} \rr L$ Рассмотрим стандартный базис в $\R^{n+1}$: $\{g_i\}_i^{n+1}$, тогда пусть $\alpha \in \R^{n+1}$, имеем:
+		$$
+		\varphi(\alpha) = \varphi\left(\sum_{k=1}^{n+1} \alpha_k g_k\right) = \sum_{k=1}^{n+1}\alpha_k \varphi(g_k) = \sum_{k=1}^{n+1} \alpha_k e_k
+		$$
+		Тогда это отображение является $\tau_L$-непрерывным в силу непрерывности суммы и умножения скаляра на фиксированный вектор.
+		Для обратного отображения имеем 
+		$$
+		\varphi^{-1}(x) = \varphi^{-1} \left(\sum_{k=1}^{n+1}\alpha_k(x) e_k\right) = \sum_{k=1}^{n+1}\alpha_k(x)g_k
+		$$
+		Где $\alpha_k(x): (L, \tau_L) \rr \R$ --- координаты вектора $x$. Таким образом $\alpha_k$ --- линейные функционалы, но
+		$$
+		\Ker \alpha_k = \{x \in L \mid \alpha_k(x) = 0\} = Lin\{e_1, \dots e_{k-1}, e_{k+1}, \dots e_{n+1}\} \text{ $n$-мерное подпространство в $(X, \tau)$}
+		$$
+		По предположению индукции $\Ker \alpha_k$ --- $\tau_L$-замкнуто, тогда по критерию топологической непрерывности $\alpha_k$ топологически непрерывно. Тогда $\varphi^{-1}(x) =  \sum_{k=1}^{n+1}\alpha_k(x)g_k$ --- непрерывно, что и требовалось.
+	\end{itemize}
+\end{proof}
+Таким образом мы доказали теорему
+\begin{theorem}
+	\label{th:clfinds}
+	Пусть $L \subset X$ --- конечномерное подпространство топологического векторного пространства $(X, \tau)$ тогда $L$ --- $\tau$-замкнуто
+\end{theorem}
+\begin{proof}
+	Так как $L$ --- конечномерно, существует изоморфизм $\varphi: \R^n \rr L$ по утверждению (\ref{claim:hom}) он является гомеоморфизмом, но $\R^n$ является локально компактным пространством, это свойство сохраняется при гомеоморфизме, значит $L$ --- локально компактно в $(X, \tau)$, тогда по утверждению (\ref{claim:localcompact}) $L$ --- $\tau$-замкнуто.
+\end{proof}

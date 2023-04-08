@@ -1,0 +1,159 @@
+\newpage
+\section{Теорема о равенстве размерностей ядер $\Ker A_\lambda$ и $\Ker A^*_\lambda$ для компактного оператора $A \in \CL(X)$ и нетривиального числа $\lambda$ в банаховом пространстве $X$. Альтернатива Фредгольма.}
+Для доказательства основной теоремы билета потребуется несколько лемм. 
+\begin{lemma}\label{lem:41-1}
+	Пусть $Z$ --- линейное пространство и $L \subset Z$ --- его подпространство. Тогда существует подпространство $M \subset Z$ такое что 
+	$$
+	Z = L \oplus M 
+	$$
+	то есть $L \cap M = \{0\}$ и $Z = L + M$.
+\end{lemma}
+\begin{proof}
+	Доказательство проведем с помощью теоремы Хаусдорфа. Рассмотрим 
+	$$
+	\Phi = \{M \subset Z \mid M \text{ --- подпространство $Z$ и $M \cap L = \{0\}$ }\}
+	$$
+	Ясно, что $\{0\} \in \Phi$, поэтому это множество не пусто. Частично упорядочим его относительно вложения и применим теорему Хаусдорфа (\ref{th:Hausdorf}). Пусть $S$ --- максимальный ЛУМ. в $(\Phi, \subset)$. Рассмотрим 
+	$$
+	M = \bigcup_{N \in S} N 
+	$$
+	Покажем, что $M$ --- подпространство в $Z$. Действительно, если $x, y \in M$, то существуют подпространства $N_x$, $N_y$ из $S$, что $x\in N_x$ $y \in N_y$. Но так как $S$ ЛУМ, то они упорядоченны по вложению, значит можно считать, что $N_x \subset N_y$, тогда для любых $\alpha, \beta \in \Cx$ выполнено вложение 
+	$$x + y \in N_y \subset M$$
+	что и требовалось. Далее, если существует ненулевой элемент $x$ из пересечения $M \cap L$, то существует $N_x \in S$, а значит $N_x \cap L \neq \{0\}$, значит $M \cap L = \{0\}$. Таким образом $M \in \Phi$. Осталось показать, что 
+	$$
+	M + L = Z
+	$$
+	Но если это не верно, то существует элемент $z_0 \in Z \setminus (M + L)$. Тогда рассмотрев $M_0 = M \oplus \Lin \{z_0\}$, получим противоречие с максимальностью лума $S$. 
+\end{proof}
+Теперь можно приступить к формулировке и доказательству основного утверждения. 
+\begin{theorem}
+	Для компактного оператора $A \in \CL(X)$ и числа $\lambda \in \Cx \setminus \{0\}$ выполнено 
+	$$
+	\dim \Ker A_\lambda = \dim \Ker A^*_\lambda
+	$$
+\end{theorem}
+\begin{proof}
+	Так как оператор $A$ --- компактен, из \ref{th:fr2} мы знаем, что оператор $A^*$ тоже является компактным, тогда по первой теореме Фредгольма \ref{th:fr1}:
+	$$
+	\dim \Ker A_\lambda < \infty \quad \dim \Ker A^*_\lambda < \infty
+	$$ 
+	По первой лемме найдутся два подпространства $L_\lambda \subset X$ и $L_{\lambda *} \subset X^*$ такие что 
+	$$
+	L_\lambda \oplus \Ima A_\lambda = X \text{ и } L_{\lambda *} \oplus \Ima A^*_\lambda = X^*
+	$$
+	Покажем, что 
+	$$
+	\dim L_\lambda \subset \dim (\Ima A_\lambda)^\perp  = \dim \Ker A_\lambda^*
+	$$
+	для этого возьмем систему линейно независимых векторов $x_1, \dots, x_N \in L_\lambda$. Векторы $x_i$ не лежат в $\Ima A_\lambda$ --- замкнутом в $X$ (по теореме \ref{th:fr1}) пространстве. Тогда по следствию теоремы Хана-Банаха найдется $f_1 \in X^*$: 
+	$$
+	f_1 \Large|_{\Ima A_\lambda} = 0 \text{ и } f_1(x_1) = 1
+	$$
+	то есть $f_1 \in (\Ima A_\lambda)^\perp$. Далее для $j \in \overline{2, N}$ рассмотрим 
+	$$
+	M_j = \Ima A_\lambda \oplus \Lin \{x_1, \dots, x_j\}
+	$$
+	Пространство $\Ima A_\lambda$ является замкнутым в $X$. Пространство $\Lin \{x_1, \dots, x_j\}$ является конечномерным, тогда по теореме \ref{th:tvp_sum} пространство $M_j$ замкнуто в $X$, и, снова применяя следствие теоремы Хана-Банаха, получим, что найдется $f_j \in X^*$: 
+	$$
+	f_j \Large|_{M_j} = 0 \text{ и } f_j(M_j) = 1
+	$$
+	откуда $f_j \in (\Ima A_\lambda)^\perp$. И значит
+	$$
+	\{f_1, \dots, f_N\} \subset (\Ima A_\lambda)^\perp  = \Ker A^*
+	$$
+	Причем $f_j(x_k) = \delta_{jk}$, значит они линейно независимы, откуда следует, что для любого $N \leq \dim L_\lambda$
+	$$
+	N \leq \dim \Ker A^*_\lambda
+	$$ 
+	Что значит $\dim L_\lambda \leq \dim \Ker A_\lambda^*$
+	
+	Похожим образом докажем, что 
+	$$
+	\dim L_{\lambda *} \leq \dim ^\perp (\Ima A_\lambda^*) = \dim \Ker A_\lambda
+	$$ Возьмем линейно независимые $\{f_1, \dots, f_N\} \in L_{\lambda *}$. Ясно, что 
+	$$
+	f_1 \notin \Ima A_\lambda^* 
+	$$
+	В силу теоремы фредгольма и леммы \ref{lem:annul} имеем
+	$$
+	\Ima A_\lambda^* = (\Ker A_\lambda)^\perp = [\Ima A_\lambda^*]_{\tau_{w^*}}
+	$$
+	То есть $\Ima A_\lambda^*$ является $\tau_{w^*}$-замкнутым пространством в $X^*$, тогда по следствию теоремы Хана-Банаха для локально выпуклых топологических векторных пространств, получим 
+	$$
+	\exists \Phi_1 \in (X^*, \tau_{w^*})^*: \ \ \Phi_1\Large |_{\Ima A_\lambda^*} =0, \ \Phi_1(f_1) = 1
+	$$
+	Но по теореме Шмульяна \ref{th:shulian} $(X^*, \tau_{w^*})^* = X$ и значит $$\exists x_1 \in X: \forall f \in X^*: \Phi_1(f) = f(x_1)$$
+	откуда следует что $x_1 \in ^\perp (\Im A_\lambda^*) = \Ker A_\lambda$ и $f_1(x_1) = 1$. Далее действия полностью аналогичны рассуждению для $L_{\lambda}$, заметим только, что все это законно, поскольку теорема \ref{th:tvp_sum} доказана в произвольных топологических векторных пространствах, коим является $(X^*, \tau_{w^*})$. Таким образом 
+	$$
+	\dim L_{\lambda *} \leq \dim \Ker A_\lambda
+	$$
+	Если мы докажем неравенство 
+	$$
+	\dim \Ker A_\lambda \leq \dim L_\lambda
+	$$
+	то аналогично мы сможем доказать, неравенство 
+	$$
+	\dim \Ker A_\lambda^* \leq \dim L_{\lambda *}
+	$$
+	Беря во внимание $L_\lambda \oplus \Ima A_\lambda = X$ и $L_{\lambda *} \oplus \Ima A_\lambda^* = X^*$ получим цепочку неравенств 
+	$$
+	\dim \Ker A_\lambda \leq \dim L_\lambda \leq \dim \Ker A_\lambda^* \leq \dim L_{\lambda *} \leq \dim \Ker A_\lambda	
+	$$
+	откуда следует утверждение теоремы. 
+	Итак, будем доказывать, что 
+	$$
+	\dim \Ker A_\lambda \leq \dim L_\lambda
+	$$
+	Предположим, что оно не выполнено, то есть 
+	$$
+	 \infty > \dim \Ker A_\lambda > \dim L_\lambda
+	$$
+	Тогда существует $\Phi \colon \Ker A_\lambda \to L_\lambda$ --- линейная сюрьекция с нетривиальным ядром: $\Ker \Phi \neq \{0\}$. Пусть $\dim \Ker A_\lambda = N$ и $\{e_1, \dots, e_N\} \subset \Ker A_\lambda$ --- базис. Тогда для любого $x \in \Ker A_\lambda$
+	$$
+	x = \sum_{k=1}^N \varphi_k(x) e_k
+	$$
+	где $\varphi_k \colon X \to \Cx$ --- линейные функционалы координат в нашем базисе. Так как $\Ker A_\lambda$ --- конечномерно, то функционалы $\varphi_k$ --- непрерывны на $\Ker A_\lambda$ и поэтому по теореме Хана-Банаха могут быть продолжены на все $X$. Пусть $f_1, \dots, f_N \in X^*$ --- соответствующие продолжения. Определим оператор 
+	$$
+	T \colon X \to \Ker A_\lambda
+	$$
+	по формуле $Tx = \sum_{k=1}^N f_k(x) e_k$. Тогда $T \in \CL(X, \Ker A_\lambda)$ и $\Ima T = \Ker A_\lambda$. Тогда 
+	$$
+	\dim \Ima T = \dim \Ker A_\lambda
+	$$
+	то есть $T$ непрерывный оператор с конечномерным образом, значит $T$ компактен. Определим другой оператор 
+	$$
+	S = A + \Phi \circ T
+	$$
+	Он является компактным. Определим соответствующий ему
+	$$
+	S_\lambda = A_\lambda + \Phi \circ T 
+	$$
+	Заметим, что подпространство
+	$$
+	M_\lambda = \bigcap_{k=1}^N \Ker f_k
+	$$
+	является замкнутым, как конечное пересечение замкнутых коконечных подпространств. Причем
+	$$
+	\Ker A_\lambda \oplus M_\lambda = X
+	$$
+	так как для любого $x \in X$ $Tx \in \Ker A_\lambda$ а значит $x - Tx \in M_\lambda$. При этом $T(M_\lambda) = 0$. Откуда получаем
+	$$
+	S_\lambda(X) = S_\lambda(\Ker A_\lambda \oplus M_\lambda) = A_\lambda(M_\lambda) + \Phi T(\Ker A_\lambda) = \Ima A_\lambda + \Phi(\Ker A_\lambda) = \Ima A_\lambda + L_\lambda = X
+	$$
+	То есть $S_\lambda(X)  = X$. При этом $S_\lambda$ --- компактный оператор и $\lambda \neq 0$. По предположению существует ненулевой $x_0 \in \Ker \Phi \subset \Ker A_\lambda$, тогда 
+	$$
+	S_\lambda (x_0) = A_\lambda x_0  + \Phi T(x_0) = A_\lambda (x_0) + \Phi T(x_0) = 0 + 0 = 0
+	$$
+	Значит ядро $S_\lambda$ не пусто. Таким образом в спектре компактного оператора обнаружилось ненулевое число $\lambda$, такое что $\Ima S_\lambda = X$ и $\Ker S_\lambda \neq 0$. Чего быть не может. Теорема доказана. 
+\end{proof} 
+
+\begin{theorem}[Альтернатива Фредгольма]
+	Пусть $T$ --- компактный оператор действующий на банаховом пространстве $X$, а $T^*$ --- сопряженный ему, $\lambda \in \Cx$, $\lambda \neq 0$. Тогда верна альтернатива:
+	\begin{itemize}
+		\item Либо $\Ima T_\lambda = X$ и $\Ker T_\lambda = 0$. 
+		\item Либо $\Ima T_\lambda$ --- замкнут и не равен $X$ и  $\dim \Ker T_\lambda = \dim \Ker T^*_\lambda$ 
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Простое следствие теорем Фредгольма.
+\end{proof}
